@@ -1,0 +1,9 @@
+[meta]
+tex_data = "shadow_scale_proj_2"
+scale = 6.3
+speed = 7.0
+lifetime = 900.0
+multi_hit = true
+damage = "160-200"
+at_player = true
+render_angle_add = -45.0

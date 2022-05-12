@@ -1,0 +1,8 @@
+[meta]
+render_angle_add = -90.0
+damage = "150-200"
+range = 8.5
+speed = 16.0
+multi_hit = true
+tex_data = "dasher_1_proj"
+scale = 4.1

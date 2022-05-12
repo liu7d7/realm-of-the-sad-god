@@ -1,0 +1,9 @@
+[meta]
+tex_data = "elemental_dude_proj_1"
+speed = 15.0
+damage = "150-151"
+range = 5.6
+render_angle_add = -45.0
+multi_hit = true
+through_def = true
+scale = 0.9

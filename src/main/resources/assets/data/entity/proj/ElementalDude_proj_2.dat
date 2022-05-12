@@ -1,0 +1,10 @@
+#blu
+[meta]
+tex_data = "elemental_dude_proj_2"
+speed = 7.0
+frequency = 2.0
+amplitude = 0.4
+damage = "130-150"
+through_def = true
+render_angle_add = -45.0
+at_player = true

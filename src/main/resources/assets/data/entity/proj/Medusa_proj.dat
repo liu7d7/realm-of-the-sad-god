@@ -1,0 +1,8 @@
+[meta]
+tex_data = "medusa_proj"
+render_angle_add = -45.0
+speed = 9.0
+range = 4.5
+scale = 4.1
+at_player = true
+damage = "60-80"

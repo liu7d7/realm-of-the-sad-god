@@ -1,0 +1,14 @@
+[meta]
+tex_data = "stem_of_the_brain"
+name = "Stem Of The Brain"
+desc = "This is the stem of the Flying Brain. gosh."
+tier = "legendary"
+legendary_effect = "throwback"
+
+[meta.stats]
+wis = +6
+
+[weapon_meta]
+aps_multiplier = 0.65
+damage = "250-350"
+shot_pattern = ["stem_of_the_brain_proj"]

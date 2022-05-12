@@ -1,0 +1,8 @@
+[meta]
+tex_data = "orange_elemental_dude"
+health = 30_000
+def = 30
+exp = 7000
+scale = 1.05
+speed = 70
+loot_table = ["elemental_dude_loot_table"]

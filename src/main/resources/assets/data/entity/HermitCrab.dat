@@ -1,0 +1,8 @@
+[meta]
+tex_data = "hermit_crab"
+health = 360
+def = 40
+speed = 19
+exp = 120
+shot_pattern = ["hermit_crab_proj_1", "hermit_crab_proj_2", "hermit_crab_proj_3", "hermit_crab_proj_4"]
+loot_table = ["t2_gear", "t1_gear", "t1_gear"]

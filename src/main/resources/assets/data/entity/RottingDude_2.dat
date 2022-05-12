@@ -1,0 +1,10 @@
+[meta]
+tex_data = "rotting_dude2"
+health = 10000
+def = 20
+arc_gap = 40.0
+shot_pattern = ["rotting_dude2_proj", "rotting_dude2_proj"]
+scale = 1.0
+exp = 4500
+speed = 5
+loot_table = ["rotten_dude_primals"]

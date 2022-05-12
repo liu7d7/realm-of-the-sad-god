@@ -1,0 +1,8 @@
+[meta]
+tex_data = "murena"
+scale = 0.95
+speed = 11.0
+multi_hit = true
+damage = "100-190"
+range = 5.85
+at_player = true

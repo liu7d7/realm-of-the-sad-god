@@ -1,0 +1,77 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+group 'fortnite'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+project.ext.lwjglVersion = "3.3.0-SNAPSHOT"
+project.ext.lwjglNatives = "natives-windows"
+
+compileJava.sourceCompatibility = compileJava.targetCompatibility = JavaVersion.VERSION_16
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    shadow 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.0'
+    shadow 'org.junit.jupiter:junit-jupiter-api:5.8.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.0'
+    // kotlin reflect
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.21'
+    shadow 'org.jetbrains.kotlin:kotlin-reflect:1.6.21'
+
+    implementation 'com.google.guava:guava:30.1.1-jre'
+    shadow 'com.google.guava:guava:30.1.1-jre'
+    implementation 'it.unimi.dsi:fastutil:8.5.6'
+    shadow 'it.unimi.dsi:fastutil:8.5.6'
+
+    implementation group: 'club.minnced', name: 'java-discord-rpc', version: '2.0.2'
+    shadow group: 'club.minnced', name: 'java-discord-rpc', version: '2.0.2'
+
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    shadow 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'commons-io:commons-io:2.5'
+    shadow 'commons-io:commons-io:2.5'
+
+    implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
+
+    implementation 'org.lwjgl:lwjgl:3.2.2'
+    implementation 'org.lwjgl:lwjgl-assimp:3.2.2'
+    implementation 'org.lwjgl:lwjgl-glfw:3.2.2'
+    implementation 'org.lwjgl:lwjgl-openal:3.2.2'
+    implementation 'org.lwjgl:lwjgl-opengl:3.2.2'
+    implementation 'org.lwjgl:lwjgl-stb:3.2.2'
+    runtimeOnly "org.lwjgl:lwjgl::$lwjglNatives"
+    runtimeOnly "org.lwjgl:lwjgl-assimp::$lwjglNatives"
+    runtimeOnly "org.lwjgl:lwjgl-glfw::$lwjglNatives"
+    runtimeOnly "org.lwjgl:lwjgl-openal::$lwjglNatives"
+    runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
+    runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
+    implementation "org.joml:joml:1.10.2"
+
+    implementation 'com.moandjiezana.toml:toml4j:0.7.2'
+    shadow 'com.moandjiezana.toml:toml4j:0.7.2'
+}
+
+shadowJar {
+    archiveBaseName.set('rotsg')
+    archiveClassifier.set('')
+    archiveVersion.set('1.0')
+    manifest {
+        attributes(
+                'Main-Class': "me.ethius.StartKt"
+        )
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

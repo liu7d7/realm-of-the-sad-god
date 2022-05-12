@@ -1,0 +1,6 @@
+[meta]
+tex_data = "rotting_boss"
+scale = 1.05
+speed = 70
+health = 180000
+def = 30

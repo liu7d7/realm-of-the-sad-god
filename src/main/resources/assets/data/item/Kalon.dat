@@ -1,0 +1,16 @@
+[meta]
+tex_data = "kalon"
+name = "Kalon"
+desc = "A cleaver that seems more beautiful than it is."
+tier = "legendary"
+legendary_effect = "berserk_and_damaging_on_shoot_25"
+[meta.stats]
+dex = +5
+def = -5
+spd = +10
+
+[weapon_meta]
+damage = "125-180"
+aps_multiplier = 1.2
+num_shots = 1
+shot_pattern = ["kalon_proj"]

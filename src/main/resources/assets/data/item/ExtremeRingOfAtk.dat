@@ -1,0 +1,8 @@
+[meta]
+name = "Extreme Ring Of Attack"
+desc = "A ring that gives you extreme amounts of attack."
+tex_data = "extreme_ring_of_atk"
+tier = "heroic"
+
+[meta.stats]
+atk = +15

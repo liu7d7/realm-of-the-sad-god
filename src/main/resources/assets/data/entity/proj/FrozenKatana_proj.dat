@@ -1,0 +1,9 @@
+[meta]
+tex_data = "frozen_katana_proj"
+speed = 7.0
+amplitude = 0.5
+frequency = 1.0
+range = 4.7
+damage = "100-130"
+multi_hit = true
+scale = 0.75

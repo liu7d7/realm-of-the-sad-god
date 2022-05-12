@@ -1,0 +1,7 @@
+[meta]
+tex_data = "hermit_crab_proj"
+speed = 6.0
+range = 2.6
+damage = "30-50"
+at_player = true
+render_angle_add = 90.0

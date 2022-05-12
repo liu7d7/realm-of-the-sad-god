@@ -1,0 +1,11 @@
+[meta]
+name = "Warbringer's Lance"
+desc = "The lance used by the great Warbringer."
+tier = "legendary"
+legendary_effect = "angels_touch"
+tex_data = "warbringers_lance"
+
+[weapon_meta]
+damage = "340-390"
+shot_pattern = ["warbringers_lance_proj"]
+aps_multiplier = 0.6

@@ -1,0 +1,7 @@
+[meta]
+tex_data = "crystal_dude"
+speed = 55
+def = 40
+dex = 20
+health = 30000
+loot_table = ["crystal_dude_table"]

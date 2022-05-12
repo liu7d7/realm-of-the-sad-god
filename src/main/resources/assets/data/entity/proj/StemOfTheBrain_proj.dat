@@ -1,0 +1,9 @@
+[meta]
+tex_data = "stem_of_the_brain_proj"
+render_angle_add = -45.0
+boomerang = true
+speed = 11.0
+range = 3.8
+damage = "250-350"
+multi_hit = true
+scale = 4.1

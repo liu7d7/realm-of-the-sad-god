@@ -1,0 +1,5 @@
+[meta]
+tex_data = "basic_proj_1"
+speed = 14.0
+damage = "25-60"
+range = 4.2

@@ -1,0 +1,10 @@
+[meta]
+tex_data = "fire_breather_proj_2"
+scale = 6.3
+speed = 6.0
+lifetime = 900.0
+multi_hit = true
+damage = "95-120"
+at_player = true
+render_angle_add = -45.0
+through_def = true

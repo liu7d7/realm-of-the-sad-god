@@ -1,0 +1,11 @@
+[meta]
+tex_data = "the_scorched_armor"
+name = "The Scorched Armor"
+desc = "Woven from the scales of the fallen Firebreather, this armor is sturdy, yet agile."
+tier = "heroic"
+
+[meta.stats]
+atk = +5
+def = +14
+dex = +4
+life = +50

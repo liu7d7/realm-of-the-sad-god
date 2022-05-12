@@ -1,0 +1,12 @@
+[meta]
+health = 20000
+def = 50
+speed = 6
+dex = 10
+tex_data = "warbringer"
+scale = 0.75
+loot_table = ["warbringer_leggys"]
+exp = 7000
+shot_pattern = ["warbringers_proj_1", "warbringer_proj", "warbringers_proj_2", "warbringer_proj", "warbringers_proj_1"]
+arc_gap = 8.0
+lead_shot = true

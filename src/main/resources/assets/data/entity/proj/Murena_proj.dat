@@ -1,0 +1,8 @@
+[meta]
+tex_data = "murena"
+speed = 8.0
+damage = "1000-1200"
+range = 3.75
+boomerang = true
+multi_hit = true
+scale = 0.75

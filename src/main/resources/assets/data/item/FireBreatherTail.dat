@@ -1,0 +1,11 @@
+[meta]
+name = "Firebreather's Tail"
+desc = "A dagger that's flaming so much that it flames or something."
+tier = "legendary"
+tex_data = "fire_breather_tail"
+legendary_effect = "curse"
+
+[weapon_meta]
+damage = "85-190"
+shot_pattern = ["fire_breather_tail_proj"]
+aps_multiplier = 1.10

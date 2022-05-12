@@ -1,0 +1,10 @@
+[meta]
+health = 7000
+def = 20
+speed = 12
+dex = 12
+tex_data = "flying_brain"
+exp = 1000
+loot_table = ["t2_gear", "flying_brain_leggys"]
+arc_gap = 72.0
+shot_pattern = ["flying_brain_proj", "flying_brain_proj", "flying_brain_proj", "flying_brain_proj", "flying_brain_proj"]

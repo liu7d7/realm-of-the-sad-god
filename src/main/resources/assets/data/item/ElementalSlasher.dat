@@ -1,0 +1,15 @@
+[meta]
+tex_data = "elemental_slasher"
+name = "Elemental Slasher"
+desc = "The slasher used by the Elemental Dude."
+tier = "legendary"
+legendary_effect = "elemental_burst"
+[meta.stats]
+wis = +12
+vit = +6
+
+[weapon_meta]
+damage = "30-75"
+shot_pattern = ["elemental_slasher_proj", "elemental_slasher_proj", "elemental_slasher_proj", "elemental_slasher_proj", "elemental_slasher_proj"]
+aps_multiplier = 1.6
+arc_gap = 10.0

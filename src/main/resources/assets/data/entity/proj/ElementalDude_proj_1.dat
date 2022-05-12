@@ -1,0 +1,10 @@
+#org
+[meta]
+tex_data = "elemental_dude_proj_1"
+speed = 12.0
+frequency = 1.0
+amplitude = 0.1
+damage = "100-130"
+through_def = true
+render_angle_add = -45.0
+at_player = true

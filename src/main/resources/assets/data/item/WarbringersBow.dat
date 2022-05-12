@@ -1,0 +1,11 @@
+[meta]
+name = "Warbringer's Bow"
+desc = "The bow of the great Warbringer."
+tier = "legendary"
+legendary_effect = "curse"
+tex_data = "warbringers_bow"
+
+[weapon_meta]
+shot_pattern = ["warbringers_bow_proj_1", "warbringers_bow_proj_2", "warbringers_bow_proj_1"]
+damage = "145-155"
+arc_gap = 8.0

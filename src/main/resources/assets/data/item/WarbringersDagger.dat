@@ -1,0 +1,11 @@
+[meta]
+name = "Warbringer's Dagger"
+desc = "The dagger used by the great Warbringer."
+tier = "legendary"
+legendary_effect = "angels_touch"
+tex_data = "warbringers_dagger"
+
+[weapon_meta]
+damage = "150-290"
+shot_pattern = ["warbringers_dagger_proj"]
+aps_multiplier = 0.9

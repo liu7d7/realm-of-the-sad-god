@@ -1,0 +1,7 @@
+[meta]
+tex_data = "metallic_robot"
+scale = 1.05
+health = 25000
+def = 70
+dex = 15
+loot_table = ["metallic_robot_table", "random_potion", "random_potion", "def_potion", "def_potion"]

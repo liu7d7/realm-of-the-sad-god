@@ -1,0 +1,10 @@
+[meta]
+name = "Basic Dagger"
+desc = "The most basic dagger."
+tier = "normal"
+tex_data = "basic_dagger_1"
+
+[weapon_meta]
+damage = "25-60"
+range = 4.2
+shot_pattern = ["basic_dagger_1_proj"]

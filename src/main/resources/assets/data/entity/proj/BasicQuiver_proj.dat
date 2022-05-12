@@ -1,0 +1,6 @@
+[meta]
+tex_data = "basic_arrow"
+speed = 17.0
+damage = "60-100"
+range = 7.5
+multiple_hit = true

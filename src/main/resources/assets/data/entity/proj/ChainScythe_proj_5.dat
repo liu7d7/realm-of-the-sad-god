@@ -1,0 +1,13 @@
+[meta]
+tex_data = "chain_scythe_proj"
+speed = 11.5
+damage = "100-300"
+lifetime = 500.0
+amplitude = 0.6875
+frequency = 0.5
+#frequency_offset = 0.5
+time_offset = 75.0
+scale = 0.675
+boomerang = true
+multi_hit = true
+through_walls = true

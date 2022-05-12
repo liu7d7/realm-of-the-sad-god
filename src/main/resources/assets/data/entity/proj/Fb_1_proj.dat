@@ -1,0 +1,6 @@
+[meta]
+tex_data = "fb_1_proj"
+speed = 10.0
+damage = "65-95"
+range = 3.0
+random_base_angle = true

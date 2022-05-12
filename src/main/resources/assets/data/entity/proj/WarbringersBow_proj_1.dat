@@ -1,0 +1,7 @@
+[meta]
+tex_data = "warbringers_bow_proj"
+scale = 4.1
+render_angle_add = -45.0
+damage = "45-55"
+range = 6.2
+speed = 16.0

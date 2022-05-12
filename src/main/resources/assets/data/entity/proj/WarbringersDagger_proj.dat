@@ -1,0 +1,7 @@
+[meta]
+speed = 18.0
+range = 4.5
+damage = "150-290"
+tex_data = "warbringers_dagger_proj"
+scale = 4.1
+render_angle_add = -45.0

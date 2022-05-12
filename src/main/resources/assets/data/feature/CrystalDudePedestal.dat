@@ -1,0 +1,2495 @@
+[[data]]
+texData = "edge_purple_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 5
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 6
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 7
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 8
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 9
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 10
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 11
+
+[[data]]
+texData = "edge_purple_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 12
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 6
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 6
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 7
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 7
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 4
+
+[[data]]
+texData = "edge_purple_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 5
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 6
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 7
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 8
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 9
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 10
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 11
+
+[[data]]
+texData = "edge_purple_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 12
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 7
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 7
+y = 17
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 1
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 2
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 3
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 4
+
+[[data]]
+texData = "edge_purple_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 5
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 6
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 7
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 8
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 9
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 10
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 11
+
+[[data]]
+texData = "edge_purple_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 12
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 13
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 14
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 16
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 1
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 2
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 3
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 4
+
+[[data]]
+texData = "edge_purple_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 5
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 6
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 7
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 8
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 9
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 10
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 11
+
+[[data]]
+texData = "edge_purple_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 12
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 13
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 14
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 16
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 10
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 10
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 4
+
+[[data]]
+texData = "edge_purple_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 5
+
+[[data]]
+texData = "purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 6
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 7
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 8
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 9
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 10
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 11
+
+[[data]]
+texData = "edge_purple_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 12
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 10
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 10
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 10
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 11
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 11
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 4
+
+[[data]]
+texData = "edge_purple_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 5
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 6
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 7
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 8
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 9
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 10
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 11
+
+[[data]]
+texData = "edge_purple_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 12
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 11
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 11
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 11
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 12
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 12
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 4
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 5
+
+[[data]]
+texData = "edge_purple_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 6
+
+[[data]]
+texData = "edge_purple_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 7
+
+[[data]]
+texData = "edge_purple_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 8
+
+[[data]]
+texData = "edge_purple_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 9
+
+[[data]]
+texData = "edge_purple_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 10
+
+[[data]]
+texData = "edge_purple_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 11
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 12
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 12
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 12
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 12
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 13
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 13
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 4
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 5
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 6
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 7
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 8
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 9
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 10
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 11
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 12
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 13
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 13
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 13
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 14
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 14
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 14
+y = 3
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 4
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 5
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 6
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 7
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 14
+y = 8
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 14
+y = 9
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 10
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 11
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 12
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 14
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 14
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 14
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 14
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 15
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 2
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 3
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 4
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 5
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 6
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 7
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 8
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 9
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 10
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 11
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 12
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 13
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 15
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 15
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 16
+y = 0
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 1
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 2
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 3
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 4
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 5
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 6
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 7
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 8
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 9
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 10
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 11
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 12
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 13
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 14
+
+[[data]]
+texData = "edge_blue_crystal_tile_r"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 15
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 16
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 16
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 1
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 2
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 3
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 4
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 5
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 6
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 7
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 10
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 11
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 12
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 14
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 15
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 1
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 0
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 3
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 4
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 5
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 6
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 7
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 10
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 11
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 12
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 13
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 14
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 15
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 17
+y = 16
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 1
+y = 0
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 1
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 2
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 3
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 4
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 5
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 6
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 7
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 8
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 9
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 10
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 11
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 12
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 13
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 14
+
+[[data]]
+texData = "edge_blue_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 15
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 1
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 2
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 2
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 4
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 5
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 6
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 7
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 8
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 9
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 10
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 11
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 12
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 13
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 14
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 2
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 3
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 3
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 4
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 5
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 6
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 7
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 8
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 9
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 10
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 11
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 12
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 13
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 3
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 4
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 4
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 4
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 5
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 6
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 7
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 8
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 9
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 10
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 11
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 12
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 4
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 4
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 5
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 5
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 4
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 5
+
+[[data]]
+texData = "edge_purple_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 6
+
+[[data]]
+texData = "edge_purple_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 7
+
+[[data]]
+texData = "edge_purple_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 8
+
+[[data]]
+texData = "edge_purple_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 9
+
+[[data]]
+texData = "edge_purple_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 10
+
+[[data]]
+texData = "edge_purple_crystal_tile_l"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 11
+
+[[data]]
+texData = "light_purple_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 12
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 13
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 5
+y = 14
+
+[[data]]
+texData = "blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 15
+
+[[data]]
+texData = "edge_blue_crystal_tile_d"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 16
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 5
+y = 17
+
+[[data]]
+texData = "empty"
+env = "purple_crystal_wall"
+
+[data.pos]
+x = 6
+y = 0
+
+[[data]]
+texData = "edge_blue_crystal_tile_u"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 1
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 2
+
+[[data]]
+texData = "empty"
+env = "blue_crystal_wall"
+
+[data.pos]
+x = 6
+y = 3
+
+[[data]]
+texData = "light_blue_crystal_tile"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 4

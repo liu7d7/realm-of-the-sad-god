@@ -1,0 +1,11 @@
+[meta]
+tex_data = "kalon"
+render_angle_add = -45.0
+speed = 12.0
+boomerang = false
+spinning = false
+multiple_hit = true
+through_def = false
+damage = "125-180"
+range = 4.3
+scale = 0.9

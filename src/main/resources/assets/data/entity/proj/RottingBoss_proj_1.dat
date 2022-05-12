@@ -1,0 +1,7 @@
+[meta]
+tex_data = "rotting_boss_proj"
+speed = 8.0
+damage = "150-200"
+range = 5.0
+render_angle_add = -45.0
+scale = 0.75

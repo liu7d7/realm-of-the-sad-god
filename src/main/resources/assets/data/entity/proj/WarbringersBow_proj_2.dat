@@ -1,0 +1,7 @@
+[meta]
+tex_data = "warbringers_lance_proj"
+scale = 4.1
+render_angle_add = -45.0
+damage = "145-155"
+range = 7.0
+speed = 16.0

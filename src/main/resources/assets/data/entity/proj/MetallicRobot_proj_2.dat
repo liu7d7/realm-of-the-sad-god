@@ -1,0 +1,9 @@
+[meta]
+tex_data = "moon_beam"
+speed = 16.0
+scale = 0.75
+damage = "90-100"
+through_def = true
+range = 7.85
+amplitude = 1.0
+frequency = 2.0

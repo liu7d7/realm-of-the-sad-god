@@ -1,0 +1,10 @@
+[meta]
+tex_data = "dual_crystal_cutters_proj"
+lifetime = 4000.0
+frequency = 0.7
+amplitude = 0.75
+speed = 1.0
+spin_speed = 50.0
+damage = "70-80"
+scale = 0.5
+at_player = true

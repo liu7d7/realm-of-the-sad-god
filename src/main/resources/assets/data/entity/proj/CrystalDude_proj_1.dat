@@ -1,0 +1,9 @@
+[meta]
+tex_data = "crystal_proj_2"
+amplitude = 5.0
+frequency = 3.0
+speed = 2.0
+lifetime = 4000.0
+spin_speed = 70.0
+at_player = true
+damage = "45-50"

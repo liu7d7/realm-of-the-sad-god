@@ -1,0 +1,9 @@
+[meta]
+tex_data = "fire_breather_tail"
+render_angle_add = -45.0
+damage = "85-190"
+through_def = true
+speed = 13.0
+range = 4.3
+scale = 0.9
+move_fx = "purple"

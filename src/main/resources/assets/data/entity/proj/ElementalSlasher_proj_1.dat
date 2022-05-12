@@ -1,0 +1,9 @@
+[meta]
+tex_data = "elemental_dude_proj_2"
+speed = 8.0
+amplitude = 0.2
+frequency = 2.0
+damage = "30-75"
+range = 3.5
+render_angle_add = -45.0
+scale = 0.9

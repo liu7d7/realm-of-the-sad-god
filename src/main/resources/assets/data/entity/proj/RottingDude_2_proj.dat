@@ -1,0 +1,9 @@
+[meta]
+tex_data = "rotting_dude2_proj"
+speed = 7.0
+damage = "60-90"
+range = 4.0
+render_angle_add = -45.0
+multi_hit = true
+at_player = true
+scale = 0.75

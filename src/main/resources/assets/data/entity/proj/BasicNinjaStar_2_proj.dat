@@ -1,0 +1,7 @@
+[meta]
+tex_data = "ninja_star_2"
+speed = 10.0
+damage = "1300-1300"
+range = 12.5
+spin_speed = 50.0
+scale = 0.95

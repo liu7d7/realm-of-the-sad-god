@@ -1,0 +1,583 @@
+[[data]]
+texData = "cave_floor_2"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 5
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 10
+y = 9
+
+[[data]]
+texData = "cave_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 6
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 3
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 7
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 4
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 8
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 5
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 9
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 6
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 2
+y = 7
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 2
+y = 10
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 2
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 3
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 4
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 5
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 2
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 6
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 3
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 7
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 4
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 7
+y = 8
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 5
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 6
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 7
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 3
+y = 8
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 8
+y = 0
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 3
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 4
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 1
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 5
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 2
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 6
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 3
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 8
+y = 7
+
+[[data]]
+texData = "cave_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 4
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 0
+y = 1
+
+[[data]]
+texData = "cave_floor_2"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 5
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 0
+y = 2
+
+[[data]]
+texData = "cave_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 6
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 8
+y = 10
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 7
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 8
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 4
+y = 9
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 0
+y = 8
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 0
+y = 9
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 9
+y = 0
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 4
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 1
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 5
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 2
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 9
+y = 6
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 3
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 1
+y = 0
+
+[[data]]
+texData = "cave_floor_2"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 4
+
+[[data]]
+texData = "ice_1"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 5
+
+[[data]]
+texData = "cave_floor_2"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 6
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 9
+y = 10
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 7
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 4
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 8
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 5
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 5
+y = 9
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 1
+y = 6
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 1
+y = 10
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 10
+y = 1
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 10
+y = 2
+
+[[data]]
+texData = "empty"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 1
+
+[[data]]
+texData = "grass_2"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 2
+
+[[data]]
+texData = "cobble_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 3
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 2
+y = 0
+
+[[data]]
+texData = "cave_floor_1"
+env = "NIL"
+
+[data.pos]
+x = 6
+y = 4
+
+[[data]]
+texData = "empty"
+env = "metal_fence_1"
+
+[data.pos]
+x = 10
+y = 8

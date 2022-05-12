@@ -1,0 +1,10 @@
+[meta]
+health = 7000
+def = 20
+speed = 12
+dex = 0
+tex_data = "medusa"
+exp = 1000
+loot_table = ["t2_gear"]
+arc_gap = 10.0
+shot_pattern = ["medusa_proj", "medusa_proj", "medusa_proj", "medusa_proj", "medusa_proj"]

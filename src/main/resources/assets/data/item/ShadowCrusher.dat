@@ -1,0 +1,16 @@
+[meta]
+tex_data = "shadow_crusher"
+name = "Shadow Crusher"
+desc = "This sword from the ShadowScale looks like it's really heavy."
+tier = "legendary"
+legendary_effect = "angels_touch"
+
+[meta.stats]
+def = +5
+dex = -5
+mana = -40
+
+[weapon_meta]
+aps_multiplier = 0.4
+damage = "350-450"
+shot_pattern = ["shadow_crusher_proj"]

@@ -1,0 +1,15 @@
+[meta]
+name = "Murena"
+desc = "A hammer that can absolutely obliterate anything in its path."
+tier = "legendary"
+tex_data = "murena"
+[meta.stats]
+dex = -12
+atk = +7
+spd = -20
+
+[weapon_meta]
+damage = "1000-1200"
+aps_multiplier = 0.2
+shot_pattern = ["murena_proj"]
+num_shots = 1
