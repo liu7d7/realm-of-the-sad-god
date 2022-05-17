@@ -50,7 +50,7 @@ enum class RenderLayer(val begin:() -> void, val end:() -> void, val beEachTime:
             Client.renderTaskTracker.shadows.copyColorFrom(Client.renderTaskTracker.outlines)
             Client.renderTaskTracker.shadows.copyDepthFrom(Client.renderTaskTracker.outlines)
             Client.renderTaskTracker.shadows.bind()
-            Shadow.render(4f, Client.renderTaskTracker.shadows)
+            Shadow.render(Client.renderTaskTracker.shadows, 4f)
             Client.renderTaskTracker.shadows.unbind()
             Client.renderTaskTracker.outlines.bind()
             EntityOutline.render(Client.renderTaskTracker.outlines, 1)

@@ -17,7 +17,7 @@ in VertexData {
 
 void main() {
     // ambient
-    vec3 lightColor = vec3(1.0, 1.0, 1.0);
+    vec3 lightColor = vec3(0.8);
 
     float ambientStrength = 0.7;
     vec3 ambient = ambientStrength * lightColor;

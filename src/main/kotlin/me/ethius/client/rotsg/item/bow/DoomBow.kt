@@ -17,7 +17,7 @@ class DoomBow:BowItem(TexData.doom_bow,
                                             false,
                                             false,
                                             false,
-                                            350..450)),
+                                            350..450).also { it.renderAngleAdd = ProjectileData.slant_angle_correction }),
                       hashMapOf(Pair(
                           Stat.vit, 4)),
                       "Doom Bow",

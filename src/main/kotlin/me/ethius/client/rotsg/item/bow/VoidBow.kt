@@ -22,7 +22,7 @@ class VoidBow:BowItem(TexData.void_bow,
     companion object {
         // this is the projectile supplier that will be used to create the projectile
         private val entityInfo =
-            ProjectileData(TexData.void_arrow, 0.35, 0.2, 16.0, 5.6, true, false, false, false, 135..205)
+            ProjectileData(TexData.void_arrow, 0.35, 0.2, 16.0, 5.6, true, false, false, false, 135..205).also { it.renderAngleAdd = ProjectileData.slant_angle_correction }
     }
 
 }

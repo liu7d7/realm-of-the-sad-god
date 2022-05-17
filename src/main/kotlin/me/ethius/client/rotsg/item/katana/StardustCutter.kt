@@ -22,7 +22,7 @@ class StardustCutter:KatanaItem(TexData.stardust_cutter,
     companion object {
         // this is the projectile supplier that will be used to create the projectile
         private val entityInfo =
-            ProjectileData(TexData.cutter_proj, 0.35, 0.2, 13.0, 4.2, true, false, false, false, 160..260)
+            ProjectileData(TexData.cutter_proj, 0.35, 0.2, 13.0, 4.2, true, false, false, false, 160..260).also { it.renderAngleAdd = ProjectileData.slant_angle_correction }
     }
 
 }

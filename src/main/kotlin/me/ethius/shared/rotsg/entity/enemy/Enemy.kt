@@ -137,7 +137,7 @@ class Enemy private constructor(
     override fun clientTick() {
         this.prevX = this.x
         this.prevY = this.y
-        if (!serverX.isNaN()) {
+        if (!serverX.isNaN() && !serverY.isNaN()) {
             moveTo(serverX, serverY)
             this.serverX = Double.NaN
             this.serverY = Double.NaN

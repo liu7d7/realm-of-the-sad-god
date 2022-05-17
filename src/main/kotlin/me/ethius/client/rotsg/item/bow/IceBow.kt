@@ -22,7 +22,7 @@ class IceBow:BowItem(TexData.ice_bow,
     }
 
     companion object {
-        private val pData = ProjectileData(TexData.ice_arrow, 0.0, 0.0, 7.0, 7.5, true, false, false, false, 100..115)
+        private val pData = ProjectileData(TexData.ice_arrow, 0.0, 0.0, 7.0, 7.5, true, false, false, false, 100..115).also { it.renderAngleAdd = ProjectileData.slant_angle_correction }
     }
 
 }

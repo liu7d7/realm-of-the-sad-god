@@ -124,6 +124,7 @@ class Projectile:PassableEntity() {
         this.owner = owner
         this.r = angle
         this.projProps = projectileData
+        this.texDataId = this.projProps.texDataId
         if (owner is ClientPlayer) {
             this.r = wrapDegrees(calcAngle(-((Client.cameraPos.y + startPos.y) - Client.mouse.y),
                                            -((Client.cameraPos.x + startPos.x) - Client.mouse.x)) - Client.player.r + angle)

@@ -205,7 +205,7 @@ open class TexData(
         val sand_1 = TexData(192, 203, 8, 8)
         val water_1 = FlowingTexData(TexData(414, 222, 16, 16), 8.0, 8.0)
         val border_water_1 = FlowingTexData(TexData(432, 222, 16, 16), 8.0, 8.0)
-        val grass_2 = TexData(192, 193, 8, 8)
+        val grass_2 = TexData(192, 253, 8, 8)
         val gore_1 = TexData(192, 213, 8, 8)
         val ice_1 = RandomTexData(TexData(192f, 273f, 8f, 8f),
                                   TexData(202f, 273f, 8f, 8f),
@@ -217,10 +217,10 @@ open class TexData(
                                    TexData(202, 263, 8, 8),
                                    TexData(212, 263, 8, 8),
                                    TexData(222, 263, 8, 8))
-        val cave_floor_1 = TexData(192, 253, 8, 8)
+        val cave_floor_1 = TexData(202, 253, 8, 8)
         val cave_floor_2 = TexData(212, 253, 8, 8)
         val cobble_floor_1 = TexData(192, 163, 8, 8)
-        val tropical_grass_1 = TexData(212, 193, 8, 8)
+        val tropical_grass_1 = TexData(192, 193, 8, 8)
         val vit_rock = TexData(192, 233, 8, 8)
         val wis_rock = TexData(232, 233, 8, 8)
         val atk_rock = TexData(222, 233, 8, 8)
@@ -230,7 +230,7 @@ open class TexData(
         val def_rock = TexData(252, 233, 8, 8)
         val dex_rock = TexData(202, 233, 8, 8)
         val wood_1 = TexData(222, 153, 8, 8)
-        val cave_floor_3 = TexData(202, 253, 8, 8)
+        val cave_floor_3 = TexData(222, 253, 8, 8)
         val metal_floor_1 = TexData(102, 163, 8, 8)
         val cracked_metal_floor_1 = RandomTexData(TexData(202, 163, 8, 8),
                                                   TexData(212, 163, 8, 8),

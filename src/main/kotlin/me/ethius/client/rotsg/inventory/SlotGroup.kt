@@ -89,13 +89,13 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
                                                          bottom)
     }
 
-    fun postRender(matrix:Matrix4dStack) {
+    fun renderItems(matrix:Matrix4dStack) {
         for (it in slots) {
             it.renderItem(matrix)
         }
     }
 
-    fun postRenderText(matrix:Matrix4dStack) {
+    fun renderItemText(matrix:Matrix4dStack) {
         for (it in slots) {
             it.renderItemText(matrix)
         }

@@ -14,7 +14,7 @@ class MoltenKatana:KatanaItem(TexData.molten_katana,
                               "Sizzle, Sizzle, Sizzle...") {
 
     val projInfo = ProjectileData(TexData.molten_katana_proj, 0.3, 1.7, 11.0, 4.0,
-                                  true, false, false, false, 80..95).also { it.throughDef = false }
+                                  true, false, false, false, 80..95).also { it.throughDef = false; it.renderAngleAdd = ProjectileData.slant_angle_correction }
 
     init {
         this.shotPattern = listOf(projInfo, projInfo)

@@ -25,7 +25,7 @@ class ProjectileData {
     var parametric:bool = false
     var boomerang:bool = false
     var damage:IntRange = 0..0
-    var scale:double = 0.0
+    var scale:double = 0.75
     var lifetime:double = 0.0
     val extraData = HashMap<string, Any>()
     var spinSpeed = 0.0
@@ -150,6 +150,9 @@ class ProjectileData {
 
         val empty = ProjectileData()
 
+        const val slant_angle_correction = -45.0
+        const val horizontal_angle_correction = -90.0
+
         fun make(lambda:ProjectileData.() -> void):ProjectileData = ProjectileData().apply(lambda)
 
         val basic_proj =
@@ -222,7 +225,7 @@ class ProjectileData {
         val salmon_proj =
             { damage:IntRange, maxDist:double, speed:double, randomBaseAngle:bool ->
                 ProjectileData(TexData.salmon_missile_1, 0.0, 0.0, speed, maxDist,
-                               false, false, false, false, damage, 0.8).also { it.randomBaseAngle = randomBaseAngle }
+                               false, false, false, false, damage, 0.8).also { it.randomBaseAngle = randomBaseAngle; it.renderAngleAdd = slant_angle_correction }
             }
 
         val adv_proj = { angle:double ->
@@ -231,7 +234,7 @@ class ProjectileData {
         }
 
         val basic_arrow = ProjectileData(TexData.basic_arrow, 0.0, 0.0, 15.0, 7.5,
-                                         true, false, false, false, 20..35)
+                                         true, false, false, false, 20..35).also { it.renderAngleAdd = slant_angle_correction }
 
         val fb_1_proj = ProjectileData("Fb_1_proj")
         val fb_2_proj = ProjectileData("Fb_2_proj")
@@ -316,6 +319,10 @@ class ProjectileData {
 
         fun ms(range:double, speed:double):double {
             return range / speed * 1000.0
+        }
+
+        operator fun get(name:string?):ProjectileData {
+            return values.find { name == it.id } ?: empty
         }
 
         fun init() {

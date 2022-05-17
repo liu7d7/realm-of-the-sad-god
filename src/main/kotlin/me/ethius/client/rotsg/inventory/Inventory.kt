@@ -5,6 +5,8 @@ import me.ethius.client.ext.push
 import me.ethius.client.ext.translate
 import me.ethius.client.renderer.Framebuffer
 import me.ethius.client.renderer.Mesh
+import me.ethius.client.renderer.postprocess.Outline
+import me.ethius.client.renderer.postprocess.Shadow
 import me.ethius.client.rotsg.entity.Bag
 import me.ethius.shared.bool
 import me.ethius.shared.double
@@ -32,14 +34,12 @@ class Inventory(private val dummy:bool = false) {
     var draggingSlot:Slot? = null
     var bags = CopyOnWriteArrayList<Bag>()
     lateinit var itemFramebuffer:Framebuffer
-    lateinit var shadows:Framebuffer
 
     fun render(matrix:Matrix4dStack) {
         bags.removeIf { !it.shouldRenderInGui && measuringTimeMS() - it.animationTime >= 150f }
         if (dummy) return
         if (!this::itemFramebuffer.isInitialized) {
             itemFramebuffer = Framebuffer(false)
-            shadows = Framebuffer(false)
         }
         // render all to Net //
         Mesh.triangles.begin()
@@ -50,15 +50,28 @@ class Inventory(private val dummy:bool = false) {
         for ((i, k) in bags.withIndex()) {
             k.renderSlots(matrix, i)
         }
+        Mesh.drawTriangles()
+
+        Mesh.triangles.begin()
+        itemFramebuffer.clearColorAndDepth()
+        itemFramebuffer.bind()
         for (it in slotGroups) {
-            it.postRender(matrix)
+            it.renderItems(matrix)
         }
         for (it in bags) {
             it.renderItems(matrix)
         }
+        Mesh.drawTriangles()
+        Outline.render(itemFramebuffer, 1)
+        itemFramebuffer.unbind()
+        Client.frameBufferObj.bind()
+        itemFramebuffer.draw()
+
+        Mesh.triangles.begin()
+        Client.font.begin(0.965)
 
         for (it in slotGroups) {
-            it.postRenderText(matrix)
+            it.renderItemText(matrix)
         }
         for (it in bags) {
             it.renderItemText(matrix)

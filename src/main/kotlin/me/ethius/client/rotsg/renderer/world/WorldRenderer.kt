@@ -110,9 +110,6 @@ class WorldRenderer:Tickable(true) {
                         matrix.translate(pos.x * tile_size + tile_size / 2f, pos.y * tile_size + tile_size / 2f, 1.0) {
                             matrix.multiply(POSITIVE_Z.getDegreesQuaternion(Tile.blend_rotation_arr[i]))
                         }
-                        matrix.translate(pos.x * tile_size, pos.y * tile_size, 1.0) {
-                            matrix.scale(tile_size / 8f, tile_size / 8f, 1.0)
-                        }
                         Client.render.drawTexWithoutEnding(tdata,
                                                            matrix,
                                                            pos.x * tile_size,

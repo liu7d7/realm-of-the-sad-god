@@ -18,6 +18,7 @@ object Shaders {
     lateinit var fxaa:Shader private set
     lateinit var shadow_blur:Shader private set
     lateinit var transition:Shader private set
+    lateinit var outline:Shader private set
 
     fun init() {
         pos_color = Shader("/assets/shader/pos_color.vsh", "/assets/shader/pos_color.fsh")
@@ -33,11 +34,13 @@ object Shaders {
         shadow_blur = Shader("/assets/shader/blur.vsh", "/assets/shader/shadow_blur.fsh")
         transition = Shader("/assets/shader/transition.vsh", "/assets/shader/transition.fsh")
         pos_tex_color_lighting = Shader("/assets/shader/pos_tex_color_lighting.vsh", "/assets/shader/pos_tex_color_lighting.fsh")
+        outline = Shader("/assets/shader/sobel.vsh", "/assets/shader/outline.fsh")
         Blur.init()
         Bokeh.init()
         EntityOutline.init()
         Fxaa.init()
         Shadow.init()
+        Outline.init()
         Transition.init()
     }
 

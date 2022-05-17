@@ -1,6 +1,6 @@
 #version 150
 
-in vec4 Position;
+in vec2 Position;
 
 uniform mat4 ProjMat;
 uniform vec2 InSize;

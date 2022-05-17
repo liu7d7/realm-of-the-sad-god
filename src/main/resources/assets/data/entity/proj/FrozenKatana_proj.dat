@@ -7,3 +7,4 @@ range = 4.7
 damage = "100-130"
 multi_hit = true
 scale = 0.75
+render_angle_add = -45.0

@@ -23,7 +23,7 @@ class MoonbeamKatana:KatanaItem(TexData.moonbeam_katana,
                                                  false,
                                                  false,
                                                  false,
-                                                 85..85).also { it.throughDef = true })
+                                                 85..85).also { it.throughDef = true; it.renderAngleAdd = ProjectileData.slant_angle_correction })
         this.apsMultiplier = 1.66f
     }
 }
