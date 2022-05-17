@@ -1,19 +1,19 @@
 package me.ethius.server
 
 import me.ethius.server.network.SNetworkHandler
-import me.ethius.server.rotsg.world.biome.BiomeType
 import me.ethius.server.rotsg.world.Nexus
 import me.ethius.server.rotsg.world.Realm
 import me.ethius.server.rotsg.world.WorldEvent
 import me.ethius.server.rotsg.world.WorldTracker
+import me.ethius.server.rotsg.world.biome.BiomeType
 import me.ethius.shared.*
 import me.ethius.shared.loottable.LootTableEntry
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.world.biome.BiomeFeature
 import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.EntityInfo
 import me.ethius.shared.rotsg.data.ProjectileData
 import me.ethius.shared.rotsg.tile.Bushery
+import me.ethius.shared.rotsg.world.biome.BiomeFeature
 
 object Server {
 
@@ -21,7 +21,7 @@ object Server {
     lateinit var ticker:Ticker
     lateinit var network:SNetworkHandler
 
-    fun main(args:Array<string>) {
+    fun main(args:RunArgs) {
         Side.currentSide = Side.server
         System.setProperty("joml.format", "false")
         BiomeFeature.init()
@@ -35,7 +35,7 @@ object Server {
         LootTableEntry.init()
         this.ticker = Ticker()
         this.network = SNetworkHandler()
-        this.network.start()
+        this.network.start(args.addr)
         timeGetter = {
             (System.currentTimeMillis() - start).toFloat()
         }
@@ -44,6 +44,8 @@ object Server {
         mainloop()
         shutdown()
     }
+
+    class RunArgs(val addr:string)
 
     private fun shutdown() {
         this.network.shutdown()

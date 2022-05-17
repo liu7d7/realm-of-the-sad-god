@@ -75,7 +75,7 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
                       "The most basic sword.")
         }
         val adv_dirk = ItemInfo {
-            SwordItem(TexData.adv_dagger_1, ItemTier.heroic, listOf(
+            DaggerItem(TexData.adv_dagger_1, ItemTier.heroic, listOf(
                 ProjectileData.adv_proj(-5.0),
                 ProjectileData.adv_proj(5.0)
             ), hashMapOf(Pair(Stat.dex, 4)), "Advanced Dirk", "The most advanced dirk.").also {
@@ -95,7 +95,7 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
                                              false,
                                              false,
                                              50..110,
-                                             4.1).also { it.renderAngleAdd = -90.0 }),
+                                             0.82).also { it.renderAngleAdd = -90.0 }),
                        hashMapOf(Pair(Stat.dex, 4)),
                        "Agateclaw Dagger",
                        "The most advanced dirk.")

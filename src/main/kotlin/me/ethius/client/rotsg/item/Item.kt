@@ -4,6 +4,7 @@ import com.moandjiezana.toml.Toml
 import me.ethius.client.Client
 import me.ethius.client.rotsg.gui.ldu
 import me.ethius.client.rotsg.inventory.item_size
+import me.ethius.client.rotsg.inventory.slot_width
 import me.ethius.shared.*
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.entity.Stat
@@ -48,20 +49,11 @@ open class Item {
     var name:string
     var desc:string
 
-    var dragX:double = 0.0
-    var dragY:double = 0.0
     var x:double = 0.0
     var y:double = 0.0
     var id:string = ""
     var centered:bool = true
     var dragging = false
-        set(value) {
-            field = value
-            val x = x - if (centered) texData.width * 0.5 else 0.0
-            val y = y - if (centered) texData.width * 0.5 else 0.0
-            dragX = x - Client.mouse.x
-            dragY = y - Client.mouse.y
-        }
     var toolTipData:List<string> = emptyList()
     var toolTipHeight:double = 0.0
     var toolTipWidth:double = 0.0
@@ -83,22 +75,20 @@ open class Item {
         y:double,
         centered:bool = true,
     ) {
-        this.x = x
-        this.y = y
+        this.x = if (dragging) Client.mouse.x.toDouble() else x
+        this.y = if (dragging) Client.mouse.y.toDouble() else y
         this.centered = centered
-        val rx =
-            if (dragging) Client.mouse.x - if (centered) texData.width / 2f else 0f + dragX else x - (if (centered) texData.width * 0.5 else 0.0)
-        val ry =
-            if (dragging) Client.mouse.y - if (centered) texData.height / 2f else 0f + dragY else y - (if (centered) texData.height * 0.5 else 0.0) + 1.0
-        Client.render.drawTexWithoutEnding(texData, matrix, rx, ry)
+        val rx = this.x - (if (centered) item_size * 0.5 else 0.0)
+        val ry = this.y - (if (centered) item_size * 0.5 else 1.0)
+        Client.render.drawTexWithoutEnding(texData, matrix, rx, ry, 0.0, 0xffffffff, item_size, item_size)
     }
 
     fun renderTier(matrix:Matrix4dStack, x:double, y:double) {
         if (!dragging)
             Client.font.drawLeftWithoutEnding(matrix,
                                               tier.displayString,
-                                              x + item_size - 7.5f,
-                                              y + item_size - 15f,
+                                              x + slot_width - 7.5f,
+                                              y + slot_width - 15f,
                                               tier.displayColor,
                                               true,
                                               0.65)
@@ -137,8 +127,8 @@ open class Item {
                                           true)
     }
 
-    private fun Item.isIn():bool {
-        return Client.mouse.x > x - item_size / 2f && Client.mouse.x < x + item_size / 2f && Client.mouse.y > y - item_size / 2f && Client.mouse.y < y + item_size / 2f
+    private fun isIn():bool {
+        return Client.mouse.x > x - slot_width / 2f && Client.mouse.x < x + slot_width / 2f && Client.mouse.y > y - slot_width / 2f && Client.mouse.y < y + slot_width / 2f
     }
 
     fun onEquipExt() {

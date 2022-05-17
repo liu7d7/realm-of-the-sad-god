@@ -25,7 +25,7 @@ import kotlin.concurrent.thread
 class SNetworkHandler {
 
     private var port = 25565
-    private var addr = "rotsg.ethius.us"
+    private lateinit var addr:string
     private val clients:MutableSet<ClientView> = Sets.newConcurrentHashSet() // player associated or not
     val players:MutableSet<ServerPlayer> = Sets.newConcurrentHashSet() // player associated
 

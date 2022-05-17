@@ -5,6 +5,7 @@ import me.ethius.client.renderer.Framebuffer
 import me.ethius.client.renderer.Shader
 import me.ethius.client.renderer.Shaders
 import me.ethius.client.renderer.bindTexture
+import me.ethius.shared.int
 
 object EntityOutline {
 
@@ -17,13 +18,14 @@ object EntityOutline {
         entity_outline = Shaders.entity_outline
     }
 
-    fun render(final:Framebuffer) {
+    fun render(final:Framebuffer, width:int) {
         swap.clearColorAndDepth()
 
         entity_outline.bind()
         entity_outline["InSize", final.width] = final.height
         entity_outline["OutSize", swap.width] = swap.height
         entity_outline["ProjMat"] = final.projMat
+        entity_outline["width"] = width
         swap.bind()
         bindTexture(final.colorAttatchment, 0)
         if (final.useRenBuf) {

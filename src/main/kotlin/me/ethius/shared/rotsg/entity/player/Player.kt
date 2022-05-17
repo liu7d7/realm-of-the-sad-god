@@ -27,6 +27,7 @@ open class Player(val pClass:PlayerClass, val playerProfile:PlayerProfile):StatE
     var rawExp = true
     var walkTex = 0
     var lastWalkTexUpdate = dvec2()
+    var lastRotationTexUpdate = 0.0
     var selectedTexData = playerProfile.skin
         set(value) {
             pTexData = this.pClass.skins[value]

@@ -48,7 +48,7 @@ class ProjectileData {
     var leadShot = false
     lateinit var id:string
 
-    fun copy() {
+    fun copy():ProjectileData {
         val data = ProjectileData()
         data.texDataId = texDataId
         data.amplitude = amplitude
@@ -74,6 +74,7 @@ class ProjectileData {
         data.randomBaseAngle = randomBaseAngle
         data.leadShot = leadShot
         data.id = id
+        return data
     }
 
     constructor()
@@ -146,6 +147,8 @@ class ProjectileData {
     @Suppress("UNUSED")
     companion object {
         val values = ArrayList<ProjectileData>()
+
+        val empty = ProjectileData()
 
         fun make(lambda:ProjectileData.() -> void):ProjectileData = ProjectileData().apply(lambda)
 
@@ -301,11 +304,11 @@ class ProjectileData {
             texDataId = TexData.shadow_scale_proj_1.id
             amplitude = 0.2
             frequency = 2.0
-            speed = 4.0
+            speed = 0.8
             lifetime = ms(3.5, speed)
             multiHit = true
             damage = 250..350
-            scale = 4.1
+            scale = 0.82
             renderAngleAdd = -45.0
         }
 

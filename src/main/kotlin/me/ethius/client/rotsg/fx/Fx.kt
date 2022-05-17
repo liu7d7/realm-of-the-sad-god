@@ -46,7 +46,7 @@ data class Fx(
 
         val purple = Fx(0.0, 0.0, ZERO2, TexData.atk_rock)
 
-        operator fun get(fx:string):Fx? {
+        operator fun get(fx:string?):Fx? {
             return values.find { it.id == fx }
         }
 

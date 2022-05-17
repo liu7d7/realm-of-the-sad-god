@@ -4,7 +4,7 @@ import me.ethius.client.Client
 import me.ethius.client.rotsg.inventory.Slot
 import me.ethius.client.rotsg.inventory.SlotGroup
 import me.ethius.client.rotsg.inventory.SlotId
-import me.ethius.client.rotsg.inventory.item_size
+import me.ethius.client.rotsg.inventory.slot_width
 import me.ethius.client.rotsg.item.AirItem
 import me.ethius.client.rotsg.item.Item
 import me.ethius.client.rotsg.item.ItemTier
@@ -100,7 +100,7 @@ class Bag(var bagTier:BagTier, items:List<Item>):PassableEntity() {
         slotGroups = Array(2) { idx ->
             val _slots = Array(4) { i -> SlotId[i + 12 + idx * 4].newInst(0.0, 0.0).also { if (i + idx * 4 in items.indices) it.item = items[i + idx * 4] } }
             slots.addAll(_slots)
-            val e = SlotGroup(_slots, Client.window.midX - item_size * 2, 0.0)
+            val e = SlotGroup(_slots, Client.window.midX - slot_width * 2, 0.0)
             e.bottom = idx == 1
             e.top = idx == 0
             e

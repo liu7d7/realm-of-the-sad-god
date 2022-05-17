@@ -100,7 +100,7 @@ open class Slot(x:double, y:double, val slotId:SlotId) {
     }
 
     fun renderItem(matrix:Matrix4dStack) {
-        item.render(matrix, (x + item_size / 2f).roundToInt().toDouble(), (y + item_size / 2f).roundToInt().toDouble())
+        item.render(matrix, (x + slot_width / 2f).roundToInt().toDouble(), (y + slot_width / 2f).roundToInt().toDouble())
     }
 
     fun renderItemText(matrix:Matrix4dStack) {
@@ -112,7 +112,7 @@ open class Slot(x:double, y:double, val slotId:SlotId) {
     }
 
     fun isIn(mouseX:double, mouseY:double):bool {
-        return mouseX > x && mouseX < x + item_size && mouseY > y && mouseY < y + item_size
+        return mouseX > x && mouseX < x + slot_width && mouseY > y && mouseY < y + slot_width
     }
 
     fun click(event:MouseClickedEvent) {

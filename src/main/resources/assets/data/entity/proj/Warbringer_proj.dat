@@ -1,7 +1,7 @@
 [meta]
 tex_data = "warbringer_proj"
 render_angle_add = -45.0
-scale = 4.1
+scale = 0.82
 damage = "165-190"
 range = 4.5
 speed = 9.0

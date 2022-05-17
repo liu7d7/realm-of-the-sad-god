@@ -635,11 +635,7 @@ object Client {
             glfwSwapInterval(0)
             this.monitor = Monitor(glfwGetPrimaryMonitor())
             events.dispatch(GlfwInitEvent())
-            glfwSetFramebufferSizeCallback(handle) { window:long, width:int, height:int ->
-                this.handleResize(window,
-                                  width,
-                                  height)
-            }
+            glfwSetFramebufferSizeCallback(handle, this::handleResize)
             glfwSetWindowPosCallback(handle) { window:long, xpos:int, ypos:int -> handleMove(window, xpos, ypos) }
             glDebugMessageCallback({ _, type, _, severity, len, message, _ ->
                                        if (options.debug) {

@@ -53,7 +53,7 @@ enum class RenderLayer(val begin:() -> void, val end:() -> void, val beEachTime:
             Shadow.render(4f, Client.renderTaskTracker.shadows)
             Client.renderTaskTracker.shadows.unbind()
             Client.renderTaskTracker.outlines.bind()
-            EntityOutline.render(Client.renderTaskTracker.outlines)
+            EntityOutline.render(Client.renderTaskTracker.outlines, 1)
             Client.renderTaskTracker.outlines.unbind()
             Client.render.setRendering3d(false)
             Client.frameBufferObj.bind()

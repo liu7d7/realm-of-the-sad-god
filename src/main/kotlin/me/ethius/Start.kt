@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
     } else {
         when (args[0].lowercase()) {
             "-client" -> Client.main(args)
-            "-server" -> Server.main(args)
+            "-server" -> Server.main(Server.RunArgs(args[1].lowercase()))
             else -> Client.main(args)
         }
 

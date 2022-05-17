@@ -3,6 +3,8 @@
 uniform sampler2D DiffuseSampler;
 uniform sampler2D DepthSampler;
 
+uniform int width;
+
 in vec2 texCoord;
 in vec2 oneTexel;
 
@@ -13,13 +15,14 @@ void main() {
     vec4 centerDepth = texture(DepthSampler, texCoord);
     bool foundDepth = false;
     bool foundColor = false;
-    for (int i = -1; i <= 1; i++) {
-        for (int j = -1; j <= 1; j++) {
+    float depthThreshold = 0.2 * (1.0 - centerDepth.r);
+    for (int i = -width; i <= width; i++) {
+        for (int j = -width; j <= width; j++) {
             if (i == 0 && j == 0) {
                 continue;
             }
             vec4 colDepth = texture(DepthSampler, texCoord + vec2(oneTexel.x * i, oneTexel.y * j));
-            if (abs(colDepth.r - centerDepth.r) > 0.01 && colDepth.r < centerDepth.r) {
+            if (abs(colDepth.r - centerDepth.r) > depthThreshold && colDepth.r < centerDepth.r) {
                 foundDepth = true;
             }
             vec4 col = texture(DiffuseSampler, texCoord + vec2(oneTexel.x * i, oneTexel.y * j));

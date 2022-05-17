@@ -18,7 +18,7 @@ class ProjectileEntityRenderer:EntityRenderer<Projectile>() {
                 return
             matrix.push {
                 matrix.translate(lerpedX, lerpedY, 0.0) {
-                    matrix.scale(scale, scale, 1.0)
+                    matrix.scale(projProps.scale * 5.0, projProps.scale * 5.0, 1.0)
                     matrix.multiply(POSITIVE_Z.getDegreesQuaternion(wrapDegrees(this.lerpedDirection + this.lraa + 180f)))
                 }
                 matrix.translate(0.0, 0.0, z)

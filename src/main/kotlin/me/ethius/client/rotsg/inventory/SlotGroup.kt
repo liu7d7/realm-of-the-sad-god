@@ -14,7 +14,7 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
         set(value) {
             field = value
             for ((idx, slot) in slots.withIndex()) {
-                slot.x = field - Client.window.midX + idx * item_size
+                slot.x = field - Client.window.midX + idx * slot_width
             }
         }
     var tlY:double = 0.0
@@ -35,8 +35,8 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
             Client.render.drawRectAlphaWithoutEnding(matrix,
                                                      x,
                                                      y,
-                                                     x + item_size,
-                                                     y + item_size,
+                                                     x + slot_width,
+                                                     y + slot_width,
                                                      if (isIn(Client.mouse.x.toDouble(),
                                                               Client.mouse.y.toDouble())) lldu else ldu,
                                                      0.3f)
@@ -44,8 +44,8 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
             Client.render.drawRectAlphaWithoutEnding(matrix,
                                                      x,
                                                      y,
-                                                     x + item_size,
-                                                     y + item_size,
+                                                     x + slot_width,
+                                                     y + slot_width,
                                                      if (isIn(Client.mouse.x.toDouble(),
                                                               Client.mouse.y.toDouble())) 0xffce4b50 else 0xffb33035,
                                                      0.3f)
@@ -54,8 +54,8 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
             Client.render.drawOutlineRectWithoutEnding(matrix,
                                                        x,
                                                        y,
-                                                       item_size,
-                                                       item_size,
+                                                       slot_width,
+                                                       slot_width,
                                                        dul,
                                                        1.0,
                                                        true,
@@ -65,8 +65,8 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
         }
         Client.font.drawCenteredStringWithoutEnding(matrix,
                                                     slotId.slotString(),
-                                                    x + item_size / 2f,
-                                                    y + item_size / 2f,
+                                                    x + slot_width / 2f,
+                                                    y + slot_width / 2f,
                                                     0xffffffff,
                                                     true,
                                                     1.0)
@@ -79,8 +79,8 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
         Client.render.drawShadowOutlineRectWithoutEnding(matrix,
                                                          tlX + 0.1f,
                                                          tlY + 0.05f,
-                                                         item_size * slots.size,
-                                                         item_size + 0.1f,
+                                                         slot_width * slots.size,
+                                                         slot_width + 0.1f,
                                                          0x60000000,
                                                          3.0,
                                                          top,

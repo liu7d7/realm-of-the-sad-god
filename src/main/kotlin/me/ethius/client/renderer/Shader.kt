@@ -86,13 +86,11 @@ class Shader(vsh:string, fsh:string) {
     }
 
     fun setDefaults() {
-//        set("debug", Main.options.debug)
         set("layer", Client.renderTaskTracker.layer.ordinal)
         set("projMat", Client.projMat)
         set("lookAt", Client.renderTaskTracker.lookAt)
         set("camAngleX", Client.camAngleX)
         set("layer", Client.renderTaskTracker.layer.ordinal)
-
     }
 
     companion object {

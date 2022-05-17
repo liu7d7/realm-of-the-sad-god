@@ -18,7 +18,7 @@ class DeadmansScythe:KatanaItem(TexData.dead_man_scythe,
                                                       false,
                                                       false,
                                                       false,
-                                                      345..460).also { it.renderAngleAdd = -45.0 }),
+                                                      345..460, 0.8).also { it.renderAngleAdd = -45.0 }),
                                 hashMapOf(Stat.dex to 5, Stat.vit to 5, Stat.life to 20),
                                 "Dead Man's Scythe",
                                 "A two-faced blade enchanted with the wicked power of immortal beings.") {

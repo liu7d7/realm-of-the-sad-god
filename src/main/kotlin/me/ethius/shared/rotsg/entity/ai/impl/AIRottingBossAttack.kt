@@ -51,9 +51,10 @@ class AIRottingBossAttack(entityIn:Enemy):AIBase(entityIn) {
                     for (i in 0..6) {
                         entity.shoot(ProjectileData.rotting_boss_proj).also {
                             it.r = shots[i]
-                            it.lifetime = ProjectileData.ms(6.0, it.speed)
-                            it.frequency = 1.0
-                            it.amplitude = 0.5
+                            it.projProps = it.projProps.copy()
+                            it.projProps.lifetime = ProjectileData.ms(6.0, it.projProps.speed)
+                            it.projProps.frequency = 1.0
+                            it.projProps.amplitude = 0.5
                         }
                     }
 

@@ -15,6 +15,7 @@ import me.ethius.shared.rotsg.entity.enemy.Enemy
 import me.ethius.shared.rotsg.entity.player.Player
 import me.ethius.shared.rotsg.tile.tile_size
 import org.apache.commons.lang3.RandomUtils
+import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.floor
 import kotlin.math.min
@@ -30,24 +31,7 @@ class Projectile:PassableEntity() {
             pivotX = texData.pivotX
             pivotY = texData.pivotY
         }
-    var amplitude:double = 0.0
-    var frequency:double = 0.0
-    var speed:double = 0.0
-    var lifetime:double = 0.0
-    var multiHit:bool = false
-    var throughDef:bool = false
-    var parametric:bool = false
-    var boomerang:bool = false
-    var damage:IntRange = 0..0
-    var scale:double = 1.0
-    var spinSpeed:double = 0.0
-    var frequencyOffset:double = 0.0
-    var timeOffset:double = 0.0
-    var throughWalls:bool = false
-    var damageMultiplier:double = 1.0
-    var horizontalOffset:double = 0.0
-    val hitEffects:ArrayList<Effect> = ArrayList()
-    var moveFx:string = "NIL"
+    var projProps:ProjectileData = ProjectileData.empty
 
     // [data]
     override var width:double = 0.0
@@ -81,11 +65,17 @@ class Projectile:PassableEntity() {
             updateBoundingCircle()
             if (bulletId == -1 && value != null) {
                 bulletId = nextBulletId(value)
+                z = when (abs(this.bulletId % 5)) {
+                    1 -> 2.5
+                    2 -> 0.0
+                    else -> 5.0
+                }
             }
         }
     lateinit var startPos:dvec2
     private var prevDirection:double = 0.0
     private var direction:double = 0.0
+    var damageMultiplier:double = 1.0
     val lerpedDirection:double
         get() {
             var pd = prevDirection
@@ -101,7 +91,8 @@ class Projectile:PassableEntity() {
     val lraa:double
         get() = lerp(praa, raa, Client.ticker.tickDelta)
     var leadShot = false
-    val z = RandomUtils.nextDouble(14.8, 15.2)
+    var hitEffects = mutableListOf<Effect>()
+    var z = 0.0
 
     override fun updateBoundingCircle() {
         boundingCircle.radius = min(width, height) * 0.5 + 3f
@@ -110,10 +101,10 @@ class Projectile:PassableEntity() {
     }
 
     private fun offsetStartPos() {
-        startPos.x += cosD(r) * 12f
-        startPos.y += sinD(r) * 12f
-        startPos.x += cosD(r + 90.0) * horizontalOffset
-        startPos.y += sinD(r + 90.0) * horizontalOffset
+        startPos.x += cosD(r) * 24f
+        startPos.y += sinD(r) * 24f
+        startPos.x += cosD(r + 90.0) * projProps.horizontalOffset
+        startPos.y += sinD(r + 90.0) * projProps.horizontalOffset
         this.x = startPos.x
         this.y = startPos.y
         this.prevX = startPos.x
@@ -130,68 +121,24 @@ class Projectile:PassableEntity() {
         projectileData:ProjectileData,
         angle:double,
     ):Projectile {
-        this.horizontalOffset = projectileData.horizontalOffset
         this.owner = owner
-        reset(projectileData.texDataId,
-              angle,
-              projectileData.amplitude,
-              projectileData.frequency,
-              projectileData.speed,
-              projectileData.lifetime,
-              projectileData.multiHit,
-              projectileData.throughDef,
-              projectileData.parametric,
-              projectileData.boomerang,
-              projectileData.damage,
-              projectileData.scale)
+        this.r = angle
+        this.projProps = projectileData
         if (owner is ClientPlayer) {
             this.r = wrapDegrees(calcAngle(-((Client.cameraPos.y + startPos.y) - Client.mouse.y),
                                            -((Client.cameraPos.x + startPos.x) - Client.mouse.x)) - Client.player.r + angle)
         } else if (projectileData.atPlayer) {
             val world = (owner.world as? ServerWorld) ?: throw IllegalStateException("Projectile owner has no world")
             val player = world.closestPlayer(owner) ?: world.entities.randomOrNull() ?: owner
-            this.r = wrapDegrees(calcAngle(owner, player, projectileData.leadShot, (1.0 - this.speed / 20.0) * 12.0) + angle)
+            this.r = wrapDegrees(calcAngle(owner, player, projectileData.leadShot, (1.0 - projProps.speed / 20.0) * 12.0) + angle)
         }
-        this.moveFx = projectileData.moveFx ?: "NIL"
-        this.spinSpeed = projectileData.spinSpeed
         this.prevR = this.r
         this.direction = this.r - 90.0
         this.prevDirection = this.direction
         this.raa = projectileData.renderAngleAdd
         this.praa = this.raa
         this.offsetStartPos()
-        this.frequencyOffset = projectileData.frequencyOffset
-        this.timeOffset = projectileData.timeOffset
-        this.throughWalls = projectileData.throughWalls
         return this
-    }
-
-    fun reset(
-        texData:string,
-        angle:double,
-        amplitude:double,
-        frequency:double,
-        speed:double,
-        lifetime:double,
-        multiHit:bool,
-        throughDef:bool,
-        parametric:bool,
-        boomerang:bool,
-        damage:IntRange,
-        scale:double,
-    ) {
-        this.texDataId = texData
-        this.r = angle
-        this.amplitude = amplitude
-        this.frequency = frequency
-        this.speed = speed
-        this.lifetime = lifetime
-        this.multiHit = multiHit
-        this.parametric = parametric
-        this.boomerang = boomerang
-        this.damage = damage
-        this.scale = scale
-        this.throughDef = throughDef
     }
 
     override fun collideWith(other:AEntity) {
@@ -207,10 +154,10 @@ class Projectile:PassableEntity() {
             return
         entitiesHit.add(other)
         if (!other.hasEffect("shield")) {
-            other.damage((RandomUtils.nextInt(damage.first, damage.last) * damageMultiplier), this.throughDef, owner?.entityId ?: -2)
+            other.damage((RandomUtils.nextInt(projProps.damage.first, projProps.damage.last) * damageMultiplier), projProps.throughDef, owner?.entityId ?: -2)
             for (i in hitEffects) other.addEffect(i)
         }
-        if (!multiHit) {
+        if (!projProps.multiHit) {
             Client.world.remEntity(this, true, false)
         }
         Client.fxManager.createFx(other, other.x, other.y)
@@ -222,7 +169,7 @@ class Projectile:PassableEntity() {
         prevDirection = direction
         praa = raa
         val local3 = ticksExisted * 20.0
-        if (ticksExisted >= floor((lifetime - timeOffset * 3f) / 20f).toInt()) {
+        if (ticksExisted >= floor((projProps.lifetime - projProps.timeOffset * 3f) / 20f).toInt()) {
             Client.world.remEntity(this)
             return
         }
@@ -230,28 +177,28 @@ class Projectile:PassableEntity() {
             Client.world.remEntity(this, true, true)
             return
         }
-        if (Fx[moveFx] != null) {
-            Client.fxManager.createFx(this, this.x, this.y, Fx[moveFx]!!, 1, -15.0)
+        if (Fx[projProps.moveFx] != null) {
+            Client.fxManager.createFx(this, this.x, this.y, Fx[projProps.moveFx]!!, 1, -15.0)
         }
-        if (ticksExisted == 0 && timeOffset > 0.0) {
+        if (ticksExisted == 0 && projProps.timeOffset > 0.0) {
             this.prevX = lerp(this.prevX, this.x, 0.9f)
             this.prevY = lerp(this.prevY, this.y, 0.9f)
         }
         direction = if (ticksExisted == 0) {
             r - 90f
-        } else if (boomerang && ticksExisted == floor(lifetime / 40f).toInt()) {
+        } else if (projProps.boomerang && ticksExisted == floor(projProps.lifetime / 40f).toInt()) {
             r + 90f
         } else {
             atan2(y - prevY, x - prevX).toDegrees() - 90f
         }
-        if (ticksExisted == 0 || (boomerang && ticksExisted == floor(lifetime / 40f).toInt())) {
+        if (ticksExisted == 0 || (projProps.boomerang && ticksExisted == floor(projProps.lifetime / 40f).toInt())) {
             this.prevDirection = direction
         }
-        raa += spinSpeed
+        raa += projProps.spinSpeed
     }
 
     private fun positionAt(time:double, pos:dvec2):bool {
-        val time = time + timeOffset
+        val time = time + projProps.timeOffset
         val _local_8:double
         val _local_9:double
         val _local_10:double
@@ -261,10 +208,10 @@ class Projectile:PassableEntity() {
         val _local_14:double
         pos.x = this.startPos.x
         pos.y = this.startPos.y
-        var distance:double = time * this.speed / 1000f * tile_size
+        var distance:double = time * projProps.speed / 1000f * tile_size
         val local4:double = if ((this.bulletId % 2) == 0) 0.0 else PI
-        if (this.parametric) {
-            _local_8 = ((time / this.lifetime) * 2f) * PI
+        if (projProps.parametric) {
+            _local_8 = ((time / projProps.lifetime) * 2f) * PI
             _local_9 = sin(_local_8) * if (this.bulletId % 2 == 1) 1.0 else -1.0
             _local_10 = sin((2f * _local_8)) * (if ((this.bulletId % 4) < 2) 1.0 else -1.0)
             _local_11 = cosD(this.r)
@@ -272,9 +219,9 @@ class Projectile:PassableEntity() {
             pos.x += (_local_9 * _local_12) - (_local_10 * _local_11)
             pos.y += (_local_9 * _local_11) + (_local_10 * _local_12)
         } else {
-            halfRange = (this.lifetime * (this.speed / 1000f)) / 2f * tile_size
+            halfRange = (projProps.lifetime * (projProps.speed / 1000f)) / 2f * tile_size
             var bl = false
-            if (this.boomerang) {
+            if (projProps.boomerang) {
                 if (distance > halfRange) {
                     distance = halfRange - (distance - halfRange)
                     bl = true
@@ -282,9 +229,9 @@ class Projectile:PassableEntity() {
             }
             pos.x += distance * cosD(this.r)
             pos.y += distance * sinD(this.r)
-            val local15 = (if (!boomerang) (time / this.lifetime) else distance / halfRange)
-            if (this.amplitude != 0.0) {
-                _local_14 = (this.amplitude * sin(local4 + local15 * this.frequency * 2f * PI)) * if (bl) -1.0 else 1.0
+            val local15 = (if (!projProps.boomerang) (time / projProps.lifetime) else distance / halfRange)
+            if (projProps.amplitude != 0.0) {
+                _local_14 = (projProps.amplitude * sin(local4 + local15 * projProps.frequency * 2f * PI)) * if (bl) -1.0 else 1.0
                 pos.x += _local_14 * tile_size * cosD(this.r + 90.0)
                 pos.y += _local_14 * tile_size * sinD(this.r + 90.0)
             }
@@ -292,7 +239,7 @@ class Projectile:PassableEntity() {
         this.x = pt.x
         this.y = pt.y
         updateBoundingCircle()
-        return Client.world.getBoundingCircles(this.boundingCircle).isNotEmpty() && !throughWalls
+        return Client.world.getBoundingCircles(this.boundingCircle).isNotEmpty() && !projProps.throughWalls
     }
 
     companion object {

@@ -97,10 +97,7 @@ class WorldRenderer:Tickable(true) {
                             matrix.multiply(POSITIVE_Z.getDegreesQuaternion(randomRotationDirectionAngle))
                         }
                     }
-                    matrix.translate(pos.x * tile_size, pos.y * tile_size, 1.0) {
-                        matrix.scale(tile_size / 8f, tile_size / 8f, 1.0)
-                    }
-                    Client.render.drawTexWithoutEnding(modulatedTexData(), matrix, pos.x * tile_size, pos.y * tile_size)
+                    Client.render.drawTexWithoutEnding(modulatedTexData(), matrix, pos.x * tile_size, pos.y * tile_size, 0.0, 0xffffffff, tile_size, tile_size)
                 }
             }
         }
@@ -121,7 +118,7 @@ class WorldRenderer:Tickable(true) {
                                                            pos.x * tile_size,
                                                            pos.y * tile_size,
                                                            0.0,
-                                                           tilesAdj[i]!!.modulatedTexData().avgColor)
+                                                           tilesAdj[i]!!.modulatedTexData().avgColor, tile_size, tile_size)
                     }
                 }
             }
@@ -146,9 +143,6 @@ class WorldRenderer:Tickable(true) {
                                                  0.0) {
                                     matrix.multiply(POSITIVE_Z.getDegreesQuaternion(Tile.blend_rotation_outcorner_arr[brca_idx]))
                                 }
-                                matrix.translate(pos.x * tile_size, pos.y * tile_size, 1.0) {
-                                    matrix.scale(tile_size / 8f, tile_size / 8f, 1.0)
-                                }
                                 Client.render.drawTexWithoutEnding(tdata,
                                                                    matrix,
                                                                    pos.x * tile_size,
@@ -156,7 +150,7 @@ class WorldRenderer:Tickable(true) {
                                                                    0.0,
                                                                    interpolateColor(tilesAdj[i]!!.tilesAdj[j]!!.modulatedTexData().avgColor,
                                                                                     tilesAdj[j]!!.tilesAdj[i]!!.modulatedTexData().avgColor,
-                                                                                    0.5f))
+                                                                                    0.5f), tile_size, tile_size)
                             }
                         }
                     }

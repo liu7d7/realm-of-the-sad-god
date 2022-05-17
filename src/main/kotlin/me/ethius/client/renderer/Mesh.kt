@@ -29,10 +29,8 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
     private var vertexI = 0
     private var indicesCount = 0
     var building = false
-    private var cameraX = 0.0f
-    private var cameraZ = 0.0f
     private var beganRendering = false
-    var uniformSetter:(() -> void)? = null
+    var uniformSetter:((Shader) -> void)? = null
 
     fun begin() {
         check(!building) { "Mesh.begin() called while already building." }
@@ -41,8 +39,6 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
         vertexI = 0
         indicesCount = 0
         building = true
-        cameraX = 0.0f
-        cameraZ = 0.0f
     }
 
     fun end():Mesh {
@@ -80,7 +76,7 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
             /* Render */
             beforeRender()
             Shader.activeShader?.setDefaults()
-            uniformSetter?.invoke()
+            Shader.activeShader?.let { uniformSetter?.invoke(it) }
             bindVertexArray(vao)
             drawElements(drawMode.asGl, indicesCount, GL11C.GL_UNSIGNED_INT)
 
@@ -147,6 +143,14 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
         vertices.putFloat((color shr 8 and 0xff) * 0.003921569f)
         vertices.putFloat((color and 0xff) * 0.003921569f)
         vertices.putFloat((color shr 24 and 0xff) * 0.003921569f * alpha)
+        return this
+    }
+
+    fun vec4(x:double, y:double, z:double, w:double):Mesh {
+        vertices.putFloat(x.toFloat())
+        vertices.putFloat(y.toFloat())
+        vertices.putFloat(z.toFloat())
+        vertices.putFloat(w.toFloat())
         return this
     }
 
@@ -265,6 +269,7 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
         var numDrawCalls = 0
 
         lateinit var triangles:Mesh private set
+//        lateinit var pos_tex_color_outline_shadow:Mesh private set
         lateinit var lines:Mesh private set
         lateinit var triangleFans:Mesh private set
         lateinit var model3dMesh:Mesh private set
@@ -275,6 +280,8 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
             lines = Mesh(DrawMode.line, Shaders.pos_color, Attrib.vec2, Attrib.color)
             model3dMesh = Mesh(DrawMode.triangle, Shaders.pos_tex_color_lighting, Attrib.vec3, Attrib.vec3, Attrib.tex, Attrib.color)
             model3dMesh.depthTest = true
+//            pos_tex_color_outline_shadow = Mesh(DrawMode.triangle, Shaders.pos_tex_color_outline_shadow, Attrib.vec3, Attrib.vec3, Attrib.vec3, Attrib.vec2, Attrib.color, Attrib.color, Attrib.color)
+//            pos_tex_color_outline_shadow.depthTest = true
         }
 
         fun drawTriangles(mtId:int = main_tex.id) {

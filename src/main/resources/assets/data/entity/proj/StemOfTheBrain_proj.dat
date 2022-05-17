@@ -6,4 +6,4 @@ speed = 11.0
 range = 3.8
 damage = "250-350"
 multi_hit = true
-scale = 4.1
+scale = 0.82

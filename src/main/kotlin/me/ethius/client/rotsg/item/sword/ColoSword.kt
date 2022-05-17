@@ -17,7 +17,7 @@ class ColoSword:SwordItem(TexData.colo_sword_1, ItemTier.legendary,
 
     companion object {
         private val entityInfo =
-            ProjectileData(TexData.colo_proj, 1.0, 0.5, 10.0, 4.5, false, false, false, false, 180..215)
+            ProjectileData(TexData.colo_proj, 1.0, 0.5, 10.0, 4.5, false, false, false, false, 180..215, 0.8)
     }
 
 }
