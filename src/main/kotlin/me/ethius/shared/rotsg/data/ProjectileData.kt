@@ -192,7 +192,7 @@ class ProjectileData {
                                            false,
                                            false,
                                            80..95,
-                                           0.8).also { it.atPlayer = true }
+                                           0.8).also { it.atPlayer = true; it.renderAngleAdd = slant_angle_correction }
 
         val rotten_shot = { atPlayer:bool, damage:IntRange ->
             ProjectileData(TexData.rotting_arm_proj,
@@ -292,7 +292,7 @@ class ProjectileData {
             ProjectileData("WarbringersBow_proj_1").also { it.atPlayer = true; it.speed = 8.0; it.lifetime = ms(6.2, 8.0) }
 
         val medusa_proj = ProjectileData("Medusa_proj")
-        val flying_brain_proj = ProjectileData("Medusa_proj")
+        val flying_brain_proj = ProjectileData("FlyingBrain_proj")
 
         val dasher_1_proj = ProjectileData("Dasher_1_proj")
         val dasher_2_proj = ProjectileData("Dasher_2_proj")
@@ -302,6 +302,9 @@ class ProjectileData {
 
         val fire_breather_proj_1 = ProjectileData("FireBreather_proj_1")
         val fire_breather_proj_2 = ProjectileData("FireBreather_proj_2")
+
+        val diviners_old_stick_proj = ProjectileData("DivinersOldStick_proj")
+        val golden_wand_proj = ProjectileData("GoldenWand_proj")
 
         val shadow_crusher_proj = make {
             texDataId = TexData.shadow_scale_proj_1.id
@@ -316,6 +319,8 @@ class ProjectileData {
         }
 
         val stem_of_the_brain_proj = ProjectileData("StemOfTheBrain_proj")
+
+        val lightning_bolt_proj = ProjectileData("LightningBolt_proj")
 
         fun ms(range:double, speed:double):double {
             return range / speed * 1000.0

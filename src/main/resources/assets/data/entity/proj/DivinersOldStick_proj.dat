@@ -1,0 +1,9 @@
+[meta]
+tex_data = "diviners_old_stick_proj"
+damage = "20-40"
+amplitude = 0.2
+frequency = 3.0
+speed = 10.0
+range = 7.25
+scale = 0.82
+render_angle_add = -45.0

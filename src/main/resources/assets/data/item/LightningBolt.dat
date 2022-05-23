@@ -1,0 +1,10 @@
+[meta]
+tex_data = "lightning_bolt"
+tier = "heroic"
+name = "Lightning Bolt"
+desc = "Some say this weapon came from a real lightning bolt. And that the person who found it was really happy. All we know is that he named it the Lightning Bolt."
+
+[weapon_meta]
+damage = "170-220"
+aps_multiplier = 0.4
+shot_pattern = ["lightning_bolt_proj"]

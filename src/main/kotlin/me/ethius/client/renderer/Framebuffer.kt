@@ -151,7 +151,7 @@ class Framebuffer(w:double, h:double, val useRenBuf:bool) {
                           width.toInt(),
                           0,
                           GL_COLOR_BUFFER_BIT,
-                          GL_LINEAR)
+                          GL_NEAREST)
         unbind()
     }
 
@@ -166,7 +166,7 @@ class Framebuffer(w:double, h:double, val useRenBuf:bool) {
             glBindTexture(GL_TEXTURE_2D, this.depthAttatchment)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
-            glTexParameteri(GL_TEXTURE_2D, 34892, 0)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32F, this.width.toInt(), this.height.toInt())

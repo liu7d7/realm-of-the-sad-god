@@ -72,6 +72,16 @@ open class QuiverItem(
     desc:string,
 ):AbilityItem(texData, tier, action, mpCost, statMap, name, desc)
 
+open class OrbItem(
+    texData:TexData,
+    tier:ItemTier,
+    action:(IWorld) -> void,
+    mpCost:int,
+    statMap:MutableMap<Stat, int>,
+    name:string,
+    desc:string,
+):AbilityItem(texData, tier, action, mpCost, statMap, name, desc)
+
 open class NinjaStarItem(
     texData:TexData,
     tier:ItemTier,

@@ -53,6 +53,20 @@ class LightArmorItem:ArmorItem {
 
 }
 
+class RobeArmorItem:ArmorItem {
+
+    constructor(
+        texData:TexData,
+        tier:ItemTier,
+        statMap:HashMap<Stat, int>,
+        name:string,
+        desc:string,
+    ):super(texData, tier, statMap, name, desc)
+
+    constructor(assetLoc:string):super(assetLoc)
+
+}
+
 class HeavyArmorItem:ArmorItem {
     constructor(
         texData:TexData,

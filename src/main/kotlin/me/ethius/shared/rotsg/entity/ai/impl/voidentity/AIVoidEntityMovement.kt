@@ -9,7 +9,7 @@ class AIVoidEntityMovement(entityIn:Enemy):AIBase(entityIn) {
     override val type:Type = Type.move
     var centerX = 0.0
     var centerY = 0.0
-    val aiWander = AIWander(entityIn)
+    private val aiWander = AIWander(entityIn)
 
     override fun update() {
         when (VoidEntityStage.getStage(entity)) {

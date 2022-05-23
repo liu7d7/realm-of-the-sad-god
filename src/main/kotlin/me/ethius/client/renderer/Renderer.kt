@@ -411,15 +411,18 @@ class Renderer {
         renderHeight:double,
         color:long = 0xffffffff,
         windX:double,
+        windMultiplier:double
     ) {
+        val windY = sin((windX + 1.0) * PI) * windMultiplier * 0.2
+        val windX = windX * windMultiplier
         triangles.quad(
             triangles.addVertex(matrices, x - renderWidth * 0.5 + data.pivotX, y, 0.0)
                 .tex(data.u, data.v + renderHeight, main_tex).color(color).float(0).next(),
             triangles.addVertex(matrices, x + renderWidth - renderWidth * 0.5 + data.pivotX, y, 0.0)
                 .tex(data.u + renderWidth, data.v + renderHeight, main_tex).color(color).float(0).next(),
-            triangles.addVertex(matrices, x + renderWidth - renderWidth * 0.5 + windX + data.pivotX, y, renderHeight)
+            triangles.addVertex(matrices, x + renderWidth - renderWidth * 0.5 + windX + data.pivotX, y, renderHeight + windY)
                 .tex(data.u + renderWidth, data.v, main_tex).color(color).float(0).next(),
-            triangles.addVertex(matrices, x - renderWidth * 0.5 + windX + data.pivotX, y, renderHeight)
+            triangles.addVertex(matrices, x - renderWidth * 0.5 + windX + data.pivotX, y, renderHeight + windY)
                 .tex(data.u, data.v, main_tex).color(color).float(0).next()
         )
     }

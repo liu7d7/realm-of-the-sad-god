@@ -16,7 +16,7 @@ class AIMedusaAttack(entityIn:Enemy):AIBase(entityIn) {
 
     override fun update() {
         aiAttackDefault.update()
-        val world = entity.world as ServerWorld
+        val world = entity.world as? ServerWorld ?: return
         val player = world.closestPlayer(this.entity) ?: return
         if (player.pos.distance2dSquared(entity.pos) < 25 * tile_size * tile_size) {
             if (entity.ticksExisted % 150 == 0) {

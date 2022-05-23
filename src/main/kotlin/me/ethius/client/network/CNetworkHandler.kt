@@ -114,8 +114,7 @@ class CNetworkHandler:Tickable(true, 1) {
                 Packet._id_bag_spawn -> {
                     val x = packet.data[0].toDouble()
                     val y = packet.data[1].toDouble()
-                    val _items = packet.data[2].split(" ")
-                    val items = _items.map { ItemInfo[it]() }.toMutableList()
+                    val items = packet.data[2].split(" ").map { ItemInfo[it]() }.toMutableList()
                     items.sortByDescending { it.tier.ordinal }
                     if (items.isNotEmpty()) {
                         for (i in 0 until items.size step 8) {

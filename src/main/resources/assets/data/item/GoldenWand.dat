@@ -1,0 +1,9 @@
+[meta]
+tex_data = "golden_wand"
+name = "Divining Wand"
+desc = "Every diviner uses this wand as soon as they can get rid of their old stick."
+tier = "heroic"
+
+[weapon_meta]
+damage = "66-123"
+shot_pattern = ["golden_wand_proj"]

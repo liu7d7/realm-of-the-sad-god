@@ -1,0 +1,8 @@
+[meta]
+tex_data = "lightning_bolt_proj"
+render_angle_add = -45.0
+speed = 8.0
+range = 4.0
+scale = 0.82
+move_fx = "yellow"
+damage = "170-220"

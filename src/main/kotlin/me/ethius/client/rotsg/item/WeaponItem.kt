@@ -204,3 +204,26 @@ open class DaggerItem:WeaponItem {
 
     constructor(assetLoc:string):super(assetLoc)
 }
+
+open class WandItem:WeaponItem {
+    constructor(
+        texData:TexData,
+        tier:ItemTier,
+        damage:ClosedRange<int>,
+        numShots:int,
+        statMap:MutableMap<Stat, int>,
+        name:string,
+        desc:string,
+    ):super(texData, tier, damage, numShots, statMap, name, desc)
+    constructor(
+        texData:TexData,
+        tier:ItemTier,
+        shotPattern:List<ProjectileData>,
+        statMap:MutableMap<Stat, int>,
+        name:string,
+        desc:string,
+    ):this(texData, tier, shotPattern.first().damage, shotPattern.size, statMap, name, desc) {
+        this.shotPattern = shotPattern
+    }
+    constructor(assetLoc:string):super(assetLoc)
+}

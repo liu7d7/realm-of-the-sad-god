@@ -20,6 +20,7 @@ class Aoe(x:double, y:double):AEntity() {
     val startPos = dvec2()
     var lifetime:double = 0.0
     var maxDist = 0.0
+    var modulateZ = true
     var speed:double = 0.0
         set(value) {
             field = value
@@ -75,11 +76,11 @@ class Aoe(x:double, y:double):AEntity() {
                 Client.world.remEntity(this, true, false)
             }
         }
-        val z = Animations.upAndDownCurve(lifetime, time) * tile_size * 12
+        val z = if (modulateZ) Animations.upAndDownCurve(lifetime, time) * tile_size * 12 else 0.0
         val distance = speed * 0.001 * time * tile_size
         val x = startPos.x + distance * cosD(direction)
         val y = startPos.y + distance * sinD(direction)
-        Client.fxManager.createFx(TexData[texDataId], x, y, 2, z)
+        Client.fxManager.createFx(TexData[texDataId], x, y, 2, z, modulateZ)
     }
 
     init {

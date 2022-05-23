@@ -1,0 +1,9 @@
+[meta]
+tex_data = "diviners_old_stick"
+name = "Diviner's Old Stick"
+desc = "Every diviner has this stick lying around their vault."
+tier = "normal"
+
+[weapon_meta]
+damage = "20-40"
+shot_pattern = ["diviners_old_stick_proj"]

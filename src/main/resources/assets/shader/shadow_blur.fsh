@@ -16,7 +16,6 @@ void main() {
     vec4 center = texture(u_Texture, v_TexCoord);
 
     if (center.a != 0.0) {
-        color = center;
         return;
     }
 

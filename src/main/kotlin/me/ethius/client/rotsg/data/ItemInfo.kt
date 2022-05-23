@@ -1,6 +1,8 @@
 package me.ethius.client.rotsg.data
 
 import me.ethius.client.Client
+import me.ethius.client.calcAngleMPToMouse
+import me.ethius.client.mouseDstToPlayer
 import me.ethius.client.rotsg.item.*
 import me.ethius.client.rotsg.item.bow.DoomBow
 import me.ethius.client.rotsg.item.bow.IceBow
@@ -14,11 +16,16 @@ import me.ethius.client.rotsg.item.potion.PotionItem
 import me.ethius.client.rotsg.item.sword.ColoSword
 import me.ethius.client.rotsg.item.sword.Murena
 import me.ethius.client.rotsg.item.sword.RottingArm
+import me.ethius.shared.cosD
+import me.ethius.shared.dvec2
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.ProjectileData
 import me.ethius.shared.rotsg.entity.Stat
+import me.ethius.shared.rotsg.entity.enemy.Aoe
 import me.ethius.shared.rotsg.entity.other.Projectile
+import me.ethius.shared.rotsg.tile.tile_size
+import me.ethius.shared.sinD
 import me.ethius.shared.string
 import java.util.*
 import kotlin.reflect.KProperty1
@@ -120,25 +127,9 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
         val warbringers_dagger = ItemInfo { DaggerItem("WarbringersDagger") }
         val warbringers_bow = ItemInfo { BowItem("WarbringersBow") }
         val stem_of_the_brain = ItemInfo { KatanaItem("StemOfTheBrain") }
-
-        val basic_dasher_1 = ItemInfo {
-            DasherItem(TexData.basic_dasher,
-                       ItemTier.normal,
-                       65,
-                       EnumMap(Stat::class.java),
-                       "Basic Dasher",
-                       "This dasher allows the player to dash forwards quickly.",
-                       3, ProjectileData.dasher_1_proj)
-        }
-        val adv_dasher = ItemInfo {
-            DasherItem(TexData.adv_dasher,
-                       ItemTier.heroic,
-                       65,
-                       hashMapOf(Pair(Stat.dex, 4)),
-                       "Advanced Dasher",
-                       "This dasher allows the player to dash forwards quickly.",
-                       6, ProjectileData.dasher_2_proj)
-        }
+        val lightning_bolt = ItemInfo { KatanaItem("LightningBolt") }
+        val diviners_old_stick = ItemInfo { WandItem("DivinersOldStick") }
+        val golden_wand = ItemInfo { WandItem("GoldenWand") }
 
         // ABILITIES //
         val basic_shield_1 = ItemInfo {
@@ -163,9 +154,8 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
             NinjaStarItem(TexData.ninja_star_1,
                           ItemTier.normal,
                           {
-                                                          Client.world.addEntity(Projectile().reset(Client.player,
-                                                                                                    ProjectileData.basic_ninja_star_proj))
-                                                      },
+                              Client.world.addEntity(Projectile().reset(Client.player, ProjectileData.basic_ninja_star_proj))
+                          },
                           30,
                           EnumMap(Stat::class.java),
                           "Basic Ninja Star",
@@ -176,9 +166,8 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
             NinjaStarItem(TexData.ninja_star_2,
                           ItemTier.normal,
                           {
-                                                          Client.world.addEntity(Projectile().reset(Client.player,
-                                                                                                    ProjectileData.basic_ninja_star_2_proj))
-                                                      },
+                              Client.world.addEntity(Projectile().reset(Client.player, ProjectileData.basic_ninja_star_2_proj))
+                          },
                           50,
                           EnumMap(Stat::class.java),
                           "Advanced Ninja Star",
@@ -189,9 +178,8 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
             QuiverItem(TexData.quiver_1,
                        ItemTier.normal,
                        {
-                                                       Client.world.addEntity(Projectile().reset(Client.player,
-                                                                                                 ProjectileData.basic_quiver_proj))
-                                                   },
+                           Client.world.addEntity(Projectile().reset(Client.player, ProjectileData.basic_quiver_proj))
+                       },
                        30,
                        EnumMap(Stat::class.java),
                        "Basic Quiver",
@@ -201,13 +189,55 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
             QuiverItem(TexData.quiver_2,
                        ItemTier.normal,
                        {
-                                                       Client.world.addEntity(Projectile().reset(Client.player,
-                                                                                                 ProjectileData.basic_quiver_2_proj))
-                                                   },
+                           Client.world.addEntity(Projectile().reset(Client.player, ProjectileData.basic_quiver_2_proj))
+                       },
                        50,
                        EnumMap(Stat::class.java),
                        "Advanced Quiver",
                        "An advanced quiver.")
+        }
+        val basic_dasher_1 = ItemInfo {
+            DasherItem(TexData.basic_dasher,
+                       ItemTier.normal,
+                       65,
+                       EnumMap(Stat::class.java),
+                       "Basic Dasher",
+                       "This dasher allows the player to dash forwards quickly.",
+                       3, ProjectileData.dasher_1_proj)
+        }
+        val adv_dasher = ItemInfo {
+            DasherItem(TexData.adv_dasher,
+                       ItemTier.heroic,
+                       65,
+                       hashMapOf(Pair(Stat.dex, 4)),
+                       "Advanced Dasher",
+                       "This dasher allows the player to dash forwards quickly.",
+                       6, ProjectileData.dasher_2_proj)
+        }
+        val basic_orb_1 = ItemInfo {
+            OrbItem(TexData.orb_1,
+                    ItemTier.normal,
+                    {
+                        val angle = calcAngleMPToMouse()
+                        val direction = dvec2(cosD(angle), sinD(angle))
+                        val dist = mouseDstToPlayer().coerceAtMost(6.0 * tile_size)
+                        direction.mul(dist)
+                        val a = Aoe(direction.x + Client.player.x, direction.y + Client.player.y).also {
+                            it.owner = Client.player
+                            it.damage = 75.0
+                            it.radius = 2.5
+                            it.lifetime = 12.0
+                            it.modulateZ = false
+                            it.texDataId = TexData.light_blue_crystal_tile.id
+                            it.speed = direction.length() / it.lifetime / 1000.0
+                            it.direction = angle
+                        }
+                        it.addEntity(a)
+                    },
+                    40,
+                    EnumMap(Stat::class.java),
+                    "Basic Orb",
+                    "This orb allows the player to dash forwards quickly.")
         }
 
         // ARMORS //
@@ -242,9 +272,14 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
                            "Bone Armor",
                            "An armor crafted out of the remains of past warriors.")
         }
-        val the_scorched_armor = ItemInfo {
-            LightArmorItem("TheScorchedArmor")
+        val robe_1 = ItemInfo {
+            RobeArmorItem(TexData.robe_1,
+            ItemTier.normal,
+            hashMapOf(Pair(Stat.def, 5), Pair(Stat.wis, 2)),
+            "Robe",
+            "A simple robe.")
         }
+        val the_scorched_armor = ItemInfo { LightArmorItem("TheScorchedArmor") }
 
         // RINGS //
         val basic_ring = ItemInfo {
@@ -265,35 +300,17 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
                 "A ring that inspires its wearer with fury, but makes them forget to protect themselves."
             )
         }
-        val extreme_ring_of_atk = ItemInfo {
-            RingItem("ExtremeRingOfAtk")
-        }
+        val extreme_ring_of_atk = ItemInfo { RingItem("ExtremeRingOfAtk") }
 
         // POTIONS //
-        val dex_potion = ItemInfo {
-            PotionItem(Stat.dex)
-        }
-        val vit_potion = ItemInfo {
-            PotionItem(Stat.vit)
-        }
-        val atk_potion = ItemInfo {
-            PotionItem(Stat.atk)
-        }
-        val def_potion = ItemInfo {
-            PotionItem(Stat.def)
-        }
-        val life_potion = ItemInfo {
-            PotionItem(Stat.life)
-        }
-        val mana_potion = ItemInfo {
-            PotionItem(Stat.mana)
-        }
-        val spd_potion = ItemInfo {
-            PotionItem(Stat.spd)
-        }
-        val wis_potion = ItemInfo {
-            PotionItem(Stat.wis)
-        }
+        val dex_potion = ItemInfo { PotionItem(Stat.dex) }
+        val vit_potion = ItemInfo { PotionItem(Stat.vit) }
+        val atk_potion = ItemInfo { PotionItem(Stat.atk) }
+        val def_potion = ItemInfo { PotionItem(Stat.def) }
+        val life_potion = ItemInfo { PotionItem(Stat.life) }
+        val mana_potion = ItemInfo { PotionItem(Stat.mana) }
+        val spd_potion = ItemInfo { PotionItem(Stat.spd) }
+        val wis_potion = ItemInfo { PotionItem(Stat.wis) }
         val random_potion
             get() = PotionItem.supplierFromStat(Stat.values().random())
         val apple = ItemInfo {

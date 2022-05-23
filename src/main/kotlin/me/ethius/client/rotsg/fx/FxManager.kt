@@ -32,10 +32,10 @@ class FxManager:Tickable() {
         }
     }
 
-    fun createFx(entity:AEntity, x:double, y:double, fx:Fx, num:int = 5, zBase:double = 50.0) {
+    fun createFx(fx:Fx, x:double, y:double, num:int = 5, zBase:double = 50.0, modulateZ:bool = false) {
         for (i in num..RandomUtils.nextInt(num, num * 2 + 1)) {
             fxList.add(fx.copy(x, y, fvec2(1f - RandomUtils.nextFloat(0f, 2f), 1f - RandomUtils.nextFloat(0f, 2f)))
-                           .also { it.zBase = zBase })
+                           .also { it.zBase = zBase; it.modulateZ = modulateZ })
         }
     }
 
@@ -54,7 +54,7 @@ class FxManager:Tickable() {
                 val x = lerp(fx.pX, fx.x, Client.ticker.tickDelta) + fx.width * 0.5
                 val y = lerp(fx.pY, fx.y, Client.ticker.tickDelta) + fx.height * 0.5
                 val time = measuringTimeMS() - fx.start
-                val z = if (fx.modulateZ) (if (time < 250.0) time / 12.5 + 50.0 else ((150.0 - (time - 250.0)) / 150.0) * 70) + fx.zBase else 0.0
+                val z = if (fx.modulateZ) (if (time < 250.0) time / 12.5 + fx.zBase else ((150.0 - (time - 250.0)) / 150.0) * 70) + fx.zBase else 0.0
                 val scale = if (time > 150.0) (1.0 - Animations.getDecelerateAnimation(250.0, time - 150.0)) * 5.0 else 5.0
                 matrix.push {
                     matrix.translate(x, y, 0.0) {

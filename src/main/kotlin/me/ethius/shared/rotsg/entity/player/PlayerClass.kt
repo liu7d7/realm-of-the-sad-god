@@ -27,7 +27,7 @@ enum class PlayerClass(
               it.weapon.item = ItemInfo.basic_katana_1()
               it.ability.item = ItemInfo.basic_ninja_star_1()
           },
-          arrayOf(TexData.ninja, TexData.nature_ninja, TexData.new_ninja, TexData.crystal_ninja, TexData.kunoichi),
+          arrayOf(TexData.ninja, TexData.nature_ninja, TexData.new_ninja, TexData.kunoichi),
           arrayOf(720, 252, 70, 25, 60, 70, 60, 70)),
     warrior("Warrior",
             "The warrior is a class that focuses on strength and defense.",
@@ -38,7 +38,7 @@ enum class PlayerClass(
                 it.weapon.item = ItemInfo.basic_sword_1()
                 it.ability.item = ItemInfo.basic_shield_1()
             },
-            arrayOf(TexData.warrior, TexData.frimar_warrior, TexData.bone_warrior),
+            arrayOf(TexData.warrior, TexData.frimar_warrior, TexData.bone_warrior, TexData.crystal_warrior, TexData.knight),
             arrayOf(770, 252, 75, 25, 50, 50, 75, 50)),
     archer("Archer",
            "The archer is a class that focuses on speed and accuracy.",
@@ -60,7 +60,19 @@ enum class PlayerClass(
                it.ability.item = ItemInfo.basic_dasher_1()
            },
            arrayOf(TexData.dasher, TexData.key_dasher, TexData.traffic_cone_dasher, TexData.demon_dasher),
-           arrayOf(625, 195, 65, 30, 60, 65, 60, 50));
+           arrayOf(625, 195, 65, 30, 60, 65, 60, 50)),
+    diviner(
+        "Diviner",
+        "The diviner is a class that can cast spells and use items.",
+        WandItem::class.java,
+        OrbItem::class.java,
+        RobeArmorItem::class.java,
+        {
+            it.weapon.item = ItemInfo.diviners_old_stick()
+            it.ability.item = ItemInfo.basic_orb_1()
+        },
+        arrayOf(TexData.diviner),
+        arrayOf(720, 252, 70, 25, 60, 70, 60, 70));
 
     companion object {
         operator fun get(string:string):PlayerClass {

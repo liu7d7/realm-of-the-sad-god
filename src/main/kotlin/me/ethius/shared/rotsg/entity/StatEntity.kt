@@ -37,22 +37,6 @@ abstract class StatEntity(
     // this entity's max health //
     open var maxMp:int = 0
 
-    var dexAdd = 0
-
-    var defAdd = 0
-
-    var wisAdd = 0
-
-    var vitAdd = 0
-
-    var atkAdd = 0
-
-    var spdAdd = 0
-
-    var lifeAdd = 0
-
-    var manaAdd = 0
-
     val aps:float
         get() {
             return (1.5f + 6.5f * (dex.toFloat() * 0.013333334f)) * apsMultiplier * (if (this.hasEffect("berserk")) 1.5f else 1f)
@@ -79,6 +63,15 @@ abstract class StatEntity(
         }
 
     var apsMultiplier:float = 1f
+
+    var dexAdd = 0
+    var defAdd = 0
+    var wisAdd = 0
+    var vitAdd = 0
+    var atkAdd = 0
+    var spdAdd = 0
+    var lifeAdd = 0
+    var manaAdd = 0
 
     val manaMaxed
         get() = mana - manaAdd

@@ -26,6 +26,7 @@ object EntityOutline {
         entity_outline["OutSize", swap.width] = swap.height
         entity_outline["ProjMat"] = final.projMat
         entity_outline["width"] = width
+        entity_outline["depthThreshold"] = 0.0021f
         swap.bind()
         bindTexture(final.colorAttatchment, 0)
         if (final.useRenBuf) {

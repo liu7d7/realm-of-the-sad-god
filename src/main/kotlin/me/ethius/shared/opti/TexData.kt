@@ -109,7 +109,7 @@ open class TexData(
         val archer = PlayerTexData(1f, 26f)
         val warrior = PlayerTexData(72f, 26f)
         val nature_archer = PlayerTexData(72f, 1f)
-        val crystal_ninja = PlayerTexData(143f, 1f)
+        val crystal_warrior = PlayerTexData(143f, 1f)
         val frimar_warrior = PlayerTexData(143f, 26f)
         val dasher = PlayerTexData(214f, 1f)
         val key_dasher = PlayerTexData(214f, 26f)
@@ -117,6 +117,8 @@ open class TexData(
         val bone_warrior = PlayerTexData(214, 51, 12)
         val demon_dasher = PlayerTexData(214, 75, 11)
         val kunoichi = PlayerTexData(213, 100, 11)
+        val diviner = PlayerTexData(285, 1, 10)
+        val knight = PlayerTexData(285, 26, 11)
 
         // ITEMS //
         init {
@@ -134,6 +136,7 @@ open class TexData(
         val dual_crystal_cutters = TexData(45, 309, 8, 8)
         val elemental_slasher = TexData(90, 309, 8, 8)
         val stem_of_the_brain = TexData(0, 309, 8, 8)
+        val lightning_bolt = TexData(89, 336, 8, 8)
 
         // daggers //
         val basic_dagger_1 = TexData(36, 318, 8, 8)
@@ -151,6 +154,7 @@ open class TexData(
         val quiver_2 = TexData(72, 309, 8, 8)
         val basic_dasher = TexData(9, 327, 8, 8)
         val adv_dasher = TexData(54, 318, 8, 8)
+        val orb_1 = TexData(108, 336, 8, 8)
 
         // rings //
         val bone_ring = TexData(18, 327, 8, 8)
@@ -166,6 +170,7 @@ open class TexData(
         val elemental_heavy_armor = TexData(0, 318, 8, 8)
         val elemental_light_armor = TexData(9, 318, 8, 8)
         val the_scorched_armor = TexData(81, 309, 8, 8)
+        val robe_1 = TexData(117, 336, 8, 8)
 
         // swords //
         val colo_sword_1 = TexData(72, 327, 8, 8)
@@ -176,6 +181,10 @@ open class TexData(
         val elemental_saber = TexData(108, 309, 8, 8)
         val warbringers_lance = TexData(133, 309, 8, 8)
         val shadow_crusher = TexData(117, 309, 8, 8)
+
+        // wands //
+        val diviners_old_stick = TexData(99, 336, 8, 8)
+        val golden_wand = TexData(126, 336, 8, 8)
 
         // bows //
         val basic_bow = TexData(126, 327, 8, 8)
@@ -344,6 +353,9 @@ open class TexData(
         val shadow_scale_proj_2 = TexData(148, 415, 8, 8)
         val stem_of_the_brain_proj = TexData(157, 417, 6, 6)
         val flying_brain_proj = TexData(164, 415, 8, 8)
+        val lightning_bolt_proj = TexData(142, 406, 8, 8)
+        val diviners_old_stick_proj = TexData(0, 424, 4, 4)
+        val golden_wand_proj = TexData(4, 424, 6, 5)
 
         // enemies //
         init {

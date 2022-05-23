@@ -64,7 +64,7 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
                                          tmp
                                      }.withTexData("minion")
                                      .withDef(10)
-                                     .withArcGap(36.0)
+                                     .withArcGap(32.72727)
                                      .addToLootTable(LootTableEntry.heroics).withExp(260)
                                      .emptyPortalChance(1.0)).also {
                 it.movementAIs.add(1.0, AIFollowPlayer(it))

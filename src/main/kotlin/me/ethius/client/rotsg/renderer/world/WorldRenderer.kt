@@ -32,9 +32,7 @@ class WorldRenderer:Tickable(true) {
 
     val windX:float
         get() {
-            return lerp(prevWindX,
-                        curWindX,
-                        Animations.getDecelerateAnimation(1f, (measuringTimeMS() - lastWindUpdate) / 75.tickToMs.toFloat())
+            return lerp(prevWindX, curWindX, Animations.getDecelerateAnimation(1f, (measuringTimeMS() - lastWindUpdate) / 75.tickToMs.toFloat())
             )
         }
     private var lastWindUpdate:float = measuringTimeMS()
@@ -84,7 +82,7 @@ class WorldRenderer:Tickable(true) {
         if (ticksExisted % 75 == 0) {
             lastWindUpdate = measuringTimeMS()
             prevWindX = curWindX
-            curWindX = RandomUtils.nextFloat(0f, 23f) - 11.5f
+            curWindX = (RandomUtils.nextFloat(0f, 23f) - 11.5f) / 11.5f
         }
     }
 
@@ -253,7 +251,7 @@ class WorldRenderer:Tickable(true) {
                     if (this.texDataId != "empty") {
                         val centerX = (randomCenterMax * 2 * frand - randomCenterMax) * 0.5
                         val centerY = (randomCenterMax * 2 * cos(frand * PI2) - randomCenterMax) * 0.5
-                        val windX = Client.worldRenderer.windX * if (randomRotationAngle == 180.0) -1f else 1f
+                        val windX = Client.worldRenderer.windX * (if (randomRotationAngle == 180.0) -1.0 else 1.0)
                         val r = if (Client.playerInit) Client.player.lerpedR else 0.0
                         val x = tile.pos.x * tile_size + tile_size * 0.5 + centerX
                         val y = tile.pos.y * tile_size + tile_size * 0.5 + centerY
@@ -269,7 +267,8 @@ class WorldRenderer:Tickable(true) {
                                                                                     TexData[texDataId].width,
                                                                                     TexData[texDataId].height,
                                                                                     0xffffffff,
-                                                                                    windX * windMultiplier * 0.2f
+                                                                                    windX,
+                                                                                    windMultiplier * 0.2f * 11.5f
                             )
                         }
                     }

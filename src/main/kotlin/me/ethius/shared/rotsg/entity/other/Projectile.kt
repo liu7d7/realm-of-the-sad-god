@@ -65,10 +65,10 @@ class Projectile:PassableEntity() {
             updateBoundingCircle()
             if (bulletId == -1 && value != null) {
                 bulletId = nextBulletId(value)
-                z = when (abs(this.bulletId % 5)) {
-                    1 -> 2.5
-                    2 -> 0.0
-                    else -> 5.0
+                z = when (abs(this.bulletId % 3)) {
+                    1 -> 6.5
+                    2 -> 4.0
+                    else -> 9.0
                 }
             }
         }
@@ -179,7 +179,7 @@ class Projectile:PassableEntity() {
             return
         }
         if (Fx[projProps.moveFx] != null) {
-            Client.fxManager.createFx(this, this.x, this.y, Fx[projProps.moveFx]!!, 1, -15.0)
+            Client.fxManager.createFx(Fx[projProps.moveFx]!!, this.x, this.y, 1, -30.0, false)
         }
         if (ticksExisted == 0 && projProps.timeOffset > 0.0) {
             this.prevX = lerp(this.prevX, this.x, 0.9f)
@@ -237,8 +237,8 @@ class Projectile:PassableEntity() {
                 pos.y += _local_14 * tile_size * sinD(this.r + 90.0)
             }
         }
-        this.x = pt.x
-        this.y = pt.y
+        this.x = pos.x
+        this.y = pos.y
         updateBoundingCircle()
         return Client.world.getBoundingCircles(this.boundingCircle).isNotEmpty() && !projProps.throughWalls
     }
@@ -249,7 +249,7 @@ class Projectile:PassableEntity() {
         private val bulletIdsToOwner = Maps.newConcurrentMap<AEntity, int>()
 
         private fun nextBulletId(owner:AEntity):int {
-            bulletIdsToOwner.computeIfAbsent(owner) { 0 }
+            bulletIdsToOwner.putIfAbsent(owner, 0)
             bulletIdsToOwner[owner] = bulletIdsToOwner[owner]!! + 1
             return bulletIdsToOwner[owner]!!
         }

@@ -43,6 +43,9 @@ interface IWorld {
 
     fun getBoundingCircles(boundingCircle:BoundingCircle):List<BoundingCircle> {
         val list = Lists.newArrayList<BoundingCircle>()
+        if (boundingCircle.cx.isNaN() || boundingCircle.cy.isNaN() || boundingCircle.radius.isNaN()) {
+            return list
+        }
         val xs = ((boundingCircle.cx - boundingCircle.radius) / tile_size).roundToInt() - 1
         val ys = ((boundingCircle.cy - boundingCircle.radius) / tile_size).roundToInt() - 1
         val xe = ((boundingCircle.cx + boundingCircle.radius) / tile_size).roundToInt() + 1
