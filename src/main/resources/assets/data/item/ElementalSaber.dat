@@ -1,0 +1,14 @@
+[meta]
+tex_data = "elemental_saber"
+tier = "heroic"
+name = "Elemental Saber"
+desc = "This saber is so elemental it'll blow your mind." # I AM SO BAD AT MAKING DESCRIPTIONS
+
+[meta.stats]
+life = +50
+vit = +5
+
+[weapon_meta]
+aps_multiplier = 0.8
+damage = "220-260"
+shot_pattern = ["elemental_saber_proj"]

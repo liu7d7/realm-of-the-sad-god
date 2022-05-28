@@ -42,17 +42,16 @@ dependencies {
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
     implementation 'org.lwjgl:lwjgl:3.2.2'
-    implementation 'org.lwjgl:lwjgl-assimp:3.2.2'
     implementation 'org.lwjgl:lwjgl-glfw:3.2.2'
     implementation 'org.lwjgl:lwjgl-openal:3.2.2'
     implementation 'org.lwjgl:lwjgl-opengl:3.2.2'
     implementation 'org.lwjgl:lwjgl-stb:3.2.2'
     runtimeOnly "org.lwjgl:lwjgl::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-assimp::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-glfw::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-openal::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
+
     implementation "org.joml:joml:1.10.2"
 
     implementation 'com.moandjiezana.toml:toml4j:0.7.2'

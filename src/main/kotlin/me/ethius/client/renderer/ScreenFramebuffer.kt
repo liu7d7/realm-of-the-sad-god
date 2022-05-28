@@ -6,42 +6,15 @@ import me.ethius.shared.bool
 import me.ethius.shared.double
 import me.ethius.shared.events.Listen
 import me.ethius.shared.events.def.WindowResizedEvent
-import me.ethius.shared.int
 import org.joml.Matrix4d
 import org.lwjgl.opengl.GL11
-import org.lwjgl.opengl.GL11C
 import org.lwjgl.opengl.GL30C.*
-import org.lwjgl.opengl.GL42.glTexParameteri
-import org.lwjgl.opengl.GL42.glTexStorage2D
 
-class Framebuffer(w:double, h:double, val useRenBuf:bool) {
+class ScreenFramebuffer(w:double, h:double, useRenBuf:bool):AFramebuffer(useRenBuf) {
 
     constructor(useRenBuf:bool):this(Client.window.width.toDouble(), Client.window.height.toDouble(), useRenBuf)
 
-    var id:int = -1
-    var colorAttatchment:int = -1
-    var depthAttatchment:int = -1
-    var width:double = -1.0
-    var height:double = -1.0
     lateinit var projMat:Matrix4d
-
-    fun bind() {
-        bindFrameBuffer(id)
-    }
-
-    fun unbind() {
-        bindFrameBuffer(0)
-    }
-
-    private fun dispose() {
-        glDeleteTextures(this.colorAttatchment)
-        this.colorAttatchment = -1
-        glDeleteTextures(this.depthAttatchment)
-        this.depthAttatchment = -1
-        bindFrameBuffer(0)
-        glDeleteFramebuffers(this.id)
-        this.id = -1
-    }
 
     fun draw(setViewport:bool = true, x0:double = 0.0, y0:double = 0.0, x1:double = width, y1:double = height) {
         enableBlend()
@@ -72,13 +45,7 @@ class Framebuffer(w:double, h:double, val useRenBuf:bool) {
         }
     }
 
-    @Listen
-    fun window(event:WindowResizedEvent) {
-        dispose()
-        init(event.width.toDouble(), event.height.toDouble())
-    }
-
-    fun copyDepthFrom(p_83946_:Framebuffer) {
+    fun copyDepthFrom(p_83946_:ScreenFramebuffer) {
         glBindFramebuffer(GL_READ_FRAMEBUFFER, p_83946_.id)
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, id)
         glBlitFramebuffer(0,
@@ -94,7 +61,7 @@ class Framebuffer(w:double, h:double, val useRenBuf:bool) {
         unbind()
     }
 
-    fun copyDepthFromToColor(p_83946_:Framebuffer) {
+    fun copyDepthFromToColor(p_83946_:ScreenFramebuffer) {
         val prevMat = Client.projMat
         val prevLookAt = Client.renderTaskTracker.lookAt
         Client.renderTaskTracker.lookAt = iden_m4d
@@ -123,7 +90,7 @@ class Framebuffer(w:double, h:double, val useRenBuf:bool) {
         unbind()
     }
 
-    fun copyColorFrom(p_83946_:Framebuffer) {
+    fun copyColorFrom(p_83946_:ScreenFramebuffer) {
         glBindFramebuffer(GL_READ_FRAMEBUFFER, p_83946_.id)
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, id)
         glBlitFramebuffer(0,
@@ -155,37 +122,14 @@ class Framebuffer(w:double, h:double, val useRenBuf:bool) {
         unbind()
     }
 
-    fun init(w:double, h:double) {
-        this.width = w
-        this.height = h
+    override fun init(w:double, h:double) {
+        super.init(w, h)
         this.projMat = Matrix4d().ortho(0.0, this.width, this.height, 0.0, -1.0, 1.0)
-        this.id = glGenFramebuffers()
-        glBindFramebuffer(GL_FRAMEBUFFER, this.id)
-        if (this.useRenBuf) {
-            this.depthAttatchment = GL11C.glGenTextures()
-            glBindTexture(GL_TEXTURE_2D, this.depthAttatchment)
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE)
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
-            glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32F, this.width.toInt(), this.height.toInt())
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthAttatchment, 0)
-        }
-        this.colorAttatchment = GL11C.glGenTextures()
-        glBindTexture(GL_TEXTURE_2D, this.colorAttatchment)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER)
-        glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, this.width.toInt(), this.height.toInt())
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttatchment, 0)
-        // now that we actually created the framebuffer and added all attachments we want to check if it is actually complete
-        glBindFramebuffer(GL_FRAMEBUFFER, this.id)
-        check(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE) {
-            "Framebuffer is not complete!"
-        }
-        glBindFramebuffer(GL_FRAMEBUFFER, 0)
+    }
+
+    @Listen
+    fun onResize(e:WindowResizedEvent) {
+        init(e.width.toDouble(), e.height.toDouble())
     }
 
     init {

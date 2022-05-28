@@ -1,7 +1,7 @@
 package me.ethius.client.renderer.postprocess
 
 import me.ethius.client.Client
-import me.ethius.client.renderer.Framebuffer
+import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.Shader
 import me.ethius.client.renderer.Shaders
 import me.ethius.client.renderer.bindTexture
@@ -17,7 +17,7 @@ object Shadow {
         shadow_blur = Shaders.shadow_blur
     }
 
-    fun render(fbo:Framebuffer, radius:float, scale:bool = false) {
+    fun render(fbo:ScreenFramebuffer, radius:float, scale:bool = false) {
         if (radius == 0f) {
             return
         }

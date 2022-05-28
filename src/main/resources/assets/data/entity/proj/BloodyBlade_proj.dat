@@ -1,0 +1,7 @@
+[meta]
+tex_data = "bloody_blade_proj"
+damage = "120-130"
+amplitude = 1.0
+frequency = 0.5
+scale = 0.9
+render_angle_add = -45.0

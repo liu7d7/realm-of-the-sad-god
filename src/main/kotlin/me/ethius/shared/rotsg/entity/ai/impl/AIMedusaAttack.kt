@@ -19,7 +19,7 @@ class AIMedusaAttack(entityIn:Enemy):AIBase(entityIn) {
         val world = entity.world as? ServerWorld ?: return
         val player = world.closestPlayer(this.entity) ?: return
         if (player.pos.distance2dSquared(entity.pos) < 25 * tile_size * tile_size) {
-            if (entity.ticksExisted % 150 == 0) {
+            if (entity.delayNumSeconds(3.0)) {
                 world.addEntity(Aoe(entity.x, entity.y).also {
                     it.owner = this.entity
                     it.damage = 150.0

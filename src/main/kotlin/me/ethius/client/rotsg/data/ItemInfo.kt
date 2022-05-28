@@ -130,6 +130,9 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
         val lightning_bolt = ItemInfo { KatanaItem("LightningBolt") }
         val diviners_old_stick = ItemInfo { WandItem("DivinersOldStick") }
         val golden_wand = ItemInfo { WandItem("GoldenWand") }
+        val elemental_saber = ItemInfo { SwordItem("ElementalSaber") }
+        val flowering_katana = ItemInfo { KatanaItem("FloweringKatana") }
+        val bloody_dagger = ItemInfo { DaggerItem("BloodyDagger") }
 
         // ABILITIES //
         val basic_shield_1 = ItemInfo {
@@ -280,6 +283,8 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
             "A simple robe.")
         }
         val the_scorched_armor = ItemInfo { LightArmorItem("TheScorchedArmor") }
+        val elemental_light_armor = ItemInfo { LightArmorItem("ElementalLightArmor") }
+        val elemental_heavy_armor = ItemInfo { HeavyArmorItem("ElementalHeavyArmor") }
 
         // RINGS //
         val basic_ring = ItemInfo {
@@ -301,6 +306,7 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
             )
         }
         val extreme_ring_of_atk = ItemInfo { RingItem("ExtremeRingOfAtk") }
+        val radiant_ring = ItemInfo { RingItem("RadiantRing") }
 
         // POTIONS //
         val dex_potion = ItemInfo { PotionItem(Stat.dex) }

@@ -3,10 +3,9 @@ package me.ethius.client.rotsg.inventory
 import me.ethius.client.Client
 import me.ethius.client.ext.push
 import me.ethius.client.ext.translate
-import me.ethius.client.renderer.Framebuffer
+import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.Mesh
 import me.ethius.client.renderer.postprocess.Outline
-import me.ethius.client.renderer.postprocess.Shadow
 import me.ethius.client.rotsg.entity.Bag
 import me.ethius.shared.bool
 import me.ethius.shared.double
@@ -33,13 +32,13 @@ class Inventory(private val dummy:bool = false) {
     lateinit var ring:RingSlot
     var draggingSlot:Slot? = null
     var bags = CopyOnWriteArrayList<Bag>()
-    lateinit var itemFramebuffer:Framebuffer
+    lateinit var itemFramebuffer:ScreenFramebuffer
 
     fun render(matrix:Matrix4dStack) {
         bags.removeIf { !it.shouldRenderInGui && measuringTimeMS() - it.animationTime >= 150f }
         if (dummy) return
         if (!this::itemFramebuffer.isInitialized) {
-            itemFramebuffer = Framebuffer(false)
+            itemFramebuffer = ScreenFramebuffer(false)
         }
         // render all to Net //
         Mesh.triangles.begin()

@@ -44,7 +44,7 @@ abstract class StatEntity(
 
     val tps:float
         get() {
-            return (4 + 5.6f * (spd.toFloat() / 75f)) * 0.625f
+            return (4 + 5.6f * (spd.toFloat() / 75f)) * 0.625f * 2.5f
         }
 
     val damageMultiplier:double

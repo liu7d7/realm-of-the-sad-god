@@ -1,0 +1,14 @@
+[meta]
+tex_data = "bloody_blade"
+tier = "legendary"
+name = "Bloody Blade"
+desc = "This blade is the bloodiest blade in the history of blades."
+
+[meta.stats]
+vit = +6
+life = +20
+
+[weapon_meta]
+aps_multiplier = 1.1
+damage = "120-130"
+shot_pattern = ["bloody_blade_proj"]

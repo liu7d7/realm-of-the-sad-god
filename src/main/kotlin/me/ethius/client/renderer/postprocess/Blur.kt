@@ -1,7 +1,7 @@
 package me.ethius.client.renderer.postprocess
 
 import me.ethius.client.Client
-import me.ethius.client.renderer.Framebuffer
+import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.Shader
 import me.ethius.client.renderer.Shaders
 import me.ethius.client.renderer.bindTexture
@@ -11,15 +11,15 @@ import kotlin.math.floor
 
 object Blur {
 
-    private lateinit var fbo1:Framebuffer
-    private lateinit var fbo2:Framebuffer
+    private lateinit var fbo1:ScreenFramebuffer
+    private lateinit var fbo2:ScreenFramebuffer
 
     private lateinit var blur:Shader
 
     fun init() {
         blur = Shaders.blur
-        fbo1 = Framebuffer(true)
-        fbo2 = Framebuffer(true)
+        fbo1 = ScreenFramebuffer(true)
+        fbo2 = ScreenFramebuffer(true)
     }
 
     fun render(progress:double) {

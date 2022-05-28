@@ -1,0 +1,9 @@
+[meta]
+tex_data = "radiant_ring"
+name = "Radiant Ring"
+desc = "This ring is so radiant! It's like radiating or something. Wow!" # what did I tell you? I literally can't!
+tier = "heroic"
+
+[meta.stats]
+mana = +120
+wis = +10

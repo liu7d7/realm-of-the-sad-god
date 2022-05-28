@@ -1,7 +1,7 @@
 package me.ethius.client.renderer.postprocess
 
 import me.ethius.client.Client
-import me.ethius.client.renderer.Framebuffer
+import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.Shader
 import me.ethius.client.renderer.Shaders
 import me.ethius.client.renderer.bindTexture
@@ -9,8 +9,8 @@ import me.ethius.shared.double
 
 object Bokeh {
 
-    private lateinit var fbo0:Framebuffer
-    private lateinit var fbo1:Framebuffer
+    private lateinit var fbo0:ScreenFramebuffer
+    private lateinit var fbo1:ScreenFramebuffer
 
     private lateinit var blobs2:Shader
     private lateinit var blit:Shader
@@ -19,8 +19,8 @@ object Bokeh {
     private lateinit var outline_combine:Shader
 
     fun init() {
-        fbo0 = me.ethius.client.renderer.Framebuffer(true)
-        fbo1 = me.ethius.client.renderer.Framebuffer(true)
+        fbo0 = me.ethius.client.renderer.ScreenFramebuffer(true)
+        fbo1 = me.ethius.client.renderer.ScreenFramebuffer(true)
 
         blobs2 = Shaders.blobs2
         blit = Shaders.blit

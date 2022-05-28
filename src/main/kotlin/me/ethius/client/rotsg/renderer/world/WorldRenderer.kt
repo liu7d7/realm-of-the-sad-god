@@ -79,7 +79,7 @@ class WorldRenderer:Tickable(true) {
     }
 
     override fun clientTick() {
-        if (ticksExisted % 75 == 0) {
+        if (delayNumSeconds(1.5)) {
             lastWindUpdate = measuringTimeMS()
             prevWindX = curWindX
             curWindX = (RandomUtils.nextFloat(0f, 23f) - 11.5f) / 11.5f
@@ -90,7 +90,7 @@ class WorldRenderer:Tickable(true) {
         fun Tile.renderMesh(matrix:Matrix4dStack) {
             if (this.texDataId != "empty") {
                 matrix.push {
-                    if (TexData[texDataId] !is AnimatedTexData && TexData[texDataId] !is FlowingTexData) {
+                    if (TexData[texDataId] !is AnimatedTexData && TexData[texDataId] !is FlowingTexData && this.randomRotationDirectionAngle != 0.0) {
                         matrix.translate(pos.x * tile_size + tile_size / 2f, pos.y * tile_size + tile_size / 2f, 1.0) {
                             matrix.multiply(POSITIVE_Z.getDegreesQuaternion(randomRotationDirectionAngle))
                         }
@@ -253,6 +253,7 @@ class WorldRenderer:Tickable(true) {
                         val centerY = (randomCenterMax * 2 * cos(frand * PI2) - randomCenterMax) * 0.5
                         val windX = Client.worldRenderer.windX * (if (randomRotationAngle == 180.0) -1.0 else 1.0)
                         val r = if (Client.playerInit) Client.player.lerpedR else 0.0
+                        val tdata = TexData[texDataId].texData(tile.hash, windX.toFloat())
                         val x = tile.pos.x * tile_size + tile_size * 0.5 + centerX
                         val y = tile.pos.y * tile_size + tile_size * 0.5 + centerY
                         matrix.push {
@@ -261,11 +262,11 @@ class WorldRenderer:Tickable(true) {
                                 matrix.scale(scale, 0.0, scale)
                                 matrix.multiply(POSITIVE_Z.getDegreesQuaternion(randomRotationAngle))
                             }
-                            Client.render.drawTexCenteredVerticalWindyWithoutEnding(TexData[texDataId], matrix,
+                            Client.render.drawTexCenteredVerticalWindyWithoutEnding(tdata, matrix,
                                                                                     x,
                                                                                     y,
-                                                                                    TexData[texDataId].width,
-                                                                                    TexData[texDataId].height,
+                                                                                    tdata.width,
+                                                                                    tdata.height,
                                                                                     0xffffffff,
                                                                                     windX,
                                                                                     windMultiplier * 0.2f * 11.5f

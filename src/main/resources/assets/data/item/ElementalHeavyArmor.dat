@@ -1,0 +1,10 @@
+[meta]
+tex_data = "elemental_heavy_armor"
+name = "Elemental Heavy Armor"
+desc = "This heavy armor is so elemental you can just walk through everything and not even care."
+tier = "heroic"
+
+[meta.stats]
+def = +7
+vit = +7
+life = +120

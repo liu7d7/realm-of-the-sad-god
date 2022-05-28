@@ -1,14 +1,14 @@
 package me.ethius.client.renderer.postprocess
 
 import me.ethius.client.Client
-import me.ethius.client.renderer.Framebuffer
+import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.Shader
 import me.ethius.client.renderer.Shaders
 import me.ethius.client.renderer.bindTexture
 
 object Fxaa {
 
-    private lateinit var swap:Framebuffer
+    private lateinit var swap:ScreenFramebuffer
 
     private lateinit var fxaa:Shader
     private lateinit var blit:Shader
@@ -17,10 +17,10 @@ object Fxaa {
         fxaa = Shaders.fxaa
         blit = Shaders.blit
 
-        swap = Framebuffer(true)
+        swap = ScreenFramebuffer(true)
     }
 
-    fun render(frameBufferObj:Framebuffer = Client.frameBufferObj) {
+    fun render(frameBufferObj:ScreenFramebuffer = Client.frameBufferObj) {
 
         fxaa.bind()
         fxaa["ProjMat"] = frameBufferObj.projMat

@@ -4,14 +4,15 @@ import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+val tickTime = 50.0
+
 class Ticker {
 
     val tickables = CopyOnWriteArrayList<Tickable>()
 
-    var tickDelta = 0f
-    var lastFrameDuration = 0f
+    var tickDelta = 0.0
+    var lastFrameDuration = 0.0
     private var prevTimeMillis = 0f
-    val tickTime = 20f
     var tps = 0L
     private var tpsi = 0L
     private var lastMetricSec = 0f

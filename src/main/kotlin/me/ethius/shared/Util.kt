@@ -15,10 +15,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.nio.ByteBuffer
 import java.nio.channels.Channels
-import kotlin.math.absoluteValue
-import kotlin.math.floor
-import kotlin.math.max
-import kotlin.math.min
+import kotlin.math.*
 
 const val PI = Math.PI
 const val PI2 = PI * 2f
@@ -77,8 +74,13 @@ fun measuringTimeMS():float {
     return timeGetter()
 }
 
+fun fract(num:double):double {
+    return num - floor(num)
+}
+
 fun frand(seed:int):float {
-    return randomFloats[seed.absoluteValue % 500]
+    val vec2 = dvec2(randomFloats[abs(seed % 500)].toDouble(), randomFloats[abs(seed + 200) % 500].toDouble())
+    return fract(sin(vec2.dot(dvec2(12.9898, 78.233))) * 43758.5453).toFloat()
 }
 
 fun wrapDegrees(degrees:double):double {

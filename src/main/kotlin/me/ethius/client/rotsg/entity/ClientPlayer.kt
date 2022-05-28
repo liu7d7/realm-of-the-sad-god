@@ -133,10 +133,10 @@ class ClientPlayer(pClass:PlayerClass, playerProfile:PlayerProfile):Player(pClas
         this.lastTilePos.x = this.tilePos.x
         this.lastTilePos.y = this.tilePos.y
         this.updateBoundingCircle()
-        if (this.ticksExisted % 2 == 0 && !hasEffect("sick")) {
+        if (this.delayNumSeconds(0.04) && !hasEffect("sick")) {
             this.hp = (this.hp + this.hphs).coerceAtMost(this.life.toDouble())
         }
-        if (this.ticksExisted % 4 == 0) {
+        if (this.delayNumSeconds(0.08)) {
             this.mp = (this.mp + this.mphs).coerceAtMost(this.maxMp.toDouble())
         }
         var h = false
@@ -173,7 +173,7 @@ class ClientPlayer(pClass:PlayerClass, playerProfile:PlayerProfile):Player(pClas
         if (f1 != null) {
             f = f1.slippy
             this.depth = f1.depth
-            if (this.ticksExisted % 13 == 0) {
+            if (this.delayNumSeconds(0.26)) {
                 f1.onPlayerWalk(this)
             }
         }
@@ -183,10 +183,10 @@ class ClientPlayer(pClass:PlayerClass, playerProfile:PlayerProfile):Player(pClas
             this.prevVelocity = this.velocity.copy()
         }
         if (Client.keyboard.areKeysDown(GLFW.GLFW_KEY_Q)) {
-            this.velocity.r = -1.6
+            this.velocity.r = -1.6 * 2.5
         }
         if (Client.keyboard.areKeysDown(GLFW.GLFW_KEY_E)) {
-            this.velocity.r = 1.6
+            this.velocity.r = 1.6 * 2.5
         }
         val divBy = if (v && h) sqrt2 else 1.0
         if (bl) {

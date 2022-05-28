@@ -47,7 +47,7 @@ class AIRottingBossAttack(entityIn:Enemy):AIBase(entityIn) {
                     entity.currentMoveAI = aiStayPut
                 }
 
-                if (entity.ticksExisted % 2 == 0) {
+                if (entity.delayNumSeconds(0.04)) {
                     for (i in 0..6) {
                         entity.shoot(ProjectileData.rotting_boss_proj).also {
                             it.r = shots[i]
@@ -62,7 +62,7 @@ class AIRottingBossAttack(entityIn:Enemy):AIBase(entityIn) {
                         shots[i] += shotDirs[i] * 2.0
                     }
 
-                    if (entity.ticksExisted % 30 == 0) {
+                    if (entity.delayNumSeconds(0.6)) {
                         for (i in 0..5) {
                             shotDirs[i] = if (RandomUtils.nextBoolean()) -1 else 1
                         }

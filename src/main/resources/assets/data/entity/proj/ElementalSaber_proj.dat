@@ -1,0 +1,7 @@
+[meta]
+tex_data = "elemental_saber"
+speed = 10.0
+range = 3.2
+damage = "220-260"
+through_def = true
+render_angle_add = -45.0

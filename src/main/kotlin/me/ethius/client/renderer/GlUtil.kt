@@ -89,11 +89,11 @@ fun uniformInt(location:int, v:int) {
     glUniform1i(location, v)
 }
 
-fun uniformfloat(location:int, v:float) {
+fun uniformFloat(location:int, v:float) {
     glUniform1f(location, v)
 }
 
-fun uniformfloat2(location:int, v1:float, v2:float) {
+fun uniformFloat2(location:int, v1:float, v2:float) {
     glUniform2f(location, v1, v2)
 }
 

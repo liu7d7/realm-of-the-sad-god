@@ -1,7 +1,7 @@
 package me.ethius.client.renderer.postprocess
 
 import me.ethius.client.Client
-import me.ethius.client.renderer.Framebuffer
+import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.Shader
 import me.ethius.client.renderer.Shaders
 import me.ethius.client.renderer.bindTexture
@@ -9,16 +9,16 @@ import me.ethius.shared.int
 
 object Outline {
 
-    lateinit var swap:Framebuffer
+    lateinit var swap:ScreenFramebuffer
 
     lateinit var outline:Shader
 
     fun init() {
-        swap = Framebuffer(true)
+        swap = ScreenFramebuffer(true)
         outline = Shaders.outline
     }
 
-    fun render(final:Framebuffer, width:int) {
+    fun render(final:ScreenFramebuffer, width:int) {
         swap.clearColorAndDepth()
 
         outline.bind()

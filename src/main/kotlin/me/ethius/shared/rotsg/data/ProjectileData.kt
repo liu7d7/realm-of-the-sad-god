@@ -306,6 +306,10 @@ class ProjectileData {
         val diviners_old_stick_proj = ProjectileData("DivinersOldStick_proj")
         val golden_wand_proj = ProjectileData("GoldenWand_proj")
 
+        val elemental_saber_proj = ProjectileData("ElementalSaber_proj")
+
+        val flowering_katana_proj = ProjectileData("FloweringKatana_proj")
+
         val shadow_crusher_proj = make {
             texDataId = TexData.shadow_scale_proj_1.id
             amplitude = 0.2

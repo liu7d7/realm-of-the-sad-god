@@ -23,12 +23,12 @@ class AIMetallicRobotAttack(entityIn:Enemy):AIBase(entityIn) {
         when (entity.hp.roundToInt()) {
             // starting phase, switch between hammer throws and moonbeams
             in 25000 downTo 16000 -> {
-                if (entity.ticksExisted % 50 == 0) {
+                if (entity.delayNumSeconds(1.0)) {
                     val angle = calcAngle(entity, target) + 90f
                     entity.shoot(ProjectileData.metallic_robot_proj_1).also { it.r = -30.0 + angle }
                     entity.shoot(ProjectileData.metallic_robot_proj_1).also { it.r = 0.0 + angle }
                     entity.shoot((ProjectileData.metallic_robot_proj_1)).also { it.r = 30.0 + angle }
-                } else if (entity.ticksExisted % 88 == 0) {
+                } else if (entity.delayNumSeconds(1.7)) {
                     for (i in 0..2) {
                         entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = i * 120.0 + 30.0 }
                         entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = i * 120.0 + 60.0 }
@@ -41,7 +41,7 @@ class AIMetallicRobotAttack(entityIn:Enemy):AIBase(entityIn) {
                 if (entity.currentMoveAI !is AIStayPut) {
                     entity.currentMoveAI = AIStayPut(entity, long.MAX_VALUE)
                 }
-                if (entity.ticksExisted % 5 == 0) {
+                if (entity.delayNumSeconds(0.1)) {
                     for (i in 0..5) {
                         shot1[i] += shot1dirs[i] * 3f
                     }
@@ -52,7 +52,7 @@ class AIMetallicRobotAttack(entityIn:Enemy):AIBase(entityIn) {
                     entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = shot1[4]; }
                     entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = shot1[5]; }
                 }
-                if (entity.ticksExisted % 38 == 0) {
+                if (entity.delayNumSeconds(0.75)) {
                     for (i in 0..5) {
                         if (RandomUtils.nextBoolean()) {
                             shot1dirs[i] = -shot1dirs[i]
@@ -62,7 +62,7 @@ class AIMetallicRobotAttack(entityIn:Enemy):AIBase(entityIn) {
             }
             // last phase, massive amount of spinners
             else -> {
-                if (entity.ticksExisted % 5 == 0) {
+                if (entity.delayNumSeconds(0.1)) {
                     for (i in 0..19) {
                         entity.shoot((ProjectileData.metallic_robot_proj_3))
                             .also { it.r = i * 18.0 + 30.0 + ((measuringTimeMS() * 0.5) % 360.0); }

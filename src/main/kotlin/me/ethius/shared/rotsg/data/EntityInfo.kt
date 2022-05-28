@@ -214,6 +214,9 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
                     it.pushData("stat", stat)
                     it.movementAIs.add(1.0, AIStayPut(it, long.MAX_VALUE).also { j -> it.currentMoveAI = j })
                     it.attackAIs.add(1.0, AIPotionEntityAttack(it).also { j -> it.currentAttackAI = j })
+                    if (stat == Stat.mana) {
+                        it.lootTable.add(LootTableEntry.radiant_ring)
+                    }
                 }
             }
         }

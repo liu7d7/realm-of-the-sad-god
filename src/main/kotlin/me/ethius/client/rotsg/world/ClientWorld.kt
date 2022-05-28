@@ -149,7 +149,7 @@ class ClientWorld:IWorld, Tickable(true) {
                 }
             }
         }
-        if (ticksExisted % 2 == 0 && measuringTimeMS() - overlayTime > 1000) {
+        if (delayNumSeconds(0.04) && measuringTimeMS() - overlayTime > 1000) {
             val ftp = Client.player.flooredTilePos().copy()
             val arr = ArrayList<string>()
             label@

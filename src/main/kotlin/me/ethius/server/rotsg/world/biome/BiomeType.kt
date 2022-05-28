@@ -4,16 +4,16 @@ import me.ethius.shared.double
 import me.ethius.shared.int
 import me.ethius.shared.long
 import me.ethius.shared.maths.WeightedCollection
-import me.ethius.shared.rotsg.world.biome.BiomeFeature
 import me.ethius.shared.rotsg.data.EntityInfo
 import me.ethius.shared.rotsg.entity.enemy.Enemy
 import me.ethius.shared.rotsg.tile.Bushery
+import me.ethius.shared.rotsg.world.biome.BiomeFeature
 import me.ethius.shared.string
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.jvmErasure
 
-class BiomeType(
+class BiomeType private constructor(
     val texDataId:string,
     val minRad:int,
     val maxRad:int,

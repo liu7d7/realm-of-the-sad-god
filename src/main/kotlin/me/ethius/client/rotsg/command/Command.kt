@@ -33,11 +33,12 @@ abstract class Command(
         fun tryExec(chat:string, autoExec:bool):bool {
             // if the chat doesn't start with the prefix, it's not a command; return false
             if (!chat.startsWith(prefix)) return false
+            val split = chat.split(" ")
             for (v in values) {
                 // if the chat starts with the prefix and the command's name or any of its aliases is the same as the chat, execute the command
-                if (v.aliases.any { chat.startsWith(prefix + it) }) {
+                if (v.aliases.any { split[0] == prefix + it }) {
                     // remove the prefix and the command's name from the chat, and split the chat into arguments
-                    val args = chat.split(" ").drop(1).toTypedArray()
+                    val args = split.drop(1).toTypedArray()
                     // send the that the command has been executed to the chats
                     Client.inGameHud.chatHud.addChat("${Formatting.light_purple}${if (autoExec) "Autoe" else "E"}xecuted Command${Formatting.reset}: $chat")
                     // execute the command

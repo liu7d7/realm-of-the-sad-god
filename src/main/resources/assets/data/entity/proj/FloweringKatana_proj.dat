@@ -1,0 +1,7 @@
+[meta]
+tex_data = "flowering_katana_proj"
+scale = 0.9
+speed = 11.5
+range = 4.5
+damage = "70-140"
+render_angle_add = -35.0

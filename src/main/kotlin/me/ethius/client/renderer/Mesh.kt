@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL15C
 import org.lwjgl.opengl.GL30.*
 import java.nio.ByteBuffer
 
-open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib) {
+open class Mesh(drawMode:DrawMode, var shader:Shader?, vararg attributes:Attrib) {
 
     enum class Attrib(val size:int) {
         float(1), tex(2), vec2(3), vec3(3), color(4);
@@ -29,6 +29,7 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
     private var vertexI = 0
     private var indicesCount = 0
     var building = false
+        private set
     private var beganRendering = false
     var uniformSetter:((Shader) -> void)? = null
 
@@ -74,7 +75,7 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
             }
 
             /* Render */
-            beforeRender()
+            shader?.bind()
             Shader.activeShader?.setDefaults()
             Shader.activeShader?.let { uniformSetter?.invoke(it) }
             bindVertexArray(vao)
@@ -230,10 +231,6 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
         }
     }
 
-    protected open fun beforeRender() {
-        shader?.bind()
-    }
-
     fun dispose() {
         glDeleteVertexArrays(vao)
         glDeleteBuffers(vbo)
@@ -269,7 +266,6 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
         var numDrawCalls = 0
 
         lateinit var triangles:Mesh private set
-//        lateinit var pos_tex_color_outline_shadow:Mesh private set
         lateinit var lines:Mesh private set
         lateinit var triangleFans:Mesh private set
         lateinit var model3dMesh:Mesh private set
@@ -280,13 +276,14 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
             lines = Mesh(DrawMode.line, Shaders.pos_color, Attrib.vec2, Attrib.color)
             model3dMesh = Mesh(DrawMode.triangle, Shaders.pos_tex_color_lighting, Attrib.vec3, Attrib.vec3, Attrib.tex, Attrib.color)
             model3dMesh.depthTest = true
-//            pos_tex_color_outline_shadow = Mesh(DrawMode.triangle, Shaders.pos_tex_color_outline_shadow, Attrib.vec3, Attrib.vec3, Attrib.vec3, Attrib.vec2, Attrib.color, Attrib.color, Attrib.color)
-//            pos_tex_color_outline_shadow.depthTest = true
         }
 
-        fun drawTriangles(mtId:int = main_tex.id) {
-            triangles.end()
-            bindTexture(mtId, 0) {
+        fun drawTriangles(_shader:Shader? = triangles.shader) {
+            val shader = triangles.shader
+            triangles.shader = _shader
+            if (triangles.building)
+                triangles.end()
+            bindTexture(main_tex.id, 0) {
                 triangles.shader?.set("u_Texture0", 0)
             }
             if (Client.font.font != null) {
@@ -296,6 +293,7 @@ open class Mesh(drawMode:DrawMode, val shader:Shader?, vararg attributes:Attrib)
                 Client.font.end()
             }
             triangles.render()
+            triangles.shader = shader
         }
     }
 

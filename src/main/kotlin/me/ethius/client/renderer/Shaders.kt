@@ -7,7 +7,6 @@ object Shaders {
     lateinit var pos_color:Shader private set
     lateinit var pos_tex_color:Shader private set
     lateinit var pos_tex_color_lighting:Shader private set
-//    lateinit var pos_tex_color_outline_shadow:Shader private set
     lateinit var blur:Shader private set
     lateinit var blobs2:Shader private set
     lateinit var blit:Shader private set
@@ -42,6 +41,7 @@ object Shaders {
         Shadow.init()
         Outline.init()
         Transition.init()
+        Shader.disposeOldShaders()
     }
 
 }

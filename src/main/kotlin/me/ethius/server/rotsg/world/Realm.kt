@@ -46,7 +46,7 @@ class Realm(vararg entities:me.ethius.shared.rotsg.entity.AEntity):ServerWorld("
     }
 
     override fun serverTickInternal() {
-        if (ticksExisted % 20 == 0) {
+        if (delayNumSeconds(0.4)) {
             if (ticksExisted >= 100 && (worldEvent == null || worldEvent?.isFinished(this) == true)) {
                 val e =
                     this.tiles.values.filter { it.texDataId != "water_1" && it.texDataId != "border_water_1" }

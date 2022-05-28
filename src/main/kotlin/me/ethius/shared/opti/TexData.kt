@@ -2,6 +2,7 @@ package me.ethius.shared.opti
 
 import me.ethius.client.main_tex
 import me.ethius.shared.*
+import me.ethius.shared.maths.WeightedCollection
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.jvmErasure
@@ -137,6 +138,7 @@ open class TexData(
         val elemental_slasher = TexData(90, 309, 8, 8)
         val stem_of_the_brain = TexData(0, 309, 8, 8)
         val lightning_bolt = TexData(89, 336, 8, 8)
+        val flowering_katana = TexData(0, 345, 8, 8)
 
         // daggers //
         val basic_dagger_1 = TexData(36, 318, 8, 8)
@@ -144,6 +146,7 @@ open class TexData(
         val warbringers_dagger = TexData(27, 318, 8, 8)
         val agateclaw_dagger = TexData(126, 309, 8, 8)
         val adv_dagger_1 = TexData(99, 327, 8, 8)
+        val bloody_blade = TexData(18, 345, 8, 8)
 
         // abilities //
         val adv_shield_1 = TexData(126, 318, 8, 8)
@@ -160,6 +163,7 @@ open class TexData(
         val bone_ring = TexData(18, 327, 8, 8)
         val basic_ring_1 = TexData(27, 327, 8, 8)
         val extreme_ring_of_atk = TexData(18, 309, 8, 8)
+        val radiant_ring = TexData(9, 345, 8, 8)
 
         // armors //
         val heavy_armor_1 = TexData(36, 327, 8, 8)
@@ -273,6 +277,12 @@ open class TexData(
         val shadow_stone_1 = TexData(202, 243, 8, 8)
         val shadow_stone_2 = TexData(192, 243, 8, 8)
         val sand_stone = TexData(202, 203, 8, 8)
+        val greener_grass = ChanceTexData(WeightedCollection.build {
+            add(0.7, TexData(222, 193, 8, 8))
+            add(0.1, TexData(232, 193, 8, 8))
+            add(0.1, TexData(242, 193, 8, 8))
+            add(0.1, TexData(252, 193, 8, 8))
+        })
 
         // BUSHERY //
         init {
@@ -356,6 +366,8 @@ open class TexData(
         val lightning_bolt_proj = TexData(142, 406, 8, 8)
         val diviners_old_stick_proj = TexData(0, 424, 4, 4)
         val golden_wand_proj = TexData(4, 424, 6, 5)
+        val flowering_katana_proj = TexData(151, 407, 4, 7)
+        val bloody_blade_proj = TexData(156, 408, 5, 6)
 
         // enemies //
         init {
@@ -377,6 +389,7 @@ open class TexData(
         val yellow_bag = TexData(610, 51, 8, 8)
         val pink_bag = TexData(561, 50, 6, 8)
         val ice_portal = TexData(543, 52, 8, 7)
+        val flowering_portal = TexData(527, 67, 8, 8)
         val realm_portal = TexData(552, 44, 8, 7)
         val crystal_portal = TexData(543, 44, 8, 7)
         val potion_dude = TexData(544, 27, 16, 16)

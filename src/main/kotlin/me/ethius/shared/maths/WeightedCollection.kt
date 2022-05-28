@@ -2,6 +2,7 @@ package me.ethius.shared.maths
 
 import me.ethius.shared.bool
 import me.ethius.shared.double
+import me.ethius.shared.void
 import java.util.*
 
 open class WeightedCollection<E> constructor(private val random:Random = Random()) {
@@ -26,15 +27,22 @@ open class WeightedCollection<E> constructor(private val random:Random = Random(
         return map.isEmpty()
     }
 
-    operator fun next():E? {
-        val value = random.nextDouble() * total
-        val h = map.higherEntry(value) ?: return null
+    fun next():E? {
+        return next(random.nextDouble())
+    }
+
+    fun next(fl:double):E? {
+        val h = map.higherEntry(fl * total) ?: return null
         return h.value
     }
 
     open fun clear() {
         map.clear()
         total = 0.0
+    }
+
+    companion object {
+        fun <T> build(lambda:WeightedCollection<T>.() -> void):WeightedCollection<T> = WeightedCollection<T>().apply(lambda)
     }
 
 }

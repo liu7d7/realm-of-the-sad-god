@@ -17,9 +17,10 @@ class RenderTaskTracker {
             it[i] = ArrayList()
         }
     }
-    val threeD = Framebuffer(true)
-    val outlines = Framebuffer(true)
-    val shadows = Framebuffer(true)
+    val threeD = ScreenFramebuffer(true)
+    val outlines = ScreenFramebuffer(true)
+    val shadows = ScreenFramebuffer(true)
+    val texCoords = ScreenFramebuffer(true)
     var lookAt:Matrix4d = iden_m4d
 
     var hasWorld3d:bool = false
@@ -53,19 +54,19 @@ class RenderTaskTracker {
                 }
                 layer(i)
                 if (!layer.beEachTime) {
-                    layer.begin()
+                    layer.begin(this)
                 }
                 for (task in map[i]!!) {
                     if (layer.beEachTime) {
-                        layer.begin()
+                        layer.begin(this)
                     }
                     task()
                     if (layer.beEachTime) {
-                        layer.end()
+                        layer.end(this)
                     }
                 }
                 if (!layer.beEachTime) {
-                    layer.end()
+                    layer.end(this)
                 }
                 map[i]?.clear()
             }
@@ -76,11 +77,11 @@ class RenderTaskTracker {
                 continue
             }
             layer(i)
-            i.begin()
+            i.begin(this)
             for (task in map[i]!!) {
                 task()
             }
-            i.end()
+            i.end(this)
             map[i]?.clear()
         }
         hasWorld3d = false

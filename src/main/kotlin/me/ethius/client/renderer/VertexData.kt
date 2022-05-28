@@ -12,7 +12,10 @@ class VertexData {
     var normal:dvec3 = dvec3()
 
     fun uploadWithNormal(mesh:Mesh, matrix:Matrix4dStack, texData:TexData):int {
-        return mesh.addVertex(matrix, position.x, position.y, position.z).addVertex(normal.x, normal.y, normal.z).tex(lerp(0.0, texData.width, texCoords.x) + texData.u, lerp(0.0, texData.height, texCoords.y) + texData.v, main_tex).color(color).next()
+        return mesh.addVertex(matrix, position.x, position.y, position.z)
+            .addVertex(normal.x, normal.y, normal.z)
+            .tex(lerp(0.0, texData.width, texCoords.x) + texData.u, lerp(0.0, texData.height, texCoords.y) + texData.v, main_tex)
+            .color(color).next()
     }
 
     override fun toString():String {

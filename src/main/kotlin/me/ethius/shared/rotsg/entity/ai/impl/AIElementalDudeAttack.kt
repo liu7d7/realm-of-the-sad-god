@@ -22,7 +22,7 @@ class AIElementalDudeAttack(entityIn:Enemy):AIBase(entityIn) {
                 if (entity.currentMoveAI !is AIWander) {
                     entity.currentMoveAI = wander
                 }
-                if (entity.ticksExisted % 15 == 0) {
+                if (entity.delayNumSeconds(0.3)) {
                     entity.shoot(ProjectileData.elemental_dude_proj_2.also {
                         it.baseAngle = 30.0; it.lifetime = ms(4.0, it.speed)
                     })
@@ -39,7 +39,7 @@ class AIElementalDudeAttack(entityIn:Enemy):AIBase(entityIn) {
                 if (entity.texDataId != "orange_elemental_dude") {
                     entity.setTexData("orange_elemental_dude")
                 }
-                when ((entity.ticksExisted % 750) / 375) {
+                when ((entity.ticksExisted % 300) / 150) {
                     0 -> {
                         if (entity.currentMoveAI !is AIWander) {
                             entity.currentMoveAI = wander
@@ -51,7 +51,7 @@ class AIElementalDudeAttack(entityIn:Enemy):AIBase(entityIn) {
                         }
                     }
                 }
-                if (entity.ticksExisted % 25 == 0) {
+                if (entity.delayNumSeconds(0.5)) {
                     ProjectileData.elemental_dude_proj_1.atPlayer = false
                     ProjectileData.elemental_dude_proj_2.atPlayer = false
                     for (i in 0..5) {

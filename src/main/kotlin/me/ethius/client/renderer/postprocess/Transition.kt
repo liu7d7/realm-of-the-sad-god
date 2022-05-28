@@ -23,7 +23,6 @@ object Transition {
         transition["Size", Client.window.scaledWidth] = Client.window.scaledHeight
         bindTexture(Client.frameBufferObj.colorAttatchment)
         PostProcessRenderer.renderFs(0.0, 0.0, Client.window.scaledWidth.toDouble(), Client.window.scaledHeight.toDouble())
-        transition.unbind()
     }
 
 }

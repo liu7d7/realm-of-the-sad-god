@@ -53,7 +53,7 @@ class Tile(val pos:ivec2, var texDataId:string, env:Bushery? = null) {
             vec4.transform(Client.lookAt)
             return vec4.y
         }
-    val renderX:double
+    private val renderX:double
         get() {
             if (!Client.lookAtInit) {
                 return 0.0
@@ -98,8 +98,7 @@ class Tile(val pos:ivec2, var texDataId:string, env:Bushery? = null) {
     }
 
     fun playerCanSee():bool {
-        var inCircle = pos.distanceSquared(floor(Client.player.x / tile_size).toInt(),
-                                           floor(Client.player.y / tile_size).toInt()) <= Client.options.renderDst * Client.options.renderDst
+        var inCircle = pos.distanceSquared(floor(Client.player.x / tile_size).toInt(), floor(Client.player.y / tile_size).toInt()) <= Client.options.renderDst * Client.options.renderDst
         if (inCircle) {
             val renderX = renderX
             val renderY = renderY
@@ -131,7 +130,7 @@ class Tile(val pos:ivec2, var texDataId:string, env:Bushery? = null) {
     }
 
     fun modulatedTexData():TexData {
-        return TexData[this.texDataId].texData(this.hash, Client.worldRenderer.windX)
+        return TexData[this.texDataId].texData(this.hash, Client.worldRenderer.windX * 4.0f)
     }
 
     fun updateAdjacentTiles(
@@ -144,31 +143,24 @@ class Tile(val pos:ivec2, var texDataId:string, env:Bushery? = null) {
         if (tileLeft != null) {
             val tLeftTexData = tileLeft.modulatedTexData()
             this.tilesAdj[0] = tileLeft
-            this.shouldBlend[0] = tLeftTexData != thisTexData && isColor1Darker(tLeftTexData.avgColor,
-                                                                                thisTexData.avgColor) && this.allowBlend
+            this.shouldBlend[0] = tLeftTexData != thisTexData && isColor1Darker(tLeftTexData.avgColor, thisTexData.avgColor) && this.allowBlend
         }
         if (tileRight != null) {
             val tRightTexData = tileRight.modulatedTexData()
             this.tilesAdj[1] = tileRight
-            this.shouldBlend[1] =
-                tRightTexData != thisTexData && isColor1Darker(tRightTexData.avgColor,
-                                                               thisTexData.avgColor) && this.allowBlend
+            this.shouldBlend[1] = tRightTexData != thisTexData && isColor1Darker(tRightTexData.avgColor, thisTexData.avgColor) && this.allowBlend
         }
         if (tileUp != null) {
             val tUpTexData = tileUp.modulatedTexData()
             this.tilesAdj[2] = tileUp
-            this.shouldBlend[2] = tUpTexData != thisTexData && isColor1Darker(tUpTexData.avgColor,
-                                                                              thisTexData.avgColor) && this.allowBlend
+            this.shouldBlend[2] = tUpTexData != thisTexData && isColor1Darker(tUpTexData.avgColor, thisTexData.avgColor) && this.allowBlend
         }
         if (tileDown != null) {
             val tDownTexData = tileDown.modulatedTexData()
             this.tilesAdj[3] = tileDown
-            this.shouldBlend[3] = tDownTexData != thisTexData && isColor1Darker(tDownTexData.avgColor,
-                                                                                thisTexData.avgColor) && this.allowBlend
+            this.shouldBlend[3] = tDownTexData != thisTexData && isColor1Darker(tDownTexData.avgColor, thisTexData.avgColor) && this.allowBlend
         }
-        blendOrder =
-            blendOrder.sortedBy { 255f - darknessOf(if (tilesAdj[it] != null) tilesAdj[it]!!.modulatedTexData().avgColor else 0xffffffff) }
-                .toIntArray()
+        blendOrder = blendOrder.sortedBy { 255f - darknessOf(if (tilesAdj[it] != null) tilesAdj[it]!!.modulatedTexData().avgColor else 0xffffffff) }.toIntArray()
     }
 
     init {

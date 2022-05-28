@@ -29,7 +29,7 @@ class Enemy private constructor(
     scale:double,
     var shotPattern:(Enemy) -> List<ProjectileData>,
     dex:int,
-    var lootTable:List<LootTableEntry>,
+    var lootTable:MutableList<LootTableEntry>,
     var portal:WeightedCollection<() -> ServerWorld?>,
     var exp:int,
     health:int,

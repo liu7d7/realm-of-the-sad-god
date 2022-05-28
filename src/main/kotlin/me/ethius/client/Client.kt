@@ -11,7 +11,7 @@ import me.ethius.client.rotsg.data.ItemInfo
 import me.ethius.client.rotsg.entity.ClientPlayer
 import me.ethius.client.rotsg.fx.Fx
 import me.ethius.client.rotsg.fx.FxManager
-import me.ethius.client.rotsg.gui.InGameHud
+import me.ethius.client.rotsg.gui.GameHud
 import me.ethius.client.rotsg.option.Options
 import me.ethius.client.rotsg.overlay.Overlay
 import me.ethius.client.rotsg.overlay.TransitionOverlay
@@ -52,7 +52,7 @@ import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
 lateinit var main_tex:Texture
-val iden_m4d = Matrix4d().identity()
+val iden_m4d:Matrix4d = Matrix4d().identity()
 val iden_mstack = Matrix4dStack(1)
 
 object Client {
@@ -77,7 +77,7 @@ object Client {
 
 
     // public vars
-    lateinit var frameBufferObj:Framebuffer
+    lateinit var frameBufferObj:ScreenFramebuffer
     lateinit var projMat:Matrix4d
     lateinit var audio:AudioOutput
     lateinit var window:Window
@@ -86,7 +86,7 @@ object Client {
     lateinit var render:Renderer
     lateinit var renderTaskTracker:RenderTaskTracker
     lateinit var font:FontRenderer
-    lateinit var inGameHud:InGameHud
+    lateinit var inGameHud:GameHud
     lateinit var discordRpc:DiscordRPC
     lateinit var options:Options
     lateinit var fxManager:FxManager
@@ -101,7 +101,7 @@ object Client {
     var isPaused = false
     val cameraPos = dvec2()
     val events = EventBus().setDebugLogging(false)
-    const val camAngleX = 3.0
+    const val camAngleX = 5.0
     var player:ClientPlayer
         get() = _player!!
         set(value) {
@@ -129,20 +129,14 @@ object Client {
     fun main(args:Array<string>) {
         Side.currentSide = Side.client
         System.setProperty("joml.format", "false")
-        glfwInit()
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3)
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3)
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE)
-        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE)
-        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE)
         options = Options()
         getRuntime().addShutdownHook(Thread { shutdown() })
-        window = Window(1152f, 720f)
+        window = Window(1216f, 760f)
         glClearColor(0.109803f, 0.1058823f, 0.1333333f, 1f)
         glEnable(GL_DEBUG_OUTPUT)
         glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS)
         ticker = Ticker()
-        frameBufferObj = Framebuffer(true)
+        frameBufferObj = ScreenFramebuffer(true)
         audio = AudioOutput()
         main_tex = Texture.loadTexture(texLoc)
         TexData.init()
@@ -163,7 +157,7 @@ object Client {
         EntityInfo.init()
         BiomeFeature.init()
         Model3d.init()
-        inGameHud = InGameHud()
+        inGameHud = GameHud()
         fxManager = FxManager()
         screen = MainMenuScreen()
         discordRpc = DiscordRPC()
@@ -186,7 +180,7 @@ object Client {
         shutdown()
     }
 
-    var isShutdown = false
+    private var isShutdown = false
 
     fun reset() {
         _world?.clear(true)
@@ -330,12 +324,6 @@ object Client {
             get() = -(cameraPos.y - y)
         private val worldX:double
             get() = -(cameraPos.x - x)
-        val mousePos:dvec2 = dvec2(0.0, 0.0)
-            get() {
-                field.x = worldX
-                field.y = worldY
-                return field
-            }
 
         fun set(x:float, y:float) {
             this.x = x
@@ -572,14 +560,14 @@ object Client {
             }
         }
 
-        fun setPrev() {
+        private fun setPrev() {
             this.prevX = x.roundToInt()
             this.prevY = y.roundToInt()
             this.prevWidth = width.roundToInt()
             this.prevHeight = height.roundToInt()
         }
 
-        fun toPrev() {
+        private fun toPrev() {
             this.x = prevX.toFloat()
             this.y = prevY.toFloat()
             this.width = prevWidth.toFloat()
@@ -623,7 +611,13 @@ object Client {
         }
 
         init {
-            handle = glfwCreateWindow(width.toInt(), height.toInt(), "RotSGExalt", 0L, 0L)
+            glfwInit()
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3)
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3)
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE)
+            glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE)
+            glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE)
+            handle = glfwCreateWindow(width.toInt(), height.toInt(), "Realm Of The Sad God Exalt", 0L, 0L)
             val `is` = IntArray(1)
             val js = IntArray(1)
             glfwGetWindowPos(handle, `is`, js)

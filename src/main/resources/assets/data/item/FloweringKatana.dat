@@ -1,0 +1,15 @@
+[meta]
+tex_data = "flowering_katana"
+name = "Flowering Katana"
+desc = "This katana flowers so much it's crazy. You should really see it." # can't write descriptions i'm telling you
+tier = "heroic"
+
+[meta.stats]
+vit = +6
+wis = +6
+spd = +6
+
+[weapon_meta]
+damage = "70-140"
+shot_pattern = ["flowering_katana_proj", "flowering_katana_proj"]
+arc_gap = 8.0

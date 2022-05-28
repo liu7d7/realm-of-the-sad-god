@@ -1,0 +1,10 @@
+[meta]
+tex_data = "elemental_light_armor"
+name = "Elemental Light Armor"
+desc = "This light armor is so elemental steam will come out of your ear holes." # not even gonna try anymore
+tier = "heroic"
+
+[meta.stats]
+def = +13
+spd = +7
+wis = +7

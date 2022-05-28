@@ -16,7 +16,6 @@ import me.ethius.shared.rotsg.entity.player.Player
 import me.ethius.shared.rotsg.tile.tile_size
 import org.apache.commons.lang3.RandomUtils
 import kotlin.math.abs
-import kotlin.math.atan2
 import kotlin.math.floor
 import kotlin.math.min
 
@@ -169,12 +168,12 @@ class Projectile:PassableEntity() {
         prevY = y
         prevDirection = direction
         praa = raa
-        val local3 = ticksExisted * 20.0
-        if (ticksExisted >= floor((projProps.lifetime - projProps.timeOffset * 3f) / 20f).toInt()) {
+        val _local_3 = (ticksExisted + 1) * tickTime
+        if (ticksExisted >= floor((projProps.lifetime - projProps.timeOffset * 3f - tickTime) / tickTime).toInt()) {
             Client.world.remEntity(this)
             return
         }
-        if (positionAt(local3, pt)) {
+        if (positionAt(_local_3, pt)) {
             Client.world.remEntity(this, true, true)
             return
         }
@@ -190,7 +189,8 @@ class Projectile:PassableEntity() {
         } else if (projProps.boomerang && ticksExisted == floor(projProps.lifetime / 40f).toInt()) {
             r + 90f
         } else {
-            atan2(y - prevY, x - prevX).toDegrees() - 90f
+            positionAt((ticksExisted + 2) * tickTime, pt, false)
+            fastAtan2(pt.y - y, pt.x - x).toDegrees() - 90f
         }
         if (ticksExisted == 0 || (projProps.boomerang && ticksExisted == floor(projProps.lifetime / 40f).toInt())) {
             this.prevDirection = direction
@@ -198,14 +198,14 @@ class Projectile:PassableEntity() {
         raa += projProps.spinSpeed
     }
 
-    private fun positionAt(time:double, pos:dvec2):bool {
+    private fun positionAt(time:double, pos:dvec2, real:bool = true):bool {
         val time = time + projProps.timeOffset
         val _local_8:double
         val _local_9:double
         val _local_10:double
         val _local_11:double
         val _local_12:double
-        val halfRange:double
+        val _local_13:double
         val _local_14:double
         pos.x = this.startPos.x
         pos.y = this.startPos.y
@@ -220,27 +220,30 @@ class Projectile:PassableEntity() {
             pos.x += (_local_9 * _local_12) - (_local_10 * _local_11)
             pos.y += (_local_9 * _local_11) + (_local_10 * _local_12)
         } else {
-            halfRange = (projProps.lifetime * (projProps.speed / 1000f)) / 2f * tile_size
+            _local_13 = (projProps.lifetime * (projProps.speed / 1000f)) / 2f * tile_size
             var bl = false
             if (projProps.boomerang) {
-                if (distance > halfRange) {
-                    distance = halfRange - (distance - halfRange)
+                if (distance > _local_13) {
+                    distance = _local_13 - (distance - _local_13)
                     bl = true
                 }
             }
             pos.x += distance * cosD(this.r)
             pos.y += distance * sinD(this.r)
-            val local15 = (if (!projProps.boomerang) (time / projProps.lifetime) else distance / halfRange)
+            val local15 = (if (!projProps.boomerang) (time / projProps.lifetime) else distance / _local_13)
             if (projProps.amplitude != 0.0) {
                 _local_14 = (projProps.amplitude * sin(local4 + local15 * projProps.frequency * 2f * PI)) * if (bl) -1.0 else 1.0
                 pos.x += _local_14 * tile_size * cosD(this.r + 90.0)
                 pos.y += _local_14 * tile_size * sinD(this.r + 90.0)
             }
         }
-        this.x = pos.x
-        this.y = pos.y
-        updateBoundingCircle()
-        return Client.world.getBoundingCircles(this.boundingCircle).isNotEmpty() && !projProps.throughWalls
+        if (real) {
+            this.x = pos.x
+            this.y = pos.y
+            updateBoundingCircle()
+            return Client.world.getBoundingCircles(this.boundingCircle).isNotEmpty() && !projProps.throughWalls
+        }
+        return false
     }
 
     companion object {

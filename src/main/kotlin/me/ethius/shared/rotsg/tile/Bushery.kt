@@ -54,17 +54,10 @@ open class Bushery(
         return result
     }
 
+    @Suppress("UNUSED")
     companion object {
         // busheryinfo, id
         val values = ArrayList<Bushery>()
-        private val centerXS = { bInfo:Bushery ->
-            tile_size / 2f + (RandomUtils.nextDouble(0.0,
-                                                     bInfo.randomCenterMax * 0.5) - bInfo.randomCenterMax)
-        }
-        private val centerYS = { bInfo:Bushery ->
-            tile_size / 2f + RandomUtils.nextDouble(0.0,
-                                                    bInfo.randomCenterMax * 0.5) - bInfo.randomCenterMax
-        }
 
         val empty = Bushery("empty").addToBiomeType(15.0,
                                                           BiomeType.lake,
