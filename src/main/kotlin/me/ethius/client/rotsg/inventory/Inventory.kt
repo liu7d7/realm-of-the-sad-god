@@ -149,7 +149,7 @@ class Inventory(private val dummy:bool = false) {
         for (_i in slotGroups.indices) {
             val i = 1 - _i
             val group = slotGroups[_i]
-            group.tlY = Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - slot_width - 3.0 - offset - i * slot_width
+            group.tlY = Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - slot_width * 2 - 10.0 - offset - i * slot_width
         }
     }
 
@@ -206,22 +206,14 @@ class Inventory(private val dummy:bool = false) {
             val arr1 = Array(4) { i -> SlotId[i].newInst(0.0, 0.0).also { slots.add(it) } }
             slotGroups.add(SlotGroup(arr1,
                                      Client.window.midX - slot_width * 2,
-                                     Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - 3.0).also { it.outline = true })
+                                     Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - slot_width - 10))
         }
 
         // first 4 slots //
         run {
-            val arr2 = Array(4) { i -> SlotId[i + 4].newInst(0.0, 0.0).also { slots.add(it) } }
+            val arr2 = Array(8) { i -> SlotId[i + 4].newInst(0.0, 0.0).also { slots.add(it) } }
             slotGroups.add(SlotGroup(arr2,
-                                     Client.window.midX - slot_width * 6 - 10,
-                                     Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0))
-        }
-
-        // last 4 slots //
-        run {
-            val arr3 = Array(4) { i -> SlotId[i + 8].newInst(0.0, 0.0).also { slots.add(it) } }
-            slotGroups.add(SlotGroup(arr3,
-                                     Client.window.midX + slot_width * 2 + 10,
+                                     Client.window.midX - slot_width * 4,
                                      Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0))
         }
 

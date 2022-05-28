@@ -395,9 +395,11 @@ class ClientPlayer(pClass:PlayerClass, playerProfile:PlayerProfile):Player(pClas
         fun load(profileIn:PlayerProfile):ClientPlayer {
             Client.player = ClientPlayer(PlayerClass.valueOf(profileIn.clazz), profileIn)
             Client.player.inventory.slots.forEachIndexed { index, slot ->
-                val item = ItemInfo.values.find { it.id == profileIn.items[index] }
-                if (item != null) {
-                    slot.item = item()
+                if (index in profileIn.items.indices) {
+                    val item = ItemInfo.values.find { it.id == profileIn.items[index] }
+                    if (item != null) {
+                        slot.item = item()
+                    }
                 }
             }
             return Client.player

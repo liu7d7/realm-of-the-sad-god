@@ -171,6 +171,10 @@ enum class SlotId(val canPut:(Item) -> bool) {
     Inv_6({ true }),
     Inv_7({ true }),
     Inv_8({ true }),
+//    Inv_9({ true }),
+//    Inv_10({ true }),
+//    Inv_11({ true }),
+//    Inv_12({ true }),
     Bag_1({ true }),
     Bag_2({ true }),
     Bag_3({ true }),
@@ -178,7 +182,7 @@ enum class SlotId(val canPut:(Item) -> bool) {
     Bag_5({ true }),
     Bag_6({ true }),
     Bag_7({ true }),
-    Bag_8({ true });
+    Bag_8({ true }),;
 
     fun slotString():string {
         if (ordinal in 4..11)

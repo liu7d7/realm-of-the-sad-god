@@ -78,10 +78,10 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
             it.render(matrix, false)
         }
         Client.render.drawShadowOutlineRectWithoutEnding(matrix,
-                                                         tlX + 0.1f,
-                                                         tlY + 0.05f,
+                                                         tlX,
+                                                         tlY,
                                                          slot_width * slots.size,
-                                                         slot_width + 0.1f,
+                                                         slot_width,
                                                          0x60000000,
                                                          if (this.outline) 6.0 else 3.0,
                                                          top,
