@@ -3,16 +3,17 @@ package me.ethius.client.rotsg.inventory
 import me.ethius.client.Client
 import me.ethius.client.ext.push
 import me.ethius.client.ext.translate
-import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.Mesh
+import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.postprocess.Outline
 import me.ethius.client.rotsg.entity.Bag
+import me.ethius.client.rotsg.gui.padding
+import me.ethius.client.rotsg.gui.totalBarsHeight
 import me.ethius.shared.bool
 import me.ethius.shared.double
 import me.ethius.shared.events.Listen
 import me.ethius.shared.events.def.MouseClickedEvent
 import me.ethius.shared.events.def.WindowResizedEvent
-import me.ethius.shared.int
 import me.ethius.shared.maths.Animations
 import me.ethius.shared.measuringTimeMS
 import org.joml.Matrix4dStack
@@ -46,8 +47,10 @@ class Inventory(private val dummy:bool = false) {
         for (it in slotGroups) {
             it.renderSlots(matrix)
         }
-        for ((i, k) in bags.withIndex()) {
-            k.renderSlots(matrix, i)
+        var offset = 10.0
+        for (k in bags) {
+            k.renderSlots(matrix, offset)
+            offset += 10 + slot_width * 2 * k.scale
         }
         Mesh.drawTriangles()
 
@@ -60,6 +63,7 @@ class Inventory(private val dummy:bool = false) {
         for (it in bags) {
             it.renderItems(matrix)
         }
+        Client.inGameHud.renderOutlined(matrix)
         Mesh.drawTriangles()
         Outline.render(itemFramebuffer, 1)
         itemFramebuffer.unbind()
@@ -84,6 +88,15 @@ class Inventory(private val dummy:bool = false) {
         }
         Mesh.drawTriangles()
     }
+
+    private val Bag.scale:double
+        get() {
+            return if (this.shouldRenderInGui) {
+                Animations.getDecelerateAnimation(150f, measuringTimeMS() - this.animationTime).toDouble()
+            } else {
+                1 - Animations.getAccelerateAnimation(150f, measuringTimeMS() - this.animationTime).toDouble()
+            }
+        }
 
     private fun Bag.setupMatrix(matrix:Matrix4dStack) {
         val tslg = this.slotGroups[1]
@@ -116,7 +129,7 @@ class Inventory(private val dummy:bool = false) {
         }
     }
 
-    private fun Bag.renderSlots(matrix:Matrix4dStack, offset:int) {
+    private fun Bag.renderSlots(matrix:Matrix4dStack, offset:double) {
         updateOffset(offset)
         matrix.push {
             setupMatrix(matrix)
@@ -132,11 +145,11 @@ class Inventory(private val dummy:bool = false) {
         }
     }
 
-    private fun Bag.updateOffset(offset:int) {
+    private fun Bag.updateOffset(offset:double) {
         for (_i in slotGroups.indices) {
             val i = 1 - _i
             val group = slotGroups[_i]
-            group.tlY = Client.window.scaledHeight - Client.window.scaledHeight * 0.0675 - slot_width * (2 + i) - 9 - (slot_width * 2 + 10) * offset
+            group.tlY = Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - slot_width - 3.0 - offset - i * slot_width
         }
     }
 
@@ -193,7 +206,7 @@ class Inventory(private val dummy:bool = false) {
             val arr1 = Array(4) { i -> SlotId[i].newInst(0.0, 0.0).also { slots.add(it) } }
             slotGroups.add(SlotGroup(arr1,
                                      Client.window.midX - slot_width * 2,
-                                     Client.window.scaledHeight - Client.window.scaledHeight * 0.0675 - slot_width + 1))
+                                     Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - 3.0).also { it.outline = true })
         }
 
         // first 4 slots //
@@ -201,7 +214,7 @@ class Inventory(private val dummy:bool = false) {
             val arr2 = Array(4) { i -> SlotId[i + 4].newInst(0.0, 0.0).also { slots.add(it) } }
             slotGroups.add(SlotGroup(arr2,
                                      Client.window.midX - slot_width * 6 - 10,
-                                     Client.window.scaledHeight - Client.window.scaledHeight * 0.0675 - slot_width + 1))
+                                     Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0))
         }
 
         // last 4 slots //
@@ -209,7 +222,7 @@ class Inventory(private val dummy:bool = false) {
             val arr3 = Array(4) { i -> SlotId[i + 8].newInst(0.0, 0.0).also { slots.add(it) } }
             slotGroups.add(SlotGroup(arr3,
                                      Client.window.midX + slot_width * 2 + 10,
-                                     Client.window.scaledHeight - Client.window.scaledHeight * 0.0675 - slot_width + 1))
+                                     Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0))
         }
 
         // easily accessible  //

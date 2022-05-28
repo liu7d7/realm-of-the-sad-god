@@ -29,7 +29,7 @@ abstract class StatEntity(
         }
 
     // last health update time //
-    var lastManaUpdate = 0f
+    private var lastManaUpdate = 0f
 
     // previous hp value //
     var prevMp = 0.0

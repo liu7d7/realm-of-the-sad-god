@@ -3,9 +3,9 @@ package me.ethius.client.rotsg.gui
 import me.ethius.client.Client
 import me.ethius.client.rotsg.command.Command
 import me.ethius.shared.double
+import me.ethius.shared.events.Listen
 import me.ethius.shared.events.def.KeyPressedEvent
 import me.ethius.shared.events.def.KeyTypedEvent
-import me.ethius.shared.events.Listen
 import me.ethius.shared.int
 import me.ethius.shared.maths.Animations
 import me.ethius.shared.measuringTimeMS
@@ -67,7 +67,7 @@ class ChatHud {
     private var historyIdx:int = 0
 
     fun render(matrix:Matrix4dStack) {
-        this.bottom = Client.window.scaledHeight - Client.window.scaledHeight * 0.0675
+        this.bottom = Client.window.scaledHeight - padding * 2 - (if (Client.playerInit) totalBarsHeight else 0.0) - if (isTyping) 32.0 else 0.0
         this.width = 350.0
         var y = bottom
         val ch = receivedChatHistory.filter { if (isTyping) true else measuringTimeMS() < it.timeOut }
@@ -134,9 +134,9 @@ class ChatHud {
     private fun postRender(matrix:Matrix4dStack) {
         if (this.isTyping) {
             this.textBox.posX0 = 2.0
-            this.textBox.posY0 = Client.window.scaledHeight - 24.0
+            this.textBox.posY0 = bottom + 10
             this.textBox.posX1 = 350.0
-            this.textBox.posY1 = Client.window.scaledHeight - 2.0
+            this.textBox.posY1 = bottom + 32
             this.textBox.render(matrix)
         }
     }

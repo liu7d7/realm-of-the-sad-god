@@ -9,7 +9,6 @@ import me.ethius.shared.events.Listen
 import me.ethius.shared.events.def.MouseClickedEvent
 import me.ethius.shared.maths.MaxArrayList
 import me.ethius.shared.measuringTimeMS
-import me.ethius.shared.string
 import me.ethius.shared.tickTime
 import org.joml.Matrix4dStack
 import java.util.concurrent.CopyOnWriteArrayList
@@ -20,9 +19,16 @@ const val dul = 0xff1c1b22
 const val ldu = 0xff282c34
 const val lldu = 0xff3d424d
 
-private const val expDark = 0xff9a5cb3
-private const val hpDark = 0xffeb5447
-private const val mpDark = 0xff32a1e5
+private const val expColor = 0xff58ff77
+private const val hpColor = 0xffff5a5a
+private const val mpColor = 0xffffbf00
+
+const val barHeight = 26.0
+const val barSpacing = 6.5
+const val charHeight = barHeight * 2 + barSpacing
+const val padding = 15.0
+const val expBarWidth = 200.0 + charHeight
+const val totalBarsHeight = barHeight * 3 + barSpacing * 2
 
 class GameHud {
 
@@ -55,14 +61,14 @@ class GameHud {
 
                 // hp/mp //
                 Client.font.drawCenteredStringWithoutEnding(matrix,
-                                                            getCoordsStr(),
+                                                            "XY: ${Client.player.tilePos.x}, ${Client.player.tilePos.y}",
                                                             Client.window.midX.toDouble(),
                                                             15.0,
                                                             0xffffffff,
                                                             true)
-                drawHpBar(matrix)
-                drawMpBar(matrix)
-                drawExpBar(matrix)
+                Client.font.drawWithoutEnding(matrix, Client.player.hp.roundToInt().toString(), padding + barSpacing + expBarWidth, Client.window.scaledHeight - padding - barSpacing - barHeight * 1.5 - Client.font.getHeight(true) / 2, hpColor, true)
+                Client.font.drawWithoutEnding(matrix, Client.player.mp.roundToInt().toString(), padding + barSpacing + expBarWidth, Client.window.scaledHeight - padding - barHeight * 0.5 - Client.font.getHeight(true) / 2, mpColor, true)
+                Client.font.drawWithoutEnding(matrix, Client.player.level.toString(), padding + barSpacing + expBarWidth, Client.window.scaledHeight - padding - charHeight - barSpacing - barHeight * 0.5 - Client.font.getHeight(true) / 2.0, expColor, true)
             }
             mspts += (Client.ticker.lastFrameDuration * tickTime)
             if (measuringTimeMS() - lastUpdate >= 250f) {
@@ -71,17 +77,10 @@ class GameHud {
             }
             val stringMs = ms.toString()
             val stringFps = "${(1000f / ms).roundToInt()}"
-            Client.font.drawWithoutEnding(matrix,
-                                   "MSPF: ${
-                                       stringMs.substring(0..min(stringMs.length - 1,
-                                                                 4))
-                                   } | FPS: $stringFps | Draw Calls: ${Mesh.numDrawCalls + 1}",
-                                   2.0,
-                                   if (this@GameHud.chatHud.isTyping) {
-                                       Client.window.scaledHeight - Client.font.getHeight(true) - 24.0
-                                   } else {
-                                       Client.window.scaledHeight - Client.font.getHeight(true) - 2.0
-                                   },
+            Client.font.drawLeftWithoutEnding(matrix,
+                                   "MSPF: ${stringMs.substring(0..min(stringMs.length - 1, 4))} | FPS: $stringFps | Draw Calls: ${Mesh.numDrawCalls + 1}",
+                                   Client.window.scaledWidth - 2.0,
+                                   Client.window.scaledHeight - Client.font.getHeight(true) - 2.0,
                                    0xffffffff,
                                    true)
             Mesh.drawTriangles()
@@ -94,67 +93,32 @@ class GameHud {
 
     }
 
+    fun renderOutlined(matrix:Matrix4dStack) {
+        drawHpBar(matrix)
+        drawMpBar(matrix)
+        drawExpBar(matrix)
+        drawChar(matrix)
+    }
+
     private fun drawHpBar(matrix:Matrix4dStack) {
-        Client.render.drawRectWithoutEnding(matrix,
-                                       3.0,
-                                       3.0,
-                                       3.0 + 2.0 + (Client.player.hp / Client.player.life.toDouble()) * 148.0,
-                                       3.0 + 19.0,
-                                       hpDark)
-        Client.font.drawWithoutEnding(matrix, "HP", 5.0, 4.5, 0xffffffff, true, 0.85)
-        Client.font.drawLeftWithoutEnding(matrix,
-                                          "${Client.player.hp.roundToInt()}/${Client.player.life}",
-                                          148.0,
-                                          5.5,
-                                          0xffffffff,
-                                          true,
-                                          0.8)
+        Client.render.drawRectWithoutEnding_WH(matrix, padding + barSpacing + charHeight, Client.window.scaledHeight - padding - barSpacing - barHeight * 2, expBarWidth - barSpacing - charHeight, barHeight, ldu)
+        Client.render.drawRectWithoutEnding_WH(matrix, padding + barSpacing + charHeight, Client.window.scaledHeight - padding - barSpacing - barHeight * 2, (expBarWidth - barSpacing - charHeight) * Client.player.hp / Client.player.life.toDouble(), barHeight, hpColor)
     }
 
     private fun drawMpBar(matrix:Matrix4dStack) {
-        Client.render.drawRectWithoutEnding(matrix,
-                                       3.0,
-                                       26.5,
-                                       3.0 + 2.0 + (Client.player.mp / Client.player.maxMp.toDouble()) * 148.0,
-                                       26.5 + 19.0,
-                                       mpDark)
-        Client.font.drawWithoutEnding(matrix, "MP", 5.0, 29.0, 0xffffffff, true, 0.85)
-        Client.font.drawLeftWithoutEnding(matrix,
-                                          "${Client.player.mp.roundToInt()}/${Client.player.maxMp}",
-                                          148.0,
-                                          30.0,
-                                          0xffffffff,
-                                          true,
-                                          0.8)
+        Client.render.drawRectWithoutEnding_WH(matrix, padding + barSpacing + charHeight, Client.window.scaledHeight - padding - barHeight, expBarWidth - barSpacing - charHeight, barHeight, ldu)
+        Client.render.drawRectWithoutEnding_WH(matrix, padding + barSpacing + charHeight, Client.window.scaledHeight - padding - barHeight, (expBarWidth - barSpacing - charHeight) * Client.player.mp / Client.player.maxMp.toDouble(), barHeight, mpColor)
     }
 
     private fun drawExpBar(matrix:Matrix4dStack) {
         val xpToNext = (Client.player.nextLevel() - Client.player.prevLevel()).toFloat()
         val xpProgress = (Client.player.exp - Client.player.prevLevel()).toFloat()
-        Client.render.drawRectWithoutEnding(matrix,
-                                       3.0,
-                                       49.5,
-                                       3.0 + 2.0 + (xpProgress / xpToNext) * 148.0,
-                                       49.5 + 19.0,
-                                       expDark)
-        Client.font.drawWithoutEnding(matrix,
-                                      "LVL ${Client.player.level}",
-                                      5.0,
-                                      52.0,
-                                      0xffffffff,
-                                      true,
-                                      0.85)
-        Client.font.drawLeftWithoutEnding(matrix,
-                                          "${xpProgress.toInt()}/${xpToNext.toInt()}",
-                                          148.0,
-                                          53.0,
-                                          0xffffffff,
-                                          true,
-                                          0.8)
+        Client.render.drawRectWithoutEnding_WH(matrix, padding, Client.window.scaledHeight - padding - charHeight - barSpacing - barHeight, expBarWidth, barHeight, ldu)
+        Client.render.drawRectWithoutEnding_WH(matrix, padding, Client.window.scaledHeight - padding - charHeight - barSpacing - barHeight, expBarWidth * xpProgress / xpToNext, barHeight, expColor)
     }
 
-    private fun getCoordsStr():string {
-        return "XY: ${Client.player.tilePos.x}, ${Client.player.tilePos.y}"
+    private fun drawChar(matrix:Matrix4dStack) {
+        Client.render.drawTexWithoutEnding(Client.player.pTexData.right, matrix, padding, Client.window.scaledHeight - padding - charHeight, 0.0, 0xffffffff, charHeight, charHeight)
     }
 
     @Listen

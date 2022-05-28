@@ -10,6 +10,7 @@ wis = +6
 spd = +6
 
 [weapon_meta]
-damage = "70-140"
+damage = "70-120"
+aps_multiplier = 1.33
 shot_pattern = ["flowering_katana_proj", "flowering_katana_proj"]
 arc_gap = 8.0

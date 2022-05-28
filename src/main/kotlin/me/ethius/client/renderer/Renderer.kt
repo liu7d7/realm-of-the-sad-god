@@ -208,6 +208,29 @@ class Renderer {
         )
     }
 
+    fun drawRectWithoutEnding_WH(
+        matrices:Matrix4dStack,
+        x:double,
+        y:double,
+        w:double,
+        h:double,
+        color:long,
+    ) {
+        val x1 = x + w
+        val y1 = y + h
+        triangles.quad(
+            triangles.addVertex(matrices, x, y).tex(TexData.rect.u, TexData.rect.v, main_tex).color(color).float(0)
+                .next(),
+            triangles.addVertex(matrices, x1, y).tex(TexData.rect.u + TexData.rect.width, TexData.rect.v, main_tex)
+                .color(color).float(0).next(),
+            triangles.addVertex(matrices, x1, y1)
+                .tex(TexData.rect.u + TexData.rect.width, TexData.rect.v + TexData.rect.height, main_tex).color(color)
+                .float(0).next(),
+            triangles.addVertex(matrices, x, y1).tex(TexData.rect.u, TexData.rect.v + TexData.rect.height, main_tex)
+                .color(color).float(0).next()
+        )
+    }
+
     fun drawGradientRectWithoutEnding(
         matrices:Matrix4dStack,
         x:double,

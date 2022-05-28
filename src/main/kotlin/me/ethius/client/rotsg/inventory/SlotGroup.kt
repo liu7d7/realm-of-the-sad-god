@@ -29,6 +29,7 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
     var bottom = true
     var left = true
     var right = true
+    var outline = false
 
     fun Slot.render(matrix:Matrix4dStack, outline:bool) {
         if (Client.player.canUse(this.item)) {
@@ -82,11 +83,14 @@ class SlotGroup(private val slots:Array<Slot>, tlX:double, tlY:double) {
                                                          slot_width * slots.size,
                                                          slot_width + 0.1f,
                                                          0x60000000,
-                                                         3.0,
+                                                         if (this.outline) 6.0 else 3.0,
                                                          top,
                                                          left,
                                                          right,
                                                          bottom)
+        if (this.outline) {
+            Client.render.drawOutlineRectWithoutEnding(matrix, tlX - 1, tlY - 1, slot_width * slots.size + 2, slot_width + 3, 0xffead4fa, 1.0, true, true, true, true)
+        }
     }
 
     fun renderItems(matrix:Matrix4dStack) {

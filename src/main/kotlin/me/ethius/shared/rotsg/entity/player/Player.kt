@@ -33,7 +33,7 @@ open class Player(val pClass:PlayerClass, val playerProfile:PlayerProfile):StatE
             pTexData = this.pClass.skins[value]
             field = value
         }
-    protected lateinit var pTexData:PlayerTexData
+    lateinit var pTexData:PlayerTexData
 
     fun nextLevel():int {
         return this.level * this.level * 50
