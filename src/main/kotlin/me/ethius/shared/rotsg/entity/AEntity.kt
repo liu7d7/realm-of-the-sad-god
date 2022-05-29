@@ -102,6 +102,12 @@ abstract class AEntity:Tickable() {
                 if (prevHp == 0.0)
                     prevHp = value
             }
+            if (Side._server) {
+                Server.network.broadcastIf(Packet(Packet._id_hp_update, this.entityId, value)) {
+                    val sp = ServerPlayer[it] ?: return@broadcastIf false
+                    sp.world == this.world && sp != this
+                }
+            }
             field = value
         }
     open var life:int = 0
@@ -272,9 +278,13 @@ abstract class AEntity:Tickable() {
     }
 
     fun addEffect(effect:Effect) {
+        removeEffect(effect.id)
         effect.entt = this
         effect.init()
         effects.add(effect)
+        if (Side._client) {
+            Client.network.send(Packet(Packet._id_effect_add, this.entityId, effect.toString()))
+        }
     }
 
     fun removeEffect(type:string) {

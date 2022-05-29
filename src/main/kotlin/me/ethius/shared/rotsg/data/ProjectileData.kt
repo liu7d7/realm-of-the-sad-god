@@ -12,7 +12,7 @@ import kotlin.reflect.KProperty1
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.jvmErasure
 
-private const val data_loc = "/assets/data/entity/proj"
+const val proj_data_loc = "/assets/data/entity/proj"
 
 class ProjectileData {
 
@@ -113,7 +113,7 @@ class ProjectileData {
     }
 
     constructor(assetLoc:string):this() {
-        val toml = Toml().read(this::class.java.getResourceAsStream("$data_loc/$assetLoc.dat"))
+        val toml = Toml().read(this::class.java.getResourceAsStream("$proj_data_loc/$assetLoc.dat"))
         val meta = toml.getTable("meta")
         this.texDataId = meta.getString("tex_data")
         this.amplitude = meta.getDouble("amplitude", 0.0)

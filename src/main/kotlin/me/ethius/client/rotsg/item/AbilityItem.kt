@@ -116,16 +116,7 @@ open class DasherItem(
     override fun onAbilityUse() {
         if (Client.player.mp >= mpCost) {
             Client.player.mp -= mpCost
-            run { // give attack
-                val atk = atkGiven.toDouble() / 2.0
-                if (atkGiven % 1.0 == 0.5) {
-                    Client.player.addEffect(EffectInfo.atk_add_1(4000L))
-                }
-                val intAtk = floor(atk).toInt()
-                for (i in 0 until intAtk) {
-                    Client.player.addEffect(EffectInfo.atk_add_2(4000L))
-                }
-            }
+            Client.player.addEffect(EffectInfo.atk_add(4000, atkGiven))
             Client.player.shoot(projectileData)
             Client.player.addEffect(EffectInfo.shield(480L))
 

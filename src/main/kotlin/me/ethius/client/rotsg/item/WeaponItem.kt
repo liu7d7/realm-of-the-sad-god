@@ -7,6 +7,7 @@ import me.ethius.shared.int
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.proj_data_loc
 import me.ethius.shared.rotsg.entity.Stat
 import me.ethius.shared.rotsg.entity.createSpawnPacket
 import me.ethius.shared.rotsg.entity.other.Projectile
@@ -43,8 +44,19 @@ open class WeaponItem:Item {
         val weaponMeta = toml.getTable("weapon_meta")
         val da = weaponMeta.getString("damage").split("-").map { it.toInt() }
         this.damage = da[0]..da[1]
-        this.shotPattern =
-            weaponMeta.getList<string>("shot_pattern").map { str -> ProjectileData.values.find { it.id == str }!! }
+        this.shotPattern = weaponMeta.getList<string>("shot_pattern").map { str ->
+            val pd = ProjectileData.values.find { it.id == str }
+            if (pd != null) {
+                pd
+            } else {
+                val pd2 = Client::class.java.getResource("$proj_data_loc/$str.dat")
+                if (pd2 != null) {
+                    ProjectileData(proj_data_loc)
+                } else {
+                    ProjectileData.empty
+                }
+            }
+        }
         this.numShots = weaponMeta.getInt("num_shots", shotPattern.size)
         this.apsMultiplier = weaponMeta.getDouble("aps_multiplier", 1.0).toFloat()
         this.arcGap = weaponMeta.getDouble("arc_gap", 0.0)

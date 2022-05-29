@@ -6,7 +6,6 @@ import me.ethius.client.ext.multiply
 import me.ethius.client.ext.push
 import me.ethius.client.ext.translate
 import me.ethius.shared.*
-import me.ethius.shared.ext.NEGATIVE_X
 import me.ethius.shared.ext.NEGATIVE_Z
 import me.ethius.shared.ext.POSITIVE_Z
 import me.ethius.shared.maths.Animations
@@ -44,7 +43,6 @@ open class EntityNotification(
             else 1.125f).toDouble()
             matrix.translate(entityX, entityY, 1.0) {
                 matrix.multiply(NEGATIVE_Z.getDegreesQuaternion(Client.player.lerpedR))
-                matrix.multiply(NEGATIVE_X.getDegreesQuaternion(Client.camAngleX))
             }
             matrix.translate(rX, rY + yCompY, 1.0) {
                 matrix.scale(scale, scale, 1.0)

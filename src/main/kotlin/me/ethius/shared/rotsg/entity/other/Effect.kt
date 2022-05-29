@@ -4,15 +4,21 @@ import me.ethius.shared.*
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.entity.AEntity
 
+/**
+ * @param lifetime The amount of milliseconds the effect lasts.
+ * @param texData The texture data for the effect.
+ * @param amplifier The amplifier of the effect.
+ */
 open class Effect(
     val lifetime:long,
     val texData:TexData,
-    val onAdd:(AEntity, Effect) -> void,
-    val onRem:(AEntity, Effect) -> void,
+    private val amplifier:int
 ):Tickable() {
 
     lateinit var entt:AEntity
-    var initTime = measuringTimeMS()
+    val enttInit
+        get() = this::entt.isInitialized
+    var initTime = System.currentTimeMillis()
     lateinit var id:string
 
     private val data:HashMap<string, Any> = HashMap()
@@ -31,21 +37,47 @@ open class Effect(
         return data[id] as T ?: throw IllegalStateException("$id is not a valid identifier!")
     }
 
+    fun hasData(id:string):bool {
+        return data.containsKey(id)
+    }
+
+    open fun onAdd(entt:AEntity) {
+
+    }
+
+    open fun onRem(entt:AEntity) {
+
+    }
+
     override fun clientTick() {
-        if (measuringTimeMS() - initTime >= lifetime) {
+        if (System.currentTimeMillis() - initTime >= lifetime) {
+            entt.removeEffect(this.id)
+        }
+    }
+
+    override fun serverTick() {
+        if (System.currentTimeMillis() - initTime >= lifetime) {
             entt.removeEffect(this.id)
         }
     }
 
     override fun release() {
         super.release()
-        onRem(entt, this)
+        onRem(entt)
+    }
+
+    override fun toString():string {
+        return buildString {
+            append("$id|$lifetime|$amplifier|$initTime")
+            for (i in data) {
+                append("|${i.key}:${i.value}")
+            }
+        }
     }
 
     override fun init() {
         super.init()
-        initTime = measuringTimeMS()
-        onAdd(entt, this)
+        onAdd(entt)
     }
 
 }

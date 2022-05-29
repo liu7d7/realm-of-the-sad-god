@@ -32,21 +32,22 @@ abstract class EntityRenderer<T:AEntity> {
                 val x = lerpedX + pivotX
                 val y = lerpedY + pivotY
                 // start of effects //
-                val fortnite = x - effects.sumOf { it.texData.width * 0.6 + 1.5f }
+                val fortnite = x - effects.sumOf { it.texData.width * 0.6 + 3.5f } + 3.5f
                 // push the matrix //
                 matrix.push {
+                    matrix.translate(0.0, 0.0, 120.0)
                     // translate to the entity's position //
                     center(matrix, entity) { }
-                    // render each effect using Main.render //
+                    // render each effect using Main.render //wd
                     var xOffset = 1.5
                     for (i in effects.indices) {
                         matrix.push {
-                            matrix.translate(fortnite + xOffset, y + yCompY - 16f, 0.0) {
-                                matrix.scale(1.2, 1.5, 1.0)
+                            matrix.translate(fortnite + xOffset, y + yCompY - 16f + 88, 0.0) {
+                                matrix.scale(1.2, 1.3, 1.0)
                             }
-                            Client.render.drawTexWithoutEnding(effects[i].texData, matrix, fortnite + xOffset, y + yCompY - 16f)
+                            Client.render.drawTexWithoutEnding(effects[i].texData, matrix, fortnite + xOffset, y + yCompY - 16f + 110)
                         }
-                        xOffset += effects[i].texData.width * 1.2 + 3.0
+                        xOffset += effects[i].texData.width * 1.2 + 3.5 * 1.2
                     }
                 }
             }

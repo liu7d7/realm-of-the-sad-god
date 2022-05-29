@@ -52,7 +52,7 @@ class MainMenuScreen:Screen() {
         }
         it.setOnLeft { }
         Client.ticker.submitTask(Client) {
-            Client.network.connect("rotsg.ethius.us", 25565)
+            Client.network.connect("rotsg.ethius.us", 9927)
             if (this::playerProfile.isInitialized) {
                 ClientPlayer.load(playerProfile)
             } else {

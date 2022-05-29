@@ -153,6 +153,28 @@ open class Packet(val id:int, vararg val data:string) {
          */
         const val _id_block_info_batch = 12
 
+        /**
+         * C2S/S2C
+         *
+         *     0 entityId:long
+         *     1 effectAsString:string
+         *
+         * Contract
+         *
+         * C2S:
+         *
+         *     After receiving on server side, will sync with client side and
+         *     add to appropriate entity, and will be broadcast to all other
+         *     clients in world.
+         *
+         * S2C:
+         *
+         *     After receiving on client side, will accept no matter what and
+         *     add to appropriate entity.
+         *
+         */
+        const val _id_effect_add = 13
+
         fun fromString(str:string):Packet {
             if (!str.startsWith("#")) throw IllegalArgumentException("Invalid packet string: $str")
             val str = str.drop(1)

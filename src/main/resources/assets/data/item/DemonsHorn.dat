@@ -1,0 +1,9 @@
+[meta]
+tex_data = "demons_horn"
+name = "Demon's Horn"
+desc = "This thing is so good." # giving up is something that has to happen eventually
+tier = "heroic"
+
+[weapon_meta]
+shot_pattern = ["DemonsHorn_proj"]
+damage = "120-140"

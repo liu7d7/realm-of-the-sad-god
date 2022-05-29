@@ -133,6 +133,8 @@ class ItemInfo<T:Item>(val supplier:() -> T) {
         val elemental_saber = ItemInfo { SwordItem("ElementalSaber") }
         val flowering_katana = ItemInfo { KatanaItem("FloweringKatana") }
         val bloody_dagger = ItemInfo { DaggerItem("BloodyDagger") }
+        val demons_fang = ItemInfo { KatanaItem("DemonsFang") }
+        val demons_horn = ItemInfo { DaggerItem("DemonsHorn") }
 
         // ABILITIES //
         val basic_shield_1 = ItemInfo {

@@ -10,6 +10,7 @@ import me.ethius.server.rotsg.world.ServerWorld
 import me.ethius.server.rotsg.world.WorldTracker
 import me.ethius.shared.*
 import me.ethius.shared.network.Packet
+import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.enemy.Enemy
 import me.ethius.shared.rotsg.entity.getWorldNameFromSpawnPacket
@@ -24,7 +25,7 @@ import kotlin.concurrent.thread
 
 class SNetworkHandler {
 
-    private var port = 25565
+    private var port = 9927
     private lateinit var addr:string
     private val clients:MutableSet<ClientView> = Sets.newConcurrentHashSet() // player associated or not
     val players:MutableSet<ServerPlayer> = Sets.newConcurrentHashSet() // player associated
@@ -163,6 +164,20 @@ class SNetworkHandler {
                     val entity = ServerPlayer[client]
                     if (entity != null) {
                         entity.hp = packet.data[0].toDouble()
+                    }
+                }
+                Packet._id_effect_add -> {
+                    val entity = ServerPlayer[client] ?: return
+                    val entityId = packet.data[0].toLong()
+                    val effectAsString = packet.data[1]
+
+                    val effect = EffectInfo.fromString(effectAsString) ?: return
+                    val world = entity.world ?: return
+                    val entt = world.getEntityById(entityId) ?: return
+                    entt.addEffect(effect)
+                    broadcastIf(packet) {
+                        val world1 = ServerPlayer[it]?.world ?: return@broadcastIf false
+                        world == world1 && it != client
                     }
                 }
             }

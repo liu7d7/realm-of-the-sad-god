@@ -139,6 +139,7 @@ open class TexData(
         val stem_of_the_brain = TexData(0, 309, 8, 8)
         val lightning_bolt = TexData(89, 336, 8, 8)
         val flowering_katana = TexData(0, 345, 8, 8)
+        val demons_fang = TexData(45, 345, 8, 8)
 
         // daggers //
         val basic_dagger_1 = TexData(36, 318, 8, 8)
@@ -147,6 +148,7 @@ open class TexData(
         val agateclaw_dagger = TexData(126, 309, 8, 8)
         val adv_dagger_1 = TexData(99, 327, 8, 8)
         val bloody_blade = TexData(18, 345, 8, 8)
+        val demons_horn = TexData(36, 345, 8, 8)
 
         // abilities //
         val adv_shield_1 = TexData(126, 318, 8, 8)
@@ -368,6 +370,8 @@ open class TexData(
         val golden_wand_proj = TexData(4, 424, 6, 5)
         val flowering_katana_proj = TexData(151, 407, 4, 7)
         val bloody_blade_proj = TexData(156, 408, 5, 6)
+        val demons_horn_proj = TexData(162, 407, 5, 7)
+        val demons_fang_proj = TexData(168, 407, 5, 7)
 
         // enemies //
         init {
@@ -422,6 +426,7 @@ open class TexData(
         val blend_8x8 = RandomTexData(TexData(191, 292, 8, 8), TexData(199, 292, 8, 8), TexData(207, 292, 8, 8))
         val blend_8x8c = RandomTexData(TexData(215, 292, 8, 8))
         val atk_add_effect = TexData(425, 0, 15, 9)
+        val bleed_effect = TexData(441, 0, 5, 7)
         val vignette = TexData(944, 974, 80, 50)
 
         operator fun get(name:string?):TexData {

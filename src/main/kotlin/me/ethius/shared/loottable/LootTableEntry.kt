@@ -68,6 +68,8 @@ class LootTableEntry:WeightedCollection<string?>() {
         val ice_demon_table = LootTableEntry()
             .addPair(0.2, "frozen_katana")
             .addPair(0.2, "ice_bow")
+            .addPair(0.2, "demons_fang")
+            .addPair(0.2, "demons_horn")
             .addPair(2.4, null)
 
         val flame_table = LootTableEntry()
@@ -146,6 +148,7 @@ class LootTableEntry:WeightedCollection<string?>() {
 
         val fire_breather_leggys = LootTableEntry()
             .addPair(0.2, "fire_breather_tail")
+            .addPair(0.2, "the_scorching_armor")
             .addPair(1.2, null)
 
         val flying_brain_leggys = LootTableEntry()
@@ -155,6 +158,13 @@ class LootTableEntry:WeightedCollection<string?>() {
         val radiant_ring = LootTableEntry()
             .addPair(0.2, "radiant_ring")
             .addPair(1.2, null)
+
+        val elemental = LootTableEntry()
+            .addPair(0.2, "elemental_slasher")
+            .addPair(0.2, "elemental_saber")
+            .addPair(0.2, "elemental_light_armor")
+            .addPair(0.2, "elemental_heavy_armor")
+            .addPair(2.4, null)
 
 
         fun getPotFromStat(stat:Stat):LootTableEntry {

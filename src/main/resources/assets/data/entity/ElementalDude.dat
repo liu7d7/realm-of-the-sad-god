@@ -5,4 +5,4 @@ def = 30
 exp = 7000
 scale = 1.05
 speed = 70
-loot_table = ["elemental_dude_loot_table"]
+loot_table = ["elemental"]

@@ -30,7 +30,7 @@ class FontRenderer(inputStream:InputStream) {
         text:string,
         length:int = text.length,
         shadow:bool = true,
-        scale:double = 0.965,
+        scale:double = 1.0,
         kern:(int) -> double = { getKern(it) },
     ):double {
         if (font == null) return 0.0
@@ -43,7 +43,7 @@ class FontRenderer(inputStream:InputStream) {
 
     fun getHeight(
         shadow:bool,
-        scale:double = 0.965,
+        scale:double = 1.0,
     ):double {
         if (font == null) return 0.0
         return (font!!.getHeight() - 2.5 + if (shadow) 1 else 0) * scale
@@ -56,7 +56,7 @@ class FontRenderer(inputStream:InputStream) {
         y:double,
         color:long,
         shadow:bool,
-        scale:double = 0.965,
+        scale:double = 1.0,
         kern:(int) -> double = { getKern(it) },
     ):double {
         val dynScale:double = scale
@@ -76,7 +76,7 @@ class FontRenderer(inputStream:InputStream) {
         y:double,
         color:long,
         shadow:bool,
-        scale:double = 0.965,
+        scale:double = 1.0,
         kern:(int) -> double = { getKern(it) },
     ) {
         val dynScale:double = scale
@@ -92,7 +92,7 @@ class FontRenderer(inputStream:InputStream) {
         y:double,
         color:long,
         shadow:bool,
-        scale:double = 0.965,
+        scale:double = 1.0,
         kern:(int) -> double = { getKern(it) },
     ) {
         draw(matrices, text, x - getWidth(text, text.length, shadow, scale, kern), y, color, shadow, scale, kern)
@@ -105,7 +105,7 @@ class FontRenderer(inputStream:InputStream) {
         y:double,
         color:long,
         shadow:bool,
-        scale:double = 0.965,
+        scale:double = 1.0,
         kern:(int) -> double = { getKern(it) },
     ) {
         drawWithoutEnding(matrices,
@@ -125,7 +125,7 @@ class FontRenderer(inputStream:InputStream) {
         y:double,
         color:long,
         shadow:bool,
-        scale:double = 0.965,
+        scale:double = 1.0,
         kern:(int) -> double = { getKern(it) },
     ):double {
         val dynScale:double = scale
@@ -161,7 +161,7 @@ class FontRenderer(inputStream:InputStream) {
         y:double,
         color:long,
         shadow:bool,
-        scale:double = 0.965,
+        scale:double = 1.0,
         kern:(int) -> double = { getKern(it) },
     ) {
         val dynScale:double = scale
@@ -194,7 +194,7 @@ class FontRenderer(inputStream:InputStream) {
     fun wrapWords(
         text:string,
         width:double,
-        scale:double = 0.965,
+        scale:double = 1.0,
     ):Array<string> {
         val finalWords = ArrayList<string>()
         if (getWidth(text, text.length, true, scale) > width) {
@@ -228,7 +228,7 @@ class FontRenderer(inputStream:InputStream) {
         return finalWords.toTypedArray()
     }
 
-    fun formatString(
+    private fun formatString(
         string:string,
         width:double,
         scale:double,
@@ -263,7 +263,7 @@ class FontRenderer(inputStream:InputStream) {
             (buffer as Buffer).flip()
             fonts[i] = Font(buffer, (18 * (i * 0.5 + 1)).roundToInt())
         }
-        val scaleA = floor(0.965 * 10) / 10
+        val scaleA = floor(1.0 * 10) / 10
         val scaleI:int =
             if (scaleA >= 3) 5 else if (scaleA >= 2.5) 4 else if (scaleA >= 2) 3 else if (scaleA >= 1.5) 2 else 1
         font = fonts[scaleI - 1]

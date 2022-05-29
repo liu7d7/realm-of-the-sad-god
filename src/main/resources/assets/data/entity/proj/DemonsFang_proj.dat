@@ -1,0 +1,5 @@
+[meta]
+tex_data = "demons_fang_proj"
+speed = 9.0
+range = 8.0
+damage = "120-140"

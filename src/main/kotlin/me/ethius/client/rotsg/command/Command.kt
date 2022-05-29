@@ -40,9 +40,14 @@ abstract class Command(
                     // remove the prefix and the command's name from the chat, and split the chat into arguments
                     val args = split.drop(1).toTypedArray()
                     // send the that the command has been executed to the chats
-                    Client.inGameHud.chatHud.addChat("${Formatting.light_purple}${if (autoExec) "Autoe" else "E"}xecuted Command${Formatting.reset}: $chat")
+                    Client.inGameHud.chatHud.addChat("${Formatting.light_purple}${if (autoExec) "Autoe" else "E"}xecuting Command${Formatting.reset}: $chat")
                     // execute the command
-                    v.execute(args)
+                    try {
+                        v.execute(args)
+                    } catch (e:Exception) {
+                        // if the command fails, send the error to the chat
+                        Client.inGameHud.chatHud.addChat("${Formatting.red}Error executing command: ${e.message}${Formatting.reset}")
+                    }
                     // we've successfully executed the command; return true
                     return true
                 }
@@ -63,6 +68,7 @@ abstract class Command(
             values.add(NameCommand())
             values.add(LoadBiomeFeatureCommand())
             values.add(RepeatCommand())
+            values.add(EffectCommand())
         }
     }
 }

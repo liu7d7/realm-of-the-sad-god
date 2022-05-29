@@ -9,6 +9,7 @@ import me.ethius.shared.int
 import me.ethius.shared.ivec2
 import me.ethius.shared.network.Packet
 import me.ethius.shared.opti.TexData
+import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.fromSpawnPacket
 import me.ethius.shared.rotsg.tile.Bushery
@@ -146,6 +147,14 @@ class CNetworkHandler:Tickable(true, 1) {
                     val hp = packet.data[1].toDouble()
                     val entt = Client.world.getEntityById(entityId) ?: return
                     entt.hp = hp
+                }
+                Packet._id_effect_add -> {
+                    val entityId = packet.data[0].toLong()
+                    val effectAsString = packet.data[1]
+                    val effect = EffectInfo.fromString(effectAsString) ?: return
+
+                    val entt = Client.world.getEntityById(entityId) ?: return
+                    entt.addEffect(effect)
                 }
             }
         } catch (e:Exception) {

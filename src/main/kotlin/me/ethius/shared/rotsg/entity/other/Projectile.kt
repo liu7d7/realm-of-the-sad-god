@@ -195,7 +195,7 @@ class Projectile:PassableEntity() {
         if (ticksExisted == 0 || (projProps.boomerang && ticksExisted == floor(projProps.lifetime / 40f).toInt())) {
             this.prevDirection = direction
         }
-        raa += projProps.spinSpeed
+        raa += projProps.spinSpeed * 2.5
     }
 
     private fun positionAt(time:double, pos:dvec2, real:bool = true):bool {

@@ -1,0 +1,16 @@
+[meta]
+tex_data = "demons_fang"
+tier = "heroic"
+name = "Demon's Fang"
+desc = "This demon has red fangs for some reason. Probably because it ate the last guy who came into this dungeon. But the guy didn't eat you. How nice." # no idea what this is!!!
+
+[meta.stats]
+vit = +5
+wis = +5
+life = +40
+mana = +40
+
+[weapon_meta]
+damage = "120-140"
+shot_pattern = ["DemonsFang_proj"]
+aps_multiplier = 0.75
