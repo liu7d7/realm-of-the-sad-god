@@ -24,7 +24,7 @@ open class Portal(final override val texDataId:string, val worldId:string, val n
     final override var width:double = 0.0
 
     init {
-        if (Side._client) {
+        ifclient {
             val texData = TexData[texDataId]
             height = texData.height * (46f / texData.width) * 0.8
             pivotX = texData.pivotX * ((46.0 / texData.width) * 0.8)

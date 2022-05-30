@@ -3,6 +3,8 @@ package me.ethius.client.network
 import me.ethius.client.Client
 import me.ethius.client.rotsg.data.ItemInfo
 import me.ethius.client.rotsg.entity.Bag
+import me.ethius.client.rotsg.gui.Damage
+import me.ethius.client.rotsg.gui.EntityNotification
 import me.ethius.client.rotsg.item.Item
 import me.ethius.shared.Tickable
 import me.ethius.shared.int
@@ -155,6 +157,21 @@ class CNetworkHandler:Tickable(true, 1) {
 
                     val entt = Client.world.getEntityById(entityId) ?: return
                     entt.addEffect(effect)
+                }
+                Packet._id_entity_notification -> {
+                    val entity = Client.world.getEntityById(packet.data[0].toLong()) ?: return
+                    val displayString = packet.data[1]
+                    when (val color = packet.data[2].toLong()) {
+                        -1L -> {
+                            entity.entityNotifications.add(Damage(entity, packet.data[1].toInt(), true))
+                        }
+                        -2L -> {
+                            entity.entityNotifications.add(Damage(entity, packet.data[1].toInt(), false))
+                        }
+                        else -> {
+                            entity.entityNotifications.add(EntityNotification(entity, displayString, color))
+                        }
+                    }
                 }
             }
         } catch (e:Exception) {

@@ -8,7 +8,6 @@ import me.ethius.client.rotsg.entity.OtherPlayer
 import me.ethius.client.rotsg.entity.Portal
 import me.ethius.server.rotsg.entity.ServerPlayer
 import me.ethius.shared.network.Packet
-import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.ProjectileData
 import me.ethius.shared.rotsg.entity.enemy.Aoe
 import me.ethius.shared.rotsg.entity.enemy.Enemy
@@ -76,7 +75,9 @@ fun AEntity.createSpawnPacket(): Packet {
                 this.damageMultiplier,
                 this.projProps.scale,
                 this.raa,
-                *this.hitEffects.map { "${it.id}|${it.lifetime}" }.toTypedArray()
+                this.projProps.hitEffect,
+                this.projProps.hitEffectAmplifier,
+                this.projProps.hitEffectDuration
             )
         }
         is Aoe -> {
@@ -177,10 +178,9 @@ fun AEntity.Companion.fromSpawnPacket(packet:Packet):AEntity? {
             val damageMultiplier = packet.data[24].toDouble()
             val scale = packet.data[25].toDouble()
             val raa = packet.data[26].toDouble()
-            val effects = packet.data.sliceArray(27 until packet.data.size).mapNotNull {
-                val split = (it).split("|")
-                EffectInfo[split[0]]?.let { it(split[1].toLong()) }
-            }
+            val hitEffect = packet.data[27]
+            val hitEffectDuration = packet.data[28].toLong()
+            val hitEffectAmplifier = packet.data[29].toInt()
             return Client.world.getEntityById(ownerId)?.let {
                 Projectile().reset(
                     it,
@@ -204,11 +204,13 @@ fun AEntity.Companion.fromSpawnPacket(packet:Packet):AEntity? {
                         it.leadShot = leadShot
                         it.scale = scale
                         it.renderAngleAdd = raa
+                        it.hitEffect = hitEffect
+                        it.hitEffectDuration = hitEffectDuration
+                        it.hitEffectAmplifier = hitEffectAmplifier
                     },
                     r
                 ).also {
                     it.entityId = entityId
-                    it.hitEffects.addAll(effects)
                     it.damageMultiplier = damageMultiplier
                 }
             }

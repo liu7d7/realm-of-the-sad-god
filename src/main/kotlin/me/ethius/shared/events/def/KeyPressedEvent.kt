@@ -2,9 +2,9 @@ package me.ethius.shared.events.def
 
 import me.ethius.client.Client
 import me.ethius.client.rotsg.screen.InGameMenuScreen
-import me.ethius.shared.Side
 import me.ethius.shared.events.Event
 import me.ethius.shared.events.Listen
+import me.ethius.shared.ifclient
 import me.ethius.shared.int
 import org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE
 import org.lwjgl.glfw.GLFW.GLFW_PRESS
@@ -24,7 +24,7 @@ data class KeyPressedEvent(
         }
 
         init {
-            if (Side._client) {
+            ifclient {
                 Client.events.register(this)
             }
         }

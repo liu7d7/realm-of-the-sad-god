@@ -19,7 +19,9 @@ class EffectCommand:Command(arrayOf("effect"), "Adds an effect to you", "<id (st
         }
         val duration = args[1].toInt()
         val amplifier = args[2].toInt()
-        Client.player.addEffect(effect(duration * 20L, amplifier))
+        Client.player.addEffect(effect(duration * 20L, amplifier).also {
+            it.pushData("sourceId", Client.player.entityId)
+        })
         sendMessage("Applied effect $id for $duration ticks with amplifier $amplifier")
     }
 

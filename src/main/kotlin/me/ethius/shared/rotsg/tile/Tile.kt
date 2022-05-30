@@ -165,7 +165,7 @@ class Tile(val pos:ivec2, var texDataId:string, env:Bushery? = null) {
 
     init {
         this.env = env
-        if (Side._client) {
+        ifclient {
             this.allowBlend = allowBlendMap.getBoolean(TexData[texDataId])
         }
     }

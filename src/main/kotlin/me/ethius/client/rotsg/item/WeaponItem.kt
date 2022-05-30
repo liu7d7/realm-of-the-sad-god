@@ -5,7 +5,6 @@ import me.ethius.client.Client
 import me.ethius.shared.ext.getInt
 import me.ethius.shared.int
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.ProjectileData
 import me.ethius.shared.rotsg.data.proj_data_loc
 import me.ethius.shared.rotsg.entity.Stat
@@ -51,7 +50,7 @@ open class WeaponItem:Item {
             } else {
                 val pd2 = Client::class.java.getResource("$proj_data_loc/$str.dat")
                 if (pd2 != null) {
-                    ProjectileData(proj_data_loc)
+                    ProjectileData(str)
                 } else {
                     ProjectileData.empty
                 }
@@ -70,7 +69,10 @@ open class WeaponItem:Item {
                 it.damageMultiplier = Client.player.damageMultiplier
                 if (Client.player.hasLegendaryEffect(LegendaryEffect.curse)) {
                     if (RandomUtils.nextFloat(0f, 1f / LegendaryEffect.curse.chance) < 1f) {
-                        it.hitEffects.add(EffectInfo.curse(2800L))
+                        it.projProps = it.projProps.copy()
+                        it.projProps.hitEffect = "curse"
+                        it.projProps.hitEffectDuration = 2800
+                        it.projProps.hitEffectAmplifier = -1
                         LegendaryEffect.curse.onActivateRaw(owner)
                     }
                 }

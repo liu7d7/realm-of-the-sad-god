@@ -64,7 +64,7 @@ class Bag(var bagTier:BagTier, items:List<Item>):PassableEntity() {
     }
 
     override fun collideWith(other:AEntity) {
-        if (Side._client) {
+        ifclient {
             if (other is ClientPlayer && !other.inventory.bags.contains(this) && Client.ticker.contains(this) && !slots.stream().allMatch { it.item is AirItem }) {
                 other.inventory.bags.add(this)
                 animationTime = measuringTimeMS()

@@ -2,6 +2,8 @@ package me.ethius.shared.rotsg.entity
 
 import me.ethius.client.Client
 import me.ethius.client.rotsg.gui.Damage
+import me.ethius.server.Server
+import me.ethius.server.rotsg.world.ServerWorld
 import me.ethius.shared.*
 import me.ethius.shared.network.Packet
 import kotlin.math.roundToInt
@@ -44,7 +46,7 @@ abstract class StatEntity(
 
     val tps:float
         get() {
-            return (4 + 5.6f * (spd.toFloat() / 75f)) * 0.625f * 2.5f
+            return (4 + 5.6f * (spd.toFloat() / 75f)) * 0.625f * if (Side._client) 2.5f else 1f
         }
 
     val damageMultiplier:double
@@ -99,6 +101,15 @@ abstract class StatEntity(
         hp -= fDmg.coerceAtLeast(2.0).also { if (Side._client) entityNotifications.add(Damage(this, it.roundToInt(), throughDef)) }
         if (Side._client && damageSourceId != -2L) {
             Client.network.send(Packet._id_damage_entity, damageSourceId, this.entityId, fDmg.coerceAtLeast(2.0))
+        }
+        ifserver {
+            if (hp < 0) {
+                this.world?.remEntity(this)
+                return
+            }
+            for (i in ((this.world as? ServerWorld) ?: return).players) {
+                Server.network.send(i.client, Packet._id_entity_notification, this.entityId, fDmg.coerceAtLeast(2.0).roundToInt(), if (throughDef) -1 else -2)
+            }
         }
     }
 

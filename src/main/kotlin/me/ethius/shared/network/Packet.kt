@@ -175,6 +175,15 @@ open class Packet(val id:int, vararg val data:string) {
          */
         const val _id_effect_add = 13
 
+        /**
+         * S2C
+         *
+         *     0 entityId:long
+         *     1 displayString:string
+         *     2 displayColor:long
+         */
+        const val _id_entity_notification = 14
+
         fun fromString(str:string):Packet {
             if (!str.startsWith("#")) throw IllegalArgumentException("Invalid packet string: $str")
             val str = str.drop(1)

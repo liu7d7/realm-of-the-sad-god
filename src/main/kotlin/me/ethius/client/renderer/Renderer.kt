@@ -551,22 +551,61 @@ class Renderer {
         color:long = 0xffffffff,
         renderWidth:double = data.width,
         renderHeight:double = data.height,
+        clip:bool = false
     ) {
         val x1 = x + renderWidth
         val y1 = y + renderHeight
+        val u = data.u
+        val v = data.v
+        val u1 = data.u + if (!clip) data.width else renderWidth
+        val v1 = data.v + if (!clip) data.height else renderHeight
         triangles.quad(
             triangles.addVertex(matrices, x, y1)
-                .tex(data.u / main_tex.width.toDouble(), (data.v + data.height) / main_tex.height.toDouble())
+                .tex(u, v1, main_tex)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x1, y1)
-                .tex((data.u + data.width) / main_tex.width.toDouble(),
-                     (data.v + data.height) / main_tex.height.toDouble())
+                .tex(u1, v1, main_tex)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x1 + windX, y)
-                .tex((data.u + data.width) / main_tex.width.toDouble(), data.v / main_tex.height.toDouble())
+                .tex(u1, v, main_tex)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x + windX, y)
-                .tex(data.u / main_tex.width.toDouble(), data.v / main_tex.height.toDouble())
+                .tex(u, v, main_tex)
+                .color(color).float(0).next()
+        )
+    }
+
+    fun drawTexWithoutEnding_UV(
+        data:TexData,
+        matrices:Matrix4dStack,
+        x:double,
+        y:double,
+        u:double,
+        v:double,
+        u1:double,
+        v1:double,
+        color:long = 0xffffffff,
+    ) {
+        val x1 = x + data.width * u1
+        val y1 = y + data.height * v1
+        val x = x + data.width * u
+        val y = y + data.height * v
+        val u = data.u + data.width * u
+        val v = data.v + data.height * v
+        val u1 = data.u + data.width * u1
+        val v1 = data.v + data.height * v1
+        triangles.quad(
+            triangles.addVertex(matrices, x, y1)
+                .tex(u, v1, main_tex)
+                .color(color).float(0).next(),
+            triangles.addVertex(matrices, x1, y1)
+                .tex(u1, v1, main_tex)
+                .color(color).float(0).next(),
+            triangles.addVertex(matrices, x1, y)
+                .tex(u1, v, main_tex)
+                .color(color).float(0).next(),
+            triangles.addVertex(matrices, x, y)
+                .tex(u, v, main_tex)
                 .color(color).float(0).next()
         )
     }

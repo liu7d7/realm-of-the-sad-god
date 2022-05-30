@@ -31,7 +31,7 @@ abstract class AEntity:Tickable() {
     // client member variables
     override val shouldTick:bool
         get() {
-            if (Side._server) {
+            ifserver {
                 if (this.world == null) {
                     return false
                 }
@@ -95,14 +95,14 @@ abstract class AEntity:Tickable() {
     open var pos:dvec3 = dvec3()
     open var hp = 0.0
         set(value) {
-            if (Side._client) {
+            ifclient {
                 prevHp = field
                 lastDamage = field - value
                 lastHealthUpdate = measuringTimeMS()
                 if (prevHp == 0.0)
                     prevHp = value
             }
-            if (Side._server) {
+            ifserver {
                 Server.network.broadcastIf(Packet(Packet._id_hp_update, this.entityId, value)) {
                     val sp = ServerPlayer[it] ?: return@broadcastIf false
                     sp.world == this.world && sp != this
@@ -282,7 +282,7 @@ abstract class AEntity:Tickable() {
         effect.entt = this
         effect.init()
         effects.add(effect)
-        if (Side._client) {
+        ifclient {
             Client.network.send(Packet(Packet._id_effect_add, this.entityId, effect.toString()))
         }
     }
@@ -354,7 +354,7 @@ abstract class AEntity:Tickable() {
             this.y = other.cy + dcy * mult
             updateBoundingCircle()
         }
-        if (Side._server) {
+        ifserver {
             collideWithBlocks()
         }
     }

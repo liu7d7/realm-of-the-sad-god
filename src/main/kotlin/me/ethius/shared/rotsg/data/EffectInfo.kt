@@ -70,7 +70,7 @@ class EffectInfo(val supplier:(long, int) -> Effect) {
                         val invAmp = (5 - amplifier).coerceIn(1..5)
                         if (delayNumSeconds(0.2 * invAmp)) {
                             val source = this.getData("sourceId") as long
-                            entt.damage(70.0, true, source)
+                            entt.damage(invAmp * 10.0, true, source)
                         }
                     }
                 }

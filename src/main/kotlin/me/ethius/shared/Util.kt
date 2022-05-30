@@ -387,3 +387,15 @@ fun dvec3.copy():dvec3 {
 fun dvec2.copy():dvec2 {
     return dvec2(this.x, this.y)
 }
+
+inline fun ifserver(block:() -> Unit) {
+    if (Side._server) {
+        block()
+    }
+}
+
+inline fun ifclient(block:() -> Unit) {
+    if (Side._client) {
+        block()
+    }
+}

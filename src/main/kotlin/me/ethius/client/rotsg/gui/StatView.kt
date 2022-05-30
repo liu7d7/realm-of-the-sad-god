@@ -6,8 +6,8 @@ import me.ethius.client.ext.multiply
 import me.ethius.client.ext.push
 import me.ethius.client.ext.translate
 import me.ethius.shared.bool
-import me.ethius.shared.events.def.MouseClickedEvent
 import me.ethius.shared.events.Listen
+import me.ethius.shared.events.def.MouseClickedEvent
 import me.ethius.shared.ext.POSITIVE_Z
 import me.ethius.shared.int
 import me.ethius.shared.rotsg.data.Formatting
@@ -31,14 +31,14 @@ class StatView {
         val top = 0.0
         // render main //
         Client.render.drawRectAlphaWithoutEnding(matrix,
-                                                 Client.window.scaledWidth - width,
+                                                 Client.window.scaledWidth - width - 0.1,
                                                  top,
                                                  Client.window.scaledWidth.toDouble(),
                                                  top + height,
                                                  if (isInMain()) lldu else ldu, 0.3f)
         if (!visible)
             Client.render.drawShadowOutlineRectWithoutEnding(matrix,
-                                                             Client.window.scaledWidth - width,
+                                                             Client.window.scaledWidth - width - 0.1,
                                                              top,
                                                              width,
                                                              height,

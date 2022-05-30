@@ -442,7 +442,7 @@ open class TexData(
                     val data = (field as KProperty1<Companion, *>).get(this) as TexData
                     values[field.name] = data
                     data.id = field.name
-                    if (Side._client) {
+                    ifclient {
                         if (data.type == Type.tile || data.type == Type.item || data.type == Type.player || data.type == Type.other || data.type == Type.projectile) {
                             data.pivotX = 0.0
                             data.pivotY = 0.0

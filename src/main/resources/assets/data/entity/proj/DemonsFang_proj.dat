@@ -1,5 +1,8 @@
 [meta]
 tex_data = "demons_fang_proj"
 speed = 9.0
-range = 8.0
+range = 3.1
 damage = "120-140"
+hit_effect = "bleed"
+hit_effect_amplifier = 4
+hit_effect_duration = 4000

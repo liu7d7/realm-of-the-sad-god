@@ -65,7 +65,7 @@ open class Player(val pClass:PlayerClass, val playerProfile:PlayerProfile):StatE
         this.rawExp = true
         this.exp = playerProfile.exp
         this.rawExp = false
-        if (Side._client) {
+        ifclient {
             this.pTexData = this.pClass.skins[this.playerProfile.skin]
         }
         this.name = this.playerProfile.name

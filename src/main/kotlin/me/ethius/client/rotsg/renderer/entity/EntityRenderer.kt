@@ -45,7 +45,14 @@ abstract class EntityRenderer<T:AEntity> {
                             matrix.translate(fortnite + xOffset, y + yCompY - 16f + 88, 0.0) {
                                 matrix.scale(1.2, 1.3, 1.0)
                             }
-                            Client.render.drawTexWithoutEnding(effects[i].texData, matrix, fortnite + xOffset, y + yCompY - 16f + 110)
+                            Client.render.drawTexWithoutEnding_UV(effects[i].texData,
+                                                                  matrix,
+                                                                  fortnite + xOffset,
+                                                                  y + yCompY - 16f + 110,
+                                                                  0.0,
+                                                                  (System.currentTimeMillis() - effects[i].initTime).toDouble() / effects[i].lifetime.toDouble(),
+                                                                  1.0,
+                                                                  1.0)
                         }
                         xOffset += effects[i].texData.width * 1.2 + 3.5 * 1.2
                     }

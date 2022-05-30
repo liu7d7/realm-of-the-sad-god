@@ -98,7 +98,7 @@ class Enemy private constructor(
 
     override fun release() {
         super.release()
-        if (Side._server) {
+        ifserver {
             run {
                 val ldid = this.damagerIds.lastOrNull() ?: return@run
                 if (ldid != -1L) {

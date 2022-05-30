@@ -47,6 +47,7 @@ abstract class Command(
                     } catch (e:Exception) {
                         // if the command fails, send the error to the chat
                         Client.inGameHud.chatHud.addChat("${Formatting.red}Error executing command: ${e.message}${Formatting.reset}")
+                        e.printStackTrace()
                     }
                     // we've successfully executed the command; return true
                     return true

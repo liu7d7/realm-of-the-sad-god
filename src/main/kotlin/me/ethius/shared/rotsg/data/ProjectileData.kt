@@ -3,6 +3,7 @@ package me.ethius.shared.rotsg.data
 import com.moandjiezana.toml.Toml
 import me.ethius.shared.bool
 import me.ethius.shared.double
+import me.ethius.shared.ext.getInt
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.tile.tile_size
 import me.ethius.shared.string
@@ -46,6 +47,9 @@ class ProjectileData {
     var throughWalls = false
     var randomBaseAngle = false
     var leadShot = false
+    var hitEffect:string = "NIL"
+    var hitEffectDuration = 0L
+    var hitEffectAmplifier = 0
     lateinit var id:string
 
     fun copy():ProjectileData {
@@ -142,6 +146,9 @@ class ProjectileData {
         this.throughWalls = meta.getBoolean("through_walls", false)
         this.horizontalOffset = meta.getDouble("horizontal_offset", 0.0) * tile_size
         this.moveFx = meta.getString("move_fx", "")
+        this.hitEffect = meta.getString("hit_effect", this.hitEffect)
+        this.hitEffectAmplifier = meta.getInt("hit_effect_amplifier", this.hitEffectAmplifier)
+        this.hitEffectDuration = meta.getLong("hit_effect_duration", this.hitEffectDuration)
     }
 
     @Suppress("UNUSED")

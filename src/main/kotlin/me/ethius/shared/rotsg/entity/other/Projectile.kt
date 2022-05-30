@@ -8,6 +8,7 @@ import me.ethius.server.rotsg.world.ServerWorld
 import me.ethius.shared.*
 import me.ethius.shared.ext.todvec2
 import me.ethius.shared.opti.TexData
+import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.ProjectileData
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.PassableEntity
@@ -90,7 +91,6 @@ class Projectile:PassableEntity() {
     val lraa:double
         get() = lerp(praa, raa, Client.ticker.tickDelta)
     var leadShot = false
-    var hitEffects = mutableListOf<Effect>()
     var z = 0.0
 
     override fun updateBoundingCircle() {
@@ -155,7 +155,11 @@ class Projectile:PassableEntity() {
         entitiesHit.add(other)
         if (!other.hasEffect("shield")) {
             other.damage((RandomUtils.nextInt(projProps.damage.first, projProps.damage.last) * damageMultiplier), projProps.throughDef, owner?.entityId ?: -2)
-            for (i in hitEffects) other.addEffect(i)
+            EffectInfo[projProps.hitEffect]?.let {
+                other.addEffect(it(projProps.hitEffectDuration, projProps.hitEffectAmplifier).also {
+                    it.pushData("sourceId", this.owner!!.entityId)
+                })
+            }
         }
         if (!projProps.multiHit) {
             Client.world.remEntity(this, true, false)
