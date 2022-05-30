@@ -129,6 +129,7 @@ class ScreenFramebuffer(w:double, h:double, useRenBuf:bool):AFramebuffer(useRenB
 
     @Listen
     fun onResize(e:WindowResizedEvent) {
+        dispose()
         init(e.width.toDouble(), e.height.toDouble())
     }
 

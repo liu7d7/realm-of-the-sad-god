@@ -280,11 +280,16 @@ open class TexData(
         val shadow_stone_2 = TexData(192, 243, 8, 8)
         val sand_stone = TexData(202, 203, 8, 8)
         val greener_grass = ChanceTexData(WeightedCollection.build {
-            add(0.7, TexData(222, 193, 8, 8))
-            add(0.1, TexData(232, 193, 8, 8))
-            add(0.1, TexData(242, 193, 8, 8))
-            add(0.1, TexData(252, 193, 8, 8))
+            add(0.91, TexData(222, 193, 8, 8))
+            add(0.03, TexData(232, 193, 8, 8))
+            add(0.03, TexData(242, 193, 8, 8))
+            add(0.03, TexData(252, 193, 8, 8))
         })
+        val blue_bricks = ChanceTexData(WeightedCollection.build {
+            add(0.66, TexData(252, 163, 8, 8))
+            add(0.166, TexData(262, 163, 8, 8))
+            add(0.166, TexData(272, 163, 8, 8))
+        }).also { it.randomRotation = false }
 
         // BUSHERY //
         init {
@@ -314,6 +319,9 @@ open class TexData(
         val shadow_bush_2 = TexData(163, 815, 12, 14)
         val fire_bush_1 = TexData(176, 816, 11, 13)
         val fire_bush_2 = TexData(188, 814, 5, 15)
+        val pink_tree_hanging = RandomTexData(TexData(244, 813, 15, 16), TexData(260, 814, 16, 15), TexData(277, 813, 15, 16))
+        val pink_tree_standing_1 = RandomTexData(TexData(194, 815, 16, 14), TexData(211, 813, 16, 16), TexData(228, 813, 15, 16), TexData(293, 813, 16, 16))
+        val pink_tree_standing_2 = TexData(310, 813, 16, 16)
 
         // ENTITIES //
         init {
@@ -438,7 +446,8 @@ open class TexData(
                 if (field.returnType.jvmErasure == TexData::class ||
                     field.returnType.jvmErasure == AnimatedTexData::class ||
                     field.returnType.jvmErasure == FlowingTexData::class ||
-                    field.returnType.jvmErasure == RandomTexData::class) {
+                    field.returnType.jvmErasure == RandomTexData::class ||
+                    field.returnType.jvmErasure == ChanceTexData::class) {
                     val data = (field as KProperty1<Companion, *>).get(this) as TexData
                     values[field.name] = data
                     data.id = field.name

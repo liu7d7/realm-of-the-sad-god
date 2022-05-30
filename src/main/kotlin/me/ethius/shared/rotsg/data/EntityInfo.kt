@@ -1,6 +1,7 @@
 package me.ethius.shared.rotsg.data
 
 import me.ethius.server.rotsg.world.CrystalCaveWorld
+import me.ethius.server.rotsg.world.FloweringGarden
 import me.ethius.server.rotsg.world.IceWorld
 import me.ethius.server.rotsg.world.RottenWorld
 import me.ethius.server.rotsg.world.biome.BiomeType
@@ -64,6 +65,7 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
                                          tmp
                                      }.withTexData("minion")
                                      .withDef(10)
+                                     .addToPortalTable(0.5) { IceWorld() }
                                      .withArcGap(32.72727)
                                      .addToLootTable(LootTableEntry.heroics).withExp(260)
                                      .emptyPortalChance(1.0)).also {
@@ -110,8 +112,7 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
                     listOf(ProjectileData.flayer_proj_1)
                 }.addToLootTable(LootTableEntry.flayer_table, LootTableEntry.t1_gear)
                                      .emptyPortalChance(1.0)
-                                     .addToPortalTable(0.5
-                                     ) { IceWorld() }).also {
+                                     .addToPortalTable(0.5) { FloweringGarden() }).also {
                 it.movementAIs.add(1.0, AIWander(it))
                 it.movementAIs.add(1.0, AIFollowPlayer(it))
                 it.attackAIs.add(1.0, AIAttackDefault(it))

@@ -65,7 +65,7 @@ class EffectInfo(val supplier:(long, int) -> Effect) {
          */
         val bleed = EffectInfo { duration, amplifier ->
             object:Effect(duration, TexData.bleed_effect, amplifier) {
-                override fun serverTick() {
+                override fun serverTickInternal() {
                     if (this.enttInit) {
                         val invAmp = (5 - amplifier).coerceIn(1..5)
                         if (delayNumSeconds(0.2 * invAmp)) {

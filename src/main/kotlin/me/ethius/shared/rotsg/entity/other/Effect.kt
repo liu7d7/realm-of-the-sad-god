@@ -49,16 +49,26 @@ open class Effect(
 
     }
 
-    override fun clientTick() {
+    final override fun clientTick() {
         if (System.currentTimeMillis() - initTime >= lifetime) {
             entt.removeEffect(this.id)
         }
+        clientTickInternal()
     }
 
-    override fun serverTick() {
+    protected open fun clientTickInternal() {
+
+    }
+
+    final override fun serverTick() {
         if (System.currentTimeMillis() - initTime >= lifetime) {
             entt.removeEffect(this.id)
         }
+        serverTickInternal()
+    }
+
+    protected open fun serverTickInternal() {
+
     }
 
     override fun release() {

@@ -147,8 +147,13 @@ open class Bushery(
         }
         val fire_bush_1 = Bushery(TexData.fire_bush_1.id, 1.0, .925, 1.1, BoundingBoxType.centered)
         val fire_bush_2 = Bushery(TexData.fire_bush_2.id, 1.0, .925, 1.1, BoundingBoxType.centered)
+
         val shadow_bush_1 = Bushery(TexData.shadow_bush_1.id, 1.0, .925, 1.1, BoundingBoxType.centered)
         val shadow_bush_2 = Bushery(TexData.shadow_bush_2.id, 1.0, .925, 1.1, BoundingBoxType.centered)
+
+        val pink_tree_hanging = Bushery(TexData.pink_tree_hanging.id, 1.0, .925, 1.1, BoundingBoxType.centered)
+        val pink_tree_standing_1 = Bushery(TexData.pink_tree_standing_1.id, 1.0, .925, 1.1, BoundingBoxType.centered)
+        val pink_tree_standing_2 = Bushery(TexData.pink_tree_standing_2.id, 1.0, .925, 1.1, BoundingBoxType.centered)
 
         fun find(name:string?):Bushery? {
             return copy(values.find { it.id == name })

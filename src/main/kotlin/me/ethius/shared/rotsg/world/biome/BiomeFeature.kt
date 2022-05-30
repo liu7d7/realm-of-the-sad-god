@@ -14,7 +14,7 @@ import kotlin.reflect.KProperty1
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.jvmErasure
 
-private const val feature_dir = "/assets/data/feature"
+const val feature_data_dir = "/assets/data/feature"
 
 open class BiomeFeature {
 
@@ -36,7 +36,7 @@ open class BiomeFeature {
 
     constructor(tlPos:ivec2, loc:string):this() {
         this.tlPos = tlPos
-        val toml = Toml().read(this.javaClass.getResourceAsStream("$feature_dir/$loc.dat"))
+        val toml = Toml().read(this.javaClass.getResourceAsStream("$feature_data_dir/$loc.dat"))
         val e = toml.to(WorldBuilderData::class.java)
         this.feature = e.data.map { Tile(it.pos, it.texData, Bushery[it.env]) }.toTypedArray()
     }

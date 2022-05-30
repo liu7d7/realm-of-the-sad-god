@@ -26,7 +26,7 @@ abstract class AFramebuffer(val useRenBuf:bool) {
         bindFrameBuffer(0)
     }
 
-    private fun dispose() {
+    fun dispose() {
         GL30C.glDeleteTextures(this.colorAttatchment)
         this.colorAttatchment = -1
         GL30C.glDeleteTextures(this.depthAttatchment)
@@ -34,12 +34,6 @@ abstract class AFramebuffer(val useRenBuf:bool) {
         bindFrameBuffer(0)
         GL30C.glDeleteFramebuffers(this.id)
         this.id = -1
-    }
-
-    @Listen
-    fun window(event:WindowResizedEvent) {
-        dispose()
-        init(event.width.toDouble(), event.height.toDouble())
     }
 
     open fun init(w:double, h:double) {

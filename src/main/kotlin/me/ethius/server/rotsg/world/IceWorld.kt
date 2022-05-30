@@ -12,7 +12,7 @@ class IceWorld(vararg entities:me.ethius.shared.rotsg.entity.AEntity):Returnable
 
     private val playerPos = dvec2(0.0, 0.0)
 
-    fun setupWorld() {
+    private fun setupWorld() {
         abiomes.add(SimpleBiome(0, 0, this, 15, BiomeType.ice).also { it.maxEntities = 2 })
         abiomes.add(CustomBiome(0, 0, this, 28) { Tile(it, TexData.snow_1, Bushery.empty_bb) })
     }

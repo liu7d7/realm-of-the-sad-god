@@ -169,12 +169,13 @@ class WorldRenderer:Tickable(true) {
                 val r = if (Client.playerInit) Client.player.lerpedR else 0.0
                 val x = tile.pos.x * tile_size + tile_size * 0.5 + centerX
                 val y = tile.pos.y * tile_size + tile_size * 0.5 + centerY
+                val tdata = TexData[texDataId].texData(tile.hash, Client.worldRenderer.windX)
                 matrix.push {
                     matrix.translate(x, y, 0.0) {
                         matrix.multiply(NEGATIVE_Z.getDegreesQuaternion(r))
                         matrix.scale(scale, scale, 1.0)
                     }
-                    Client.render.drawCenteredTexWithoutEnding(TexData[texDataId], matrix, x, y)
+                    Client.render.drawCenteredTexWithoutEnding(tdata, matrix, x, y)
                 }
             }
         }
