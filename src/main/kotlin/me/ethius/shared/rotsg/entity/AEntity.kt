@@ -288,6 +288,10 @@ abstract class AEntity:Tickable() {
         }
     }
 
+    fun getEffect(effect:string):Effect? {
+        return effects.find { it.id == effect }
+    }
+
     fun removeEffect(type:string) {
         val e = HashSet<Effect>()
         for (it in effects) {

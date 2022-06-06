@@ -12,7 +12,7 @@ import me.ethius.shared.rotsg.entity.AEntity
 open class Effect(
     val lifetime:long,
     val texData:TexData,
-    private val amplifier:int
+    val amplifier:int
 ):Tickable() {
 
     lateinit var entt:AEntity

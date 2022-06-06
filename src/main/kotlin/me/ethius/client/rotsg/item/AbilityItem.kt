@@ -155,11 +155,11 @@ open class DasherItem(
             })
             Client.ticker.add(object:Tickable() {
                 override fun clientTick() {
-                    if (ticksExisted == 3) {
+                    if (ticksExisted == 1) {
                         release()
                         return
                     }
-                    Client.player.moveDirection(angle, tile_size)
+                    Client.player.moveDirection(angle, tile_size * 3)
                     Client.fxManager.createFx(TexData.atk_rock,
                                               Client.player.lerpedX,
                                               Client.player.lerpedY,

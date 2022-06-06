@@ -165,6 +165,7 @@ class LootTableEntry:WeightedCollection<string?>() {
             .addPair(0.2, "elemental_saber")
             .addPair(0.2, "elemental_light_armor")
             .addPair(0.2, "elemental_heavy_armor")
+            .addPair(0.2, "acidic_dagger")
             .addPair(2.4, null)
 
 
