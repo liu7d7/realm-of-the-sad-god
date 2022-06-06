@@ -18,7 +18,7 @@ open class Packet(val id:int, vararg val data:string) {
          * C2S
          *
          *     0 id:long
-         *     1 profile toml string
+         *     1 profileToml:string
          */
         const val _id_logon = 0
 

@@ -11,7 +11,7 @@ import me.ethius.shared.loottable.LootTableEntry
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.EntityInfo
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.tile.Bushery
 import me.ethius.shared.rotsg.world.biome.BiomeFeature
 
@@ -29,7 +29,7 @@ object Server {
         EffectInfo.init()
         TexData.init()
         BiomeType.init()
-        ProjectileData.init()
+        ProjectileProperties.init()
         Bushery.init()
         WorldEvent.init()
         LootTableEntry.init()
@@ -63,7 +63,7 @@ object Server {
             network.actOnQueuedPackets()
             network.flush()
             val end = System.currentTimeMillis()
-            val timeSleep = (20L - (end - begin)).coerceAtLeast(0)
+            val timeSleep = (tick_time.toInt() - (end - begin)).coerceAtLeast(0)
             if (timeSleep > 0) {
                 Thread.sleep(timeSleep)
             }

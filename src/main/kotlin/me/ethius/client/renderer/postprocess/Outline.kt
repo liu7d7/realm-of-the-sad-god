@@ -30,8 +30,8 @@ object Outline {
         bindTexture(final.colorAttatchment, 0)
         PostProcessRenderer.renderFs(0.0,
                                      0.0,
-                                     Client.window.scaledWidth.toDouble(),
-                                     Client.window.scaledHeight.toDouble())
+                                     Client.window.scaledWidth,
+                                     Client.window.scaledHeight)
 
         final.copyColorFrom(swap)
     }

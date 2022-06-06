@@ -1,0 +1,12 @@
+[meta]
+tex_data = "silver_sickle_proj"
+amplitude = 1.1
+frequency = 0.5
+speed = 11.5
+range = 3.5
+render_angle_add = 45.0
+hit_effect = "fame"
+hit_effect_duration = 1000
+hit_effect_amplifier = 2
+bullet_id_always_even = true
+damage = "90-150"

@@ -33,7 +33,7 @@ class StatView {
         Client.render.drawRectAlphaWithoutEnding(matrix,
                                                  Client.window.scaledWidth - width - 0.1,
                                                  top,
-                                                 Client.window.scaledWidth.toDouble(),
+                                                 Client.window.scaledWidth,
                                                  top + height,
                                                  if (isInMain()) lldu else ldu, 0.3f)
         if (!visible)

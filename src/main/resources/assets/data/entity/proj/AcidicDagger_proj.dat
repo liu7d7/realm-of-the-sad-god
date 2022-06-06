@@ -1,0 +1,8 @@
+[meta]
+tex_data = "acidic_dagger_proj"
+render_angle_add = -45.0
+damage = "150-180"
+horizontal_offset = 0.6
+at_mouse = true
+range = 4.5
+speed = 14.0

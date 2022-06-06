@@ -3,7 +3,7 @@ package me.ethius.client.rotsg.item.sword
 import me.ethius.client.rotsg.item.ItemTier
 import me.ethius.client.rotsg.item.SwordItem
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.Stat
 
 class RottingArm:SwordItem(TexData.rotting_arm, ItemTier.primal,
@@ -15,11 +15,11 @@ class RottingArm:SwordItem(TexData.rotting_arm, ItemTier.primal,
     init {
         // set the shot pattern of the weapon
         shotPattern = listOf(
-            ProjectileData.rotten_shot(false, 135..185),
-            ProjectileData.rotten_shot(false, 135..185),
-            ProjectileData.rotten_shot(false, 135..185),
-            ProjectileData.rotten_shot(false, 135..185),
-            ProjectileData.rotten_shot(false, 135..185),
+            ProjectileProperties.rotten_shot(false, 135..185),
+            ProjectileProperties.rotten_shot(false, 135..185),
+            ProjectileProperties.rotten_shot(false, 135..185),
+            ProjectileProperties.rotten_shot(false, 135..185),
+            ProjectileProperties.rotten_shot(false, 135..185),
         )
         this.arcGap = 14.0
     }

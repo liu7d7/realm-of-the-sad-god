@@ -1,15 +1,18 @@
 package me.ethius.client.rotsg.gui
 
 import me.ethius.client.Client
+import me.ethius.client.Profiles
 import me.ethius.client.renderer.Mesh
 import me.ethius.client.renderer.RenderLayer
 import me.ethius.client.rotsg.entity.Portal
+import me.ethius.client.rotsg.inventory.slot_width
 import me.ethius.shared.double
 import me.ethius.shared.events.Listen
 import me.ethius.shared.events.def.MouseClickedEvent
 import me.ethius.shared.maths.MaxArrayList
 import me.ethius.shared.measuringTimeMS
-import me.ethius.shared.tickTime
+import me.ethius.shared.opti.TexData
+import me.ethius.shared.tick_time
 import org.joml.Matrix4dStack
 import java.util.concurrent.CopyOnWriteArrayList
 import kotlin.math.min
@@ -69,8 +72,9 @@ class GameHud {
                 Client.font.drawWithoutEnding(matrix, Client.player.hp.roundToInt().toString(), padding + barSpacing + expBarWidth, Client.window.scaledHeight - padding - barSpacing - barHeight * 1.5 - Client.font.getHeight(true) / 2, hpColor, true)
                 Client.font.drawWithoutEnding(matrix, Client.player.mp.roundToInt().toString(), padding + barSpacing + expBarWidth, Client.window.scaledHeight - padding - barHeight * 0.5 - Client.font.getHeight(true) / 2, mpColor, true)
                 Client.font.drawWithoutEnding(matrix, Client.player.level.toString(), padding + barSpacing + expBarWidth, Client.window.scaledHeight - padding - charHeight - barSpacing - barHeight * 0.5 - Client.font.getHeight(true) / 2.0, expColor, true)
+                Client.font.drawLeftWithoutEnding(matrix, "${Profiles.global.fame}", Client.window.midX - slot_width * 2 - 7, Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - 7 - Client.font.getHeight(true), 0xffffffff, true)
             }
-            mspts += (Client.ticker.lastFrameDuration * tickTime)
+            mspts += (Client.ticker.lastFrameDuration * tick_time)
             if (measuringTimeMS() - lastUpdate >= 250f) {
                 ms = mspts.average().toFloat()
                 lastUpdate = measuringTimeMS()
@@ -98,6 +102,14 @@ class GameHud {
         drawMpBar(matrix)
         drawExpBar(matrix)
         drawChar(matrix)
+        Client.render.drawTexWithoutEnding(TexData.fame,
+                                           matrix,
+                                           Client.window.midX - slot_width * 2 - 5 - Client.font.getWidth("${Profiles.global.fame}") - Client.font.getHeight(true) - 7,
+                                           Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - 5 - Client.font.getHeight(true) - 3.5,
+                                           0.0,
+                                           0xffffffff,
+                                           Client.font.getHeight(true) + 2,
+                                           Client.font.getHeight(true) + 2)
     }
 
     private fun drawHpBar(matrix:Matrix4dStack) {

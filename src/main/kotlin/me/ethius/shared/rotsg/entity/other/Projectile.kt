@@ -2,6 +2,7 @@ package me.ethius.shared.rotsg.entity.other
 
 import com.google.common.collect.Maps
 import me.ethius.client.Client
+import me.ethius.client.ext.transform
 import me.ethius.client.rotsg.entity.ClientPlayer
 import me.ethius.client.rotsg.fx.Fx
 import me.ethius.server.rotsg.world.ServerWorld
@@ -9,7 +10,7 @@ import me.ethius.shared.*
 import me.ethius.shared.ext.todvec2
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.data.EffectInfo
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.PassableEntity
 import me.ethius.shared.rotsg.entity.enemy.Enemy
@@ -31,7 +32,7 @@ class Projectile:PassableEntity() {
             pivotX = texData.pivotX
             pivotY = texData.pivotY
         }
-    var projProps:ProjectileData = ProjectileData.empty
+    var projProps:ProjectileProperties = ProjectileProperties.empty
 
     // [data]
     override var width:double = 0.0
@@ -65,6 +66,9 @@ class Projectile:PassableEntity() {
             updateBoundingCircle()
             if (bulletId == -1 && value != null) {
                 bulletId = nextBulletId(value)
+                if (projProps.bulletIdAlwaysEven) {
+                    bulletId *= 2
+                }
                 z = when (abs(this.bulletId % 3)) {
                     1 -> 6.5
                     2 -> 4.0
@@ -100,42 +104,54 @@ class Projectile:PassableEntity() {
     }
 
     private fun offsetStartPos() {
+        val startPosBeforeHZOffset = startPos.copy()
         startPos.x += cosD(r) * 24f
         startPos.y += sinD(r) * 24f
-        startPos.x += cosD(r + 90.0) * projProps.horizontalOffset
-        startPos.y += sinD(r + 90.0) * projProps.horizontalOffset
+        startPos.x += cosD(r + 90.0) * projProps.horizontalOffset * if (bulletId % 2 == 0) 1 else -1
+        startPos.y += sinD(r + 90.0) * projProps.horizontalOffset * if (bulletId % 2 == 0) 1 else -1
+        if (projProps.atMouse) {
+            val scrnPos = dvec4(startPosBeforeHZOffset.x, startPosBeforeHZOffset.y, 0.0, 1.0)
+            scrnPos.transform(Client.lookAt)
+            val target = dvec2(Client.mouse.x - scrnPos.x, Client.mouse.y - scrnPos.y).normalize().mul(((projProps.lifetime - tick_time) * (projProps.speed / 1000f)) * tile_size).add(scrnPos.x, scrnPos.y)
+            scrnPos.set(startPos.x, startPos.y, 0.0, 1.0)
+            scrnPos.transform(Client.lookAt)
+            r = calcAngle(target.y - scrnPos.y, target.x - scrnPos.x) - Client.player.r
+            prevR = r
+            this.direction = this.r - 90.0
+            this.prevDirection = this.direction
+        }
         this.x = startPos.x
         this.y = startPos.y
         this.prevX = startPos.x
         this.prevY = startPos.y
     }
 
-    fun reset(owner:AEntity, projectileData:ProjectileData):Projectile {
-        reset(owner, projectileData, projectileData.baseAngle)
+    fun reset(owner:AEntity, projectileProperties:ProjectileProperties):Projectile {
+        reset(owner, projectileProperties, projectileProperties.baseAngle)
         return this
     }
 
     fun reset(
         owner:AEntity,
-        projectileData:ProjectileData,
+        projectileProperties:ProjectileProperties,
         angle:double,
     ):Projectile {
+        this.projProps = projectileProperties
         this.owner = owner
         this.r = angle
-        this.projProps = projectileData
         this.texDataId = this.projProps.texDataId
         if (owner is ClientPlayer) {
             this.r = wrapDegrees(calcAngle(-((Client.cameraPos.y + startPos.y) - Client.mouse.y),
                                            -((Client.cameraPos.x + startPos.x) - Client.mouse.x)) - Client.player.r + angle)
-        } else if (projectileData.atPlayer) {
+        } else if (projectileProperties.atPlayer) {
             val world = (owner.world as? ServerWorld) ?: throw IllegalStateException("Projectile owner has no world")
             val player = world.closestPlayer(owner) ?: world.entities.randomOrNull() ?: owner
-            this.r = wrapDegrees(calcAngle(owner, player, projectileData.leadShot, (1.0 - projProps.speed / 20.0) * 12.0) + angle)
+            this.r = wrapDegrees(calcAngle(owner, player, projectileProperties.leadShot, (1.0 - projProps.speed / 20.0) * 12.0) + angle)
         }
         this.prevR = this.r
         this.direction = this.r - 90.0
         this.prevDirection = this.direction
-        this.raa = projectileData.renderAngleAdd
+        this.raa = projectileProperties.renderAngleAdd
         this.praa = this.raa
         this.offsetStartPos()
         return this
@@ -172,8 +188,8 @@ class Projectile:PassableEntity() {
         prevY = y
         prevDirection = direction
         praa = raa
-        val _local_3 = (ticksExisted + 1) * tickTime
-        if (ticksExisted >= floor((projProps.lifetime - projProps.timeOffset * 3f - tickTime) / tickTime).toInt()) {
+        val _local_3 = (ticksExisted + 1) * tick_time
+        if (ticksExisted >= floor((projProps.lifetime - projProps.timeOffset * 3f) / tick_time - 1).toInt()) {
             Client.world.remEntity(this)
             return
         }
@@ -193,7 +209,7 @@ class Projectile:PassableEntity() {
         } else if (projProps.boomerang && ticksExisted == floor(projProps.lifetime / 40f).toInt()) {
             r + 90f
         } else {
-            positionAt((ticksExisted + 2) * tickTime, pt, false)
+            positionAt((ticksExisted + 2) * tick_time, pt, false)
             fastAtan2(pt.y - y, pt.x - x).toDegrees() - 90f
         }
         if (ticksExisted == 0 || (projProps.boomerang && ticksExisted == floor(projProps.lifetime / 40f).toInt())) {

@@ -177,4 +177,4 @@ fun disableScissor() {
     glDisable(GL_SCISSOR_TEST)
 }
 
-private fun getScale():double = Client.window.width.toDouble() / Client.window.scaledWidth.toDouble()
+private fun getScale():double = Client.window.width / Client.window.scaledWidth

@@ -3,7 +3,7 @@ package me.ethius.client.rotsg.item.sword
 import me.ethius.client.rotsg.item.ItemTier
 import me.ethius.client.rotsg.item.SwordItem
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.Stat
 
 class ColoSword:SwordItem(TexData.colo_sword_1, ItemTier.legendary,
@@ -17,7 +17,7 @@ class ColoSword:SwordItem(TexData.colo_sword_1, ItemTier.legendary,
 
     companion object {
         private val entityInfo =
-            ProjectileData(TexData.colo_proj, 1.0, 0.5, 10.0, 4.5, false, false, false, false, 180..215, 0.8).also { it.renderAngleAdd = ProjectileData.slant_angle_correction }
+            ProjectileProperties(TexData.colo_proj, 1.0, 0.5, 10.0, 4.5, false, false, false, false, 180..215, 0.8).also { it.renderAngleAdd = ProjectileProperties.slant_angle_correction }
     }
 
 }

@@ -19,6 +19,7 @@ class ClientWorld:IWorld, Tickable(true) {
 
     override var name:string = ""
     override var tiles = HashMap<ivec2, Tile>()
+    var tilesLoading = HashSet<Tile>()
     var tilesInView = HashSet<Tile>()
     override val entities = CopyOnWriteArrayList<AEntity>()
     var entitiesInView:ArrayList<AEntity> = ArrayList()
@@ -31,12 +32,16 @@ class ClientWorld:IWorld, Tickable(true) {
         }
 
     fun shouldRenderEntity(entity:AEntity):bool {
-        if (measuringTimeMS() - overlayTime < 500) return entity is ClientPlayer
-        if (measuringTimeMS() - overlayTime > 1500) return true
+        if (measuringTimeMS() - overlayTime < 700) return entity is ClientPlayer
+        if (measuringTimeMS() - overlayTime > 850) return true
         return false
     }
 
     override fun addTile(tile:Tile, force:bool):bool {
+        if (measuringTimeMS() - overlayTime < 850) {
+            this.tilesLoading += tile
+            return true
+        }
         val bl = super.addTile(tile, force)
         if (bl) {
             for (i in tile.pos.x - 1..tile.pos.x + 1) {
@@ -52,7 +57,7 @@ class ClientWorld:IWorld, Tickable(true) {
     }
 
     fun updateTerrain(important:bool = false) {
-        if (measuringTimeMS() - overlayTime < 1000) {
+        if (measuringTimeMS() - overlayTime < 700) {
             return
         }
         tilesInView.clear()
@@ -69,8 +74,12 @@ class ClientWorld:IWorld, Tickable(true) {
                 }
             }
         } else {
-            synchronized(tilesInView) {
-                tilesInView.addAll(tiles.values.filter { it.playerCanSee() })
+            try {
+                synchronized(tilesInView) {
+                    tilesInView.addAll(tiles.values.filter { it.playerCanSee() })
+                }
+            } catch (_:Exception) {
+
             }
         }
     }
@@ -108,7 +117,7 @@ class ClientWorld:IWorld, Tickable(true) {
     private var overlayTime = 0f
 
     fun clear(toMenu:bool = false) {
-        Client.overlay = TransitionOverlay(2000f, false, true, 500f)
+        Client.overlay = TransitionOverlay(1800f, false, true, 0f)
         overlayTime = measuringTimeMS()
         for (i in entities) {
             remEntity(i, i !is ClientPlayer, false)
@@ -117,23 +126,29 @@ class ClientWorld:IWorld, Tickable(true) {
         if (toMenu) {
             thread(true) {
                 Client.player.invulnerable = true
-                Thread.sleep(1000)
+                Thread.sleep(900)
                 Client.screen = MainMenuScreen()
                 Client.worldToNull()
             }
         } else {
+            requestTiles(true)
             thread(true) {
                 Client.player.invulnerable = true
-                Thread.sleep(1000)
+                Thread.sleep(900)
+                tiles.clear()
+                for (i in tilesLoading) {
+                    addTile(i, true)
+                }
+                tilesLoading.clear()
                 Client.screen = null
                 Client.player.r = 0.0
-                tiles.clear()
                 if (!Client.player.serverX.isNaN()) {
                     Client.player.moveTo(Client.player.serverX, Client.player.serverY)
                     Client.player.serverX = Double.NaN
                     Client.player.serverY = Double.NaN
                 }
-                Thread.sleep(1000)
+                updateTerrain()
+                Thread.sleep(300)
                 Client.player.invulnerable = false
             }
         }
@@ -149,24 +164,30 @@ class ClientWorld:IWorld, Tickable(true) {
                 }
             }
         }
-        if (delayNumSeconds(0.04) && measuringTimeMS() - overlayTime > 1000) {
-            val ftp = Client.player.flooredTilePos().copy()
-            val arr = ArrayList<string>()
-            label@
-            for (i in -23..23) {
-                for (j in -23..23) {
-                    val pos = ftp.copy().add(i, j)
-                    if (!tiles.containsKey(pos) && pos !in Client.network.requestedTiles) {
-                        arr += "${i + ftp.x}|${j + ftp.y}"
-                    }
-                }
-            }
-            if (arr.isNotEmpty()) {
-                Client.network.send(Packet._id_block_info_request, arr.joinToString(" "))
-            }
-            updateTerrain()
+        if (delayNumSeconds(0.04)) {
+            requestTiles()
         }
         entitiesInView = entities.filter { it != null && it.playerCanSee() && it.alive } as ArrayList<AEntity>
+    }
+
+    private fun requestTiles(immediate:bool = false) {
+        val ftp = Client.player.flooredTilePos().copy()
+        val arr = ArrayList<string>()
+        for (i in -23..23) {
+            for (j in -23..23) {
+                val pos = ftp.copy().add(i, j)
+                if (!tiles.containsKey(pos) && pos !in Client.network.requestedTiles) {
+                    arr += "${i + ftp.x}|${j + ftp.y}"
+                }
+            }
+        }
+        if (arr.isNotEmpty()) {
+            if (immediate)
+                Client.network.sendImmediately(Packet._id_block_info_request, arr.joinToString(" "))
+            else
+                Client.network.send(Packet._id_block_info_request, arr.joinToString(" "))
+        }
+        updateTerrain()
     }
 
 }

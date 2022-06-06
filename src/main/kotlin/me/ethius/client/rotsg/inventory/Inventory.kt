@@ -209,7 +209,7 @@ class Inventory(private val dummy:bool = false) {
                                      Client.window.scaledHeight - padding - totalBarsHeight / 2.0 - slot_width / 2.0 - slot_width - 10))
         }
 
-        // first 4 slots //
+        // 8 other items //
         run {
             val arr2 = Array(8) { i -> SlotId[i + 4].newInst(0.0, 0.0).also { slots.add(it) } }
             slotGroups.add(SlotGroup(arr2,

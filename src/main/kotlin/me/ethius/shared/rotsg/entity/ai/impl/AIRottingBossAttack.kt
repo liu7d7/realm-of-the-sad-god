@@ -5,7 +5,7 @@ import me.ethius.shared.bool
 import me.ethius.shared.calcAngle
 import me.ethius.shared.getRandomInRange
 import me.ethius.shared.measuringTimeMS
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.ai.AIBase
 import me.ethius.shared.rotsg.entity.enemy.Enemy
 import org.apache.commons.lang3.RandomUtils
@@ -28,7 +28,7 @@ class AIRottingBossAttack(entityIn:Enemy):AIBase(entityIn) {
                     var angle = calcAngle(entity, target)
                     angle += RandomUtils.nextFloat(0f, 40f)
                     angle -= 20f
-                    entity.shoot(ProjectileData.rotting_boss_proj).also { it.r = angle }
+                    entity.shoot(ProjectileProperties.rotting_boss_proj).also { it.r = angle }
                     lastShot = measuringTimeMS()
                 }
             }
@@ -36,7 +36,7 @@ class AIRottingBossAttack(entityIn:Enemy):AIBase(entityIn) {
                 if (measuringTimeMS() - lastShot >= 500f) {
                     val angle = calcAngle(entity, target)
                     for (i in 0..2) {
-                        entity.shoot(ProjectileData.rotting_boss_proj)
+                        entity.shoot(ProjectileProperties.rotting_boss_proj)
                             .also { it.r = angle + getRandomInRange(-40f, 40f) }
                     }
                     lastShot = measuringTimeMS()
@@ -49,10 +49,10 @@ class AIRottingBossAttack(entityIn:Enemy):AIBase(entityIn) {
 
                 if (entity.delayNumSeconds(0.04)) {
                     for (i in 0..6) {
-                        entity.shoot(ProjectileData.rotting_boss_proj).also {
+                        entity.shoot(ProjectileProperties.rotting_boss_proj).also {
                             it.r = shots[i]
                             it.projProps = it.projProps.copy()
-                            it.projProps.lifetime = ProjectileData.ms(6.0, it.projProps.speed)
+                            it.projProps.lifetime = ProjectileProperties.ms(6.0, it.projProps.speed)
                             it.projProps.frequency = 1.0
                             it.projProps.amplitude = 0.5
                         }

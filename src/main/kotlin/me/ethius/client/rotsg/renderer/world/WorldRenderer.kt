@@ -46,9 +46,13 @@ class WorldRenderer:Tickable(true) {
             }
             Client.renderTaskTracker.layer(RenderLayer.tile)
             Client.renderTaskTracker.track {
-                for (it in tilesInView) {
-                    it.renderMesh(matrix)
-                    it.renderBlend(matrix)
+                try {
+                    for (it in tilesInView) {
+                        it.renderMesh(matrix)
+                        it.renderBlend(matrix)
+                    }
+                } catch (_:Exception) {
+
                 }
             }
             Client.renderTaskTracker.layer(RenderLayer.world_feature)

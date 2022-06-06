@@ -24,7 +24,7 @@ open class Item {
     }
 
     constructor(assetLoc:string) {
-        val toml = Toml().read(Client::class.java.getResourceAsStream("$item_data_loc/$assetLoc.dat"))
+        val toml = Toml().readCached("$item_data_loc/$assetLoc.dat")
         // item meta
         val meta = toml.getTable("meta")
         this.name = meta.getString("name")

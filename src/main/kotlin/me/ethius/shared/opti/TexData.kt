@@ -131,8 +131,6 @@ open class TexData(
         val moonbeam_katana = TexData(81, 318, 8, 8)
         val stardust_cutter = TexData(90, 318, 8, 8)
         val molten_katana = TexData(63, 318, 8, 8)
-        val kalon = TexData(99, 318, 8, 8)
-        val frozen_katana = TexData(108, 318, 8, 8)
         val dead_man_scythe = TexData(36, 309, 8, 8)
         val dual_crystal_cutters = TexData(45, 309, 8, 8)
         val elemental_slasher = TexData(90, 309, 8, 8)
@@ -149,6 +147,10 @@ open class TexData(
         val adv_dagger_1 = TexData(99, 327, 8, 8)
         val bloody_blade = TexData(18, 345, 8, 8)
         val demons_horn = TexData(36, 345, 8, 8)
+        val kalon = TexData(99, 318, 8, 8)
+        val frozen_dagger = TexData(108, 318, 8, 8)
+        val acidic_dagger = TexData(72, 345, 8, 8)
+        val silver_sickle = TexData(63, 345, 8, 8)
 
         // abilities //
         val adv_shield_1 = TexData(126, 318, 8, 8)
@@ -160,12 +162,14 @@ open class TexData(
         val basic_dasher = TexData(9, 327, 8, 8)
         val adv_dasher = TexData(54, 318, 8, 8)
         val orb_1 = TexData(108, 336, 8, 8)
+        val crystalline_kunai = TexData(54, 345, 8, 8)
 
         // rings //
         val bone_ring = TexData(18, 327, 8, 8)
         val basic_ring_1 = TexData(27, 327, 8, 8)
         val extreme_ring_of_atk = TexData(18, 309, 8, 8)
         val radiant_ring = TexData(9, 345, 8, 8)
+        val plant_ring = TexData(81, 346, 7, 7)
 
         // armors //
         val heavy_armor_1 = TexData(36, 327, 8, 8)
@@ -351,7 +355,7 @@ open class TexData(
         val csword_proj = TexData(126, 408, 6, 6)
         val molten_katana_proj = TexData(133, 406, 8, 8)
         val void_dude_proj_1 = TexData(0, 415, 6, 8)
-        val frozen_katana_proj = TexData(7, 419, 4, 4)
+        val frozen_dagger_proj = TexData(7, 419, 4, 4)
         val chain_scythe_chain = TexData(12, 415, 8, 8)
         val chain_scythe_proj = TexData(21, 415, 8, 8)
         val dual_crystal_cutters_proj = TexData(30, 415, 8, 8)
@@ -380,6 +384,8 @@ open class TexData(
         val bloody_blade_proj = TexData(156, 408, 5, 6)
         val demons_horn_proj = TexData(162, 407, 5, 7)
         val demons_fang_proj = TexData(168, 407, 5, 7)
+        val silver_sickle_proj = TexData(11, 424, 6, 6)
+        val acidic_dagger_proj = TexData(18, 424, 5, 5)
 
         // enemies //
         init {
@@ -436,6 +442,7 @@ open class TexData(
         val atk_add_effect = TexData(425, 0, 15, 9)
         val bleed_effect = TexData(441, 0, 5, 7)
         val vignette = TexData(944, 974, 80, 50)
+        val fame = TexData(447, 0, 8, 8)
 
         operator fun get(name:string?):TexData {
             return values[name] ?: empty

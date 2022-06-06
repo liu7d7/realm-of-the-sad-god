@@ -33,7 +33,7 @@ class Texture {
             if (width > 0) {
                 field = width
             }
-            this.invWidth = 1.0 / width.toDouble()
+            this.invWidth = 1.0 / width
         }
     var invWidth = 0.0
 
@@ -45,7 +45,7 @@ class Texture {
             if (height > 0) {
                 field = height
             }
-            this.invHeight = 1.0 / height.toDouble()
+            this.invHeight = 1.0 / height
         }
     var invHeight = 0.0
 

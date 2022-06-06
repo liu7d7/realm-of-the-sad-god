@@ -1,8 +1,8 @@
 package me.ethius.shared.rotsg.entity.ai.impl
 
 import me.ethius.shared.bool
-import me.ethius.shared.rotsg.data.ProjectileData
-import me.ethius.shared.rotsg.data.ProjectileData.Companion.ms
+import me.ethius.shared.rotsg.data.ProjectileProperties
+import me.ethius.shared.rotsg.data.ProjectileProperties.Companion.ms
 import me.ethius.shared.rotsg.entity.ai.AIBase
 import me.ethius.shared.rotsg.entity.enemy.Enemy
 import kotlin.math.roundToInt
@@ -23,13 +23,13 @@ class AIElementalDudeAttack(entityIn:Enemy):AIBase(entityIn) {
                     entity.currentMoveAI = wander
                 }
                 if (entity.delayNumSeconds(0.3)) {
-                    entity.shoot(ProjectileData.elemental_dude_proj_2.also {
+                    entity.shoot(ProjectileProperties.elemental_dude_proj_2.also {
                         it.baseAngle = 30.0; it.lifetime = ms(4.0, it.speed)
                     })
-                    entity.shoot(ProjectileData.elemental_dude_proj_2.also {
+                    entity.shoot(ProjectileProperties.elemental_dude_proj_2.also {
                         it.baseAngle = 0.0; it.lifetime = ms(4.0, it.speed)
                     })
-                    entity.shoot(ProjectileData.elemental_dude_proj_2.also {
+                    entity.shoot(ProjectileProperties.elemental_dude_proj_2.also {
                         it.baseAngle = -30.0; it.lifetime = ms(4.0, it.speed)
                     })
                 }
@@ -52,20 +52,20 @@ class AIElementalDudeAttack(entityIn:Enemy):AIBase(entityIn) {
                     }
                 }
                 if (entity.delayNumSeconds(0.5)) {
-                    ProjectileData.elemental_dude_proj_1.atPlayer = false
-                    ProjectileData.elemental_dude_proj_2.atPlayer = false
+                    ProjectileProperties.elemental_dude_proj_1.atPlayer = false
+                    ProjectileProperties.elemental_dude_proj_2.atPlayer = false
                     for (i in 0..5) {
-                        entity.shoot(ProjectileData.elemental_dude_proj_1.also {
+                        entity.shoot(ProjectileProperties.elemental_dude_proj_1.also {
                             it.baseAngle = i * 72.0; it.lifetime = ms(5.5, it.speed)
                         })
-                        entity.shoot(ProjectileData.elemental_dude_proj_2.also {
+                        entity.shoot(ProjectileProperties.elemental_dude_proj_2.also {
                             it.baseAngle = i * 72.0 + 36.0; it.lifetime = ms(4.0, it.speed)
                         })
                     }
-                    ProjectileData.elemental_dude_proj_1.baseAngle = 0.0
-                    ProjectileData.elemental_dude_proj_2.baseAngle = 0.0
-                    ProjectileData.elemental_dude_proj_1.atPlayer = true
-                    ProjectileData.elemental_dude_proj_2.atPlayer = true
+                    ProjectileProperties.elemental_dude_proj_1.baseAngle = 0.0
+                    ProjectileProperties.elemental_dude_proj_2.baseAngle = 0.0
+                    ProjectileProperties.elemental_dude_proj_1.atPlayer = true
+                    ProjectileProperties.elemental_dude_proj_2.atPlayer = true
                 }
             }
         }

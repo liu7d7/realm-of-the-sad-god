@@ -5,7 +5,7 @@ import me.ethius.shared.bool
 import me.ethius.shared.calcAngle
 import me.ethius.shared.long
 import me.ethius.shared.measuringTimeMS
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.ai.AIBase
 import me.ethius.shared.rotsg.entity.enemy.Enemy
 import org.apache.commons.lang3.RandomUtils
@@ -25,14 +25,14 @@ class AIMetallicRobotAttack(entityIn:Enemy):AIBase(entityIn) {
             in 25000 downTo 16000 -> {
                 if (entity.delayNumSeconds(1.0)) {
                     val angle = calcAngle(entity, target) + 90f
-                    entity.shoot(ProjectileData.metallic_robot_proj_1).also { it.r = -30.0 + angle }
-                    entity.shoot(ProjectileData.metallic_robot_proj_1).also { it.r = 0.0 + angle }
-                    entity.shoot((ProjectileData.metallic_robot_proj_1)).also { it.r = 30.0 + angle }
+                    entity.shoot(ProjectileProperties.metallic_robot_proj_1).also { it.r = -30.0 + angle }
+                    entity.shoot(ProjectileProperties.metallic_robot_proj_1).also { it.r = 0.0 + angle }
+                    entity.shoot((ProjectileProperties.metallic_robot_proj_1)).also { it.r = 30.0 + angle }
                 } else if (entity.delayNumSeconds(1.7)) {
                     for (i in 0..2) {
-                        entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = i * 120.0 + 30.0 }
-                        entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = i * 120.0 + 60.0 }
-                        entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = i * 120.0 + 90.0 }
+                        entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = i * 120.0 + 30.0 }
+                        entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = i * 120.0 + 60.0 }
+                        entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = i * 120.0 + 90.0 }
                     }
                 }
             }
@@ -45,12 +45,12 @@ class AIMetallicRobotAttack(entityIn:Enemy):AIBase(entityIn) {
                     for (i in 0..5) {
                         shot1[i] += shot1dirs[i] * 3f
                     }
-                    entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = shot1[0]; }
-                    entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = shot1[1]; }
-                    entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = shot1[2]; }
-                    entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = shot1[3]; }
-                    entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = shot1[4]; }
-                    entity.shoot(ProjectileData.metallic_robot_proj_2).also { it.r = shot1[5]; }
+                    entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = shot1[0]; }
+                    entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = shot1[1]; }
+                    entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = shot1[2]; }
+                    entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = shot1[3]; }
+                    entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = shot1[4]; }
+                    entity.shoot(ProjectileProperties.metallic_robot_proj_2).also { it.r = shot1[5]; }
                 }
                 if (entity.delayNumSeconds(0.75)) {
                     for (i in 0..5) {
@@ -64,7 +64,7 @@ class AIMetallicRobotAttack(entityIn:Enemy):AIBase(entityIn) {
             else -> {
                 if (entity.delayNumSeconds(0.1)) {
                     for (i in 0..19) {
-                        entity.shoot((ProjectileData.metallic_robot_proj_3))
+                        entity.shoot((ProjectileProperties.metallic_robot_proj_3))
                             .also { it.r = i * 18.0 + 30.0 + ((measuringTimeMS() * 0.5) % 360.0); }
                     }
                 }

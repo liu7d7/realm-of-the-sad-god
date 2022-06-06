@@ -176,8 +176,8 @@ class PlayerProfileScreen(private val prevScreen:MainMenuScreen):Screen() {
             Client.render.drawRectAlpha(matrix,
                                         0.0,
                                         0.0,
-                                        Client.window.scaledWidth.toDouble(),
-                                        Client.window.scaledHeight.toDouble(),
+                                        Client.window.scaledWidth,
+                                        Client.window.scaledHeight,
                                         dul,
                                         0.5f)
             profileSubScreen!!.setWidth(300.0).setHeight(134.0).setCenterX(Client.window.midX.toDouble())

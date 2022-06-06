@@ -4,7 +4,7 @@ import me.ethius.server.rotsg.world.ServerWorld
 import me.ethius.shared.bool
 import me.ethius.shared.calcAngle
 import me.ethius.shared.measuringTimeMS
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.Stat
 import me.ethius.shared.rotsg.entity.ai.AIBase
 import me.ethius.shared.rotsg.entity.enemy.Enemy
@@ -94,60 +94,60 @@ class AIPotionEntityAttack(entityIn:Enemy):AIBase(entityIn) {
         return false
     }
 
-    private fun getProjInfo():ProjectileData {
+    private fun getProjInfo():ProjectileProperties {
         return when (stage) {
             Stage.begin -> {
-                ProjectileData(stat.potion, 0.0, 0.0, 7.0, 10.0, true, false, false, true, 40..95).also {
+                ProjectileProperties(stat.potion, 0.0, 0.0, 7.0, 10.0, true, false, false, true, 40..95).also {
                     it.spinSpeed = 50.0
                 }
             }
             Stage.radial -> {
-                ProjectileData(stat.potion,
-                               0.0,
-                               0.0,
-                               7.0,
-                               10.0,
-                               true,
-                               false,
-                               false,
-                               false,
-                               60..105).also { it.spinSpeed = 50.0 }
+                ProjectileProperties(stat.potion,
+                                     0.0,
+                                     0.0,
+                                     7.0,
+                                     10.0,
+                                     true,
+                                     false,
+                                     false,
+                                     false,
+                                     60..105).also { it.spinSpeed = 50.0 }
             }
             Stage.rotation -> {
-                ProjectileData(stat.potion,
-                               0.0,
-                               0.0,
-                               7.0,
-                               10.0,
-                               true,
-                               false,
-                               false,
-                               false,
-                               60..105).also { it.spinSpeed = 50.0 }
+                ProjectileProperties(stat.potion,
+                                     0.0,
+                                     0.0,
+                                     7.0,
+                                     10.0,
+                                     true,
+                                     false,
+                                     false,
+                                     false,
+                                     60..105).also { it.spinSpeed = 50.0 }
             }
             Stage.circles -> {
-                ProjectileData(stat.potion,
-                               0.0,
-                               0.0,
-                               7.0,
-                               10.0,
-                               true,
-                               false,
-                               false,
-                               true,
-                               60..115).also { it.spinSpeed = 50.0 }
+                ProjectileProperties(stat.potion,
+                                     0.0,
+                                     0.0,
+                                     7.0,
+                                     10.0,
+                                     true,
+                                     false,
+                                     false,
+                                     true,
+                                     60..115).also { it.spinSpeed = 50.0 }
             }
             Stage.last_hope -> {
-                ProjectileData(stat.potion,
-                               0.0,
-                               0.0,
-                               11.0,
-                               10.0,
-                               true,
-                               false,
-                               false,
-                               true,
-                               80..135).also { it.spinSpeed = 50.0 }
+                ProjectileProperties(stat.potion,
+                                     0.0,
+                                     0.0,
+                                     11.0,
+                                     10.0,
+                                     true,
+                                     false,
+                                     false,
+                                     true,
+                                     80..135).also { it.spinSpeed = 50.0 }
             }
         }
     }

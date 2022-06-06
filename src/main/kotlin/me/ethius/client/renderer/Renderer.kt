@@ -622,17 +622,17 @@ class Renderer {
         val y = y - data.height * 0.5 + data.pivotY
         triangles.quad(
             triangles.addVertex(matrices, x, y + data.height)
-                .tex(data.u / main_tex.width.toDouble(), (data.v + data.height) / main_tex.height.toDouble())
+                .tex(data.u / main_tex.width, (data.v + data.height) / main_tex.height)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x + data.width, y + data.height)
-                .tex((data.u + data.width) / main_tex.width.toDouble(),
-                     (data.v + data.height) / main_tex.height.toDouble())
+                .tex((data.u + data.width) / main_tex.width,
+                     (data.v + data.height) / main_tex.height)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x + data.width + windX, y)
-                .tex((data.u + data.width) / main_tex.width.toDouble(), data.v / main_tex.height.toDouble())
+                .tex((data.u + data.width) / main_tex.width, data.v / main_tex.height)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x + windX, y)
-                .tex(data.u / main_tex.width.toDouble(), data.v / main_tex.height.toDouble())
+                .tex(data.u / main_tex.width, data.v / main_tex.height)
                 .color(color).float(0).next()
         )
     }
@@ -651,17 +651,17 @@ class Renderer {
     ) {
         triangles.quad(
             triangles.addVertex(matrices, x - renderWidth * 0.5 + pivotX, y + renderHeight * 0.5 + pivotY)
-                .tex(data.u / main_tex.width.toDouble(), (data.v + renderHeight) / main_tex.height.toDouble())
+                .tex(data.u / main_tex.width, (data.v + renderHeight) / main_tex.height)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x + renderWidth * 0.5 + pivotX, y + renderHeight * 0.5 + pivotY)
-                .tex((data.u + renderWidth) / main_tex.width.toDouble(),
-                     (data.v + renderHeight) / main_tex.height.toDouble())
+                .tex((data.u + renderWidth) / main_tex.width,
+                     (data.v + renderHeight) / main_tex.height)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x + renderWidth * 0.5 + pivotX + windX, y - renderHeight * 0.5 + pivotY)
-                .tex((data.u + renderWidth) / main_tex.width.toDouble(), data.v / main_tex.height.toDouble())
+                .tex((data.u + renderWidth) / main_tex.width, data.v / main_tex.height)
                 .color(color).float(0).next(),
             triangles.addVertex(matrices, x - renderWidth * 0.5 + pivotX + windX, y - renderHeight * 0.5 + pivotY)
-                .tex(data.u / main_tex.width.toDouble(), data.v / main_tex.height.toDouble())
+                .tex(data.u / main_tex.width, data.v / main_tex.height)
                 .color(color).float(0).next()
         )
     }

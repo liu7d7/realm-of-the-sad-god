@@ -4,7 +4,7 @@ import me.ethius.server.rotsg.world.ServerWorld
 import me.ethius.shared.bool
 import me.ethius.shared.measuringTimeMS
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.ai.AIBase
 import me.ethius.shared.rotsg.entity.enemy.Enemy
 import me.ethius.shared.rotsg.entity.other.Projectile
@@ -31,15 +31,15 @@ class AIFlameEntityAttack(entityIn:Enemy):AIBase(entityIn) {
     }
 
     companion object {
-        private val pData = ProjectileData(TexData.fb_2_proj,
-                                           0.0,
-                                           0.0,
-                                           7.5,
-                                           10.0,
-                                           false,
-                                           false,
-                                           false,
-                                           false,
-                                           90..125).also { it.spinSpeed = 50.0 }
+        private val pData = ProjectileProperties(TexData.fb_2_proj,
+                                                 0.0,
+                                                 0.0,
+                                                 7.5,
+                                                 10.0,
+                                                 false,
+                                                 false,
+                                                 false,
+                                                 false,
+                                                 90..125).also { it.spinSpeed = 50.0 }
     }
 }

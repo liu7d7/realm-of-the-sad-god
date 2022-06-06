@@ -5,7 +5,8 @@ import me.ethius.client.Client
 import me.ethius.shared.ext.getInt
 import me.ethius.shared.int
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.readCached
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.data.proj_data_loc
 import me.ethius.shared.rotsg.entity.Stat
 import me.ethius.shared.rotsg.entity.createSpawnPacket
@@ -17,7 +18,7 @@ import kotlin.math.sign
 
 open class WeaponItem:Item {
 
-    lateinit var shotPattern:List<ProjectileData>
+    lateinit var shotPattern:List<ProjectileProperties>
     var arcGap = 0.0
     var apsMultiplier = 1f
     var damage:ClosedRange<int>
@@ -38,21 +39,21 @@ open class WeaponItem:Item {
     }
 
     constructor(assetLoc:string):super(assetLoc) {
-        val toml = Toml().read(Client::class.java.getResourceAsStream("$item_data_loc/$assetLoc.dat"))
+        val toml = Toml().readCached("$item_data_loc/$assetLoc.dat")
         // weapon meta
         val weaponMeta = toml.getTable("weapon_meta")
         val da = weaponMeta.getString("damage").split("-").map { it.toInt() }
         this.damage = da[0]..da[1]
         this.shotPattern = weaponMeta.getList<string>("shot_pattern").map { str ->
-            val pd = ProjectileData.values.find { it.id == str }
+            val pd = ProjectileProperties.values.find { it.id == str }
             if (pd != null) {
                 pd
             } else {
                 val pd2 = Client::class.java.getResource("$proj_data_loc/$str.dat")
                 if (pd2 != null) {
-                    ProjectileData(str)
+                    ProjectileProperties(str).also { it.id = str }
                 } else {
-                    ProjectileData.empty
+                    ProjectileProperties.empty
                 }
             }
         }
@@ -128,7 +129,7 @@ open class KatanaItem:WeaponItem {
     constructor(
         texData:TexData,
         tier:ItemTier,
-        shotPattern:List<ProjectileData>,
+        shotPattern:List<ProjectileProperties>,
         statMap:MutableMap<Stat, int>,
         name:string,
         desc:string,
@@ -155,7 +156,7 @@ open class BowItem:WeaponItem {
     constructor(
         texData:TexData,
         tier:ItemTier,
-        shotPattern:List<ProjectileData>,
+        shotPattern:List<ProjectileProperties>,
         statMap:MutableMap<Stat, int>,
         name:string,
         desc:string,
@@ -182,7 +183,7 @@ open class SwordItem:WeaponItem {
     constructor(
         texData:TexData,
         tier:ItemTier,
-        shotPattern:List<ProjectileData>,
+        shotPattern:List<ProjectileProperties>,
         statMap:MutableMap<Stat, int>,
         name:string,
         desc:string,
@@ -208,7 +209,7 @@ open class DaggerItem:WeaponItem {
     constructor(
         texData:TexData,
         tier:ItemTier,
-        shotPattern:List<ProjectileData>,
+        shotPattern:List<ProjectileProperties>,
         statMap:MutableMap<Stat, int>,
         name:string,
         desc:string,
@@ -232,7 +233,7 @@ open class WandItem:WeaponItem {
     constructor(
         texData:TexData,
         tier:ItemTier,
-        shotPattern:List<ProjectileData>,
+        shotPattern:List<ProjectileProperties>,
         statMap:MutableMap<Stat, int>,
         name:string,
         desc:string,

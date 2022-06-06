@@ -6,6 +6,7 @@ import me.ethius.shared.double
 import me.ethius.shared.ext.ZERO2i
 import me.ethius.shared.ivec2
 import me.ethius.shared.opti.TexData
+import me.ethius.shared.readCached
 import me.ethius.shared.rotsg.data.WorldBuilderData
 import me.ethius.shared.rotsg.tile.Bushery
 import me.ethius.shared.rotsg.tile.Tile
@@ -30,13 +31,12 @@ open class BiomeFeature {
 
     constructor(tlPos:ivec2, feature:Array<Array<Tile?>>):this() {
         this.tlPos = tlPos
-        val flattened = feature.flatten()
-        this.feature = flattened.filterNotNull().toTypedArray()
+        this.feature = feature.flatten().filterNotNull().toTypedArray()
     }
 
     constructor(tlPos:ivec2, loc:string):this() {
         this.tlPos = tlPos
-        val toml = Toml().read(this.javaClass.getResourceAsStream("$feature_data_dir/$loc.dat"))
+        val toml = Toml().readCached("$feature_data_dir/$loc.dat")
         val e = toml.to(WorldBuilderData::class.java)
         this.feature = e.data.map { Tile(it.pos, it.texData, Bushery[it.env]) }.toTypedArray()
     }

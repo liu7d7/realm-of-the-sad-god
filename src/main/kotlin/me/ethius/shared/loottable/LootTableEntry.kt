@@ -134,6 +134,7 @@ class LootTableEntry:WeightedCollection<string?>() {
 
         val crystal_dude_table = LootTableEntry()
             .addPair(0.2, "dual_crystal_cutters")
+            .addPair(0.2, "crystalline_kunai")
             .addPair(1.6, null)
 
         val warbringer_leggys = LootTableEntry()

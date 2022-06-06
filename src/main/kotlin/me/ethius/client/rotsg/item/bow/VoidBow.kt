@@ -3,7 +3,7 @@ package me.ethius.client.rotsg.item.bow
 import me.ethius.client.rotsg.item.BowItem
 import me.ethius.client.rotsg.item.ItemTier
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.Stat
 
 class VoidBow:BowItem(TexData.void_bow,
@@ -22,7 +22,7 @@ class VoidBow:BowItem(TexData.void_bow,
     companion object {
         // this is the projectile supplier that will be used to create the projectile
         private val entityInfo =
-            ProjectileData(TexData.void_arrow, 0.35, 0.2, 16.0, 5.6, true, false, false, false, 135..205).also { it.renderAngleAdd = ProjectileData.slant_angle_correction }
+            ProjectileProperties(TexData.void_arrow, 0.35, 0.2, 16.0, 5.6, true, false, false, false, 135..205).also { it.renderAngleAdd = ProjectileProperties.slant_angle_correction }
     }
 
 }

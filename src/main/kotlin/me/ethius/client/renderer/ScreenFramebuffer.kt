@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL30C.*
 
 class ScreenFramebuffer(w:double, h:double, useRenBuf:bool):AFramebuffer(useRenBuf) {
 
-    constructor(useRenBuf:bool):this(Client.window.width.toDouble(), Client.window.height.toDouble(), useRenBuf)
+    constructor(useRenBuf:bool):this(Client.window.width, Client.window.height, useRenBuf)
 
     lateinit var projMat:Matrix4d
 
@@ -130,7 +130,7 @@ class ScreenFramebuffer(w:double, h:double, useRenBuf:bool):AFramebuffer(useRenB
     @Listen
     fun onResize(e:WindowResizedEvent) {
         dispose()
-        init(e.width.toDouble(), e.height.toDouble())
+        init(e.width, e.height)
     }
 
     init {

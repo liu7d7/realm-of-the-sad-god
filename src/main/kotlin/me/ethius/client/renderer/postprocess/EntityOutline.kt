@@ -5,6 +5,7 @@ import me.ethius.client.renderer.ScreenFramebuffer
 import me.ethius.client.renderer.Shader
 import me.ethius.client.renderer.Shaders
 import me.ethius.client.renderer.bindTexture
+import me.ethius.shared.double
 import me.ethius.shared.int
 
 object EntityOutline {
@@ -18,7 +19,7 @@ object EntityOutline {
         entity_outline = Shaders.entity_outline
     }
 
-    fun render(final:ScreenFramebuffer, width:int) {
+    fun render(final:ScreenFramebuffer, width:int, x0:double = 0.0, y0:double = 0.0, x1:double = Client.window.scaledWidth, y1:double = Client.window.scaledHeight) {
         swap.clearColorAndDepth()
 
         entity_outline.bind()
@@ -33,10 +34,7 @@ object EntityOutline {
             bindTexture(final.depthAttatchment, 1)
             entity_outline["DepthSampler"] = 1
         }
-        PostProcessRenderer.renderFs(0.0,
-                                     0.0,
-                                     Client.window.scaledWidth.toDouble(),
-                                     Client.window.scaledHeight.toDouble())
+        PostProcessRenderer.renderFs(x0, y0, x1, y1)
 
         final.copyColorFrom(swap)
     }

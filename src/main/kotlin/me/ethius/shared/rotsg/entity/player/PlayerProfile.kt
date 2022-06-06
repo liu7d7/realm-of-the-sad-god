@@ -4,10 +4,7 @@ import com.moandjiezana.toml.Toml
 import me.ethius.client.rotsg.entity.ClientPlayer
 import me.ethius.client.rotsg.inventory.Inventory
 import me.ethius.server.rotsg.entity.ServerPlayer
-import me.ethius.shared.bool
-import me.ethius.shared.int
-import me.ethius.shared.string
-import me.ethius.shared.toml
+import me.ethius.shared.*
 import java.io.File
 
 class PlayerProfile {
@@ -83,7 +80,7 @@ class PlayerProfile {
         fun read(location:string, file:bool = true):PlayerProfile {
             return if (file) {
                 val file = File(location)
-                Toml().read(file).to(PlayerProfile::class.java)
+                Toml().readCached(file).to(PlayerProfile::class.java)
             } else {
                 Toml().read(location).to(PlayerProfile::class.java)
             }

@@ -4,11 +4,11 @@ import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-val tickTime = 50.0
+const val tick_time = 50.0
 
 class Ticker {
 
-    val tickables = CopyOnWriteArrayList<Tickable>()
+    private val tickables = CopyOnWriteArrayList<Tickable>()
 
     var tickDelta = 0.0
     var lastFrameDuration = 0.0
@@ -16,12 +16,12 @@ class Ticker {
     var tps = 0L
     private var tpsi = 0L
     private var lastMetricSec = 0f
-    private var thread_exec:ExecutorService = Executors.newWorkStealingPool(2)
+    private var threadExecutor:ExecutorService = Executors.newWorkStealingPool(2)
 
     fun beginRenderTick():int {
         updateTime()
         val timeMillis = measuringTimeMS()
-        lastFrameDuration = (timeMillis - prevTimeMillis) / tickTime
+        lastFrameDuration = (timeMillis - prevTimeMillis) / tick_time
         prevTimeMillis = timeMillis
         tickDelta += lastFrameDuration
         val i = tickDelta.toInt()
@@ -30,7 +30,7 @@ class Ticker {
     }
 
     fun submitTask(sync:Any = this, task:() -> void) {
-        thread_exec.execute {
+        threadExecutor.execute {
             synchronized(sync) {
                 task()
             }
@@ -94,7 +94,7 @@ class Ticker {
     }
 
     fun shutdown() {
-        thread_exec.shutdownNow()
+        threadExecutor.shutdownNow()
     }
 
     init {

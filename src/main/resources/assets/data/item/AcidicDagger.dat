@@ -1,0 +1,15 @@
+[meta]
+tex_data = "acidic_dagger"
+name = "Acidic Dagger"
+desc = "This dagger has a steel blade that can resist the powerful acid it's been dipped in. The acid? Um... Johnide." # great #
+tier = "legendary"
+legendary_effect = "curse"
+
+[meta.stats]
+dex = +5
+vit = +5
+
+[weapon_meta]
+aps_multiplier = 1.33
+shot_pattern = ["AcidicDagger_proj"]
+damage = "150-180"

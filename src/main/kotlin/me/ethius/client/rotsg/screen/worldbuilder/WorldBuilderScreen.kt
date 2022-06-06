@@ -168,7 +168,7 @@ class WorldBuilderScreen(private val prevScreen:Screen):Screen() {
                                                   true)
                 }
             }
-            var xPos = Client.window.scaledWidth.toDouble()
+            var xPos = Client.window.scaledWidth
             for (i in modes) {
                 xPos -= (i.width + 2.0)
                 i.setX(xPos).setY(2.0).renderWithoutEnding(matrix)

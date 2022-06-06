@@ -6,7 +6,7 @@ import me.ethius.client.rotsg.gui.EntityNotification
 import me.ethius.shared.*
 import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.Formatting
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.Stat
 import org.apache.commons.lang3.RandomUtils
@@ -139,17 +139,17 @@ enum class LegendaryEffect(
 
     companion object {
 
-        private val scythe_proj_1 = ProjectileData("ChainScythe_proj_1")
-        private val scythe_proj_2 = ProjectileData("ChainScythe_proj_2")
-        private val scythe_proj_3 = ProjectileData("ChainScythe_proj_3")
-        private val scythe_proj_4 = ProjectileData("ChainScythe_proj_4")
-        private val scythe_proj_5 = ProjectileData("ChainScythe_proj_5")
+        private val scythe_proj_1 = ProjectileProperties("ChainScythe_proj_1")
+        private val scythe_proj_2 = ProjectileProperties("ChainScythe_proj_2")
+        private val scythe_proj_3 = ProjectileProperties("ChainScythe_proj_3")
+        private val scythe_proj_4 = ProjectileProperties("ChainScythe_proj_4")
+        private val scythe_proj_5 = ProjectileProperties("ChainScythe_proj_5")
 
-        private val elemental_slasher_proj_1 = ProjectileData("ElementalSlasher_proj_2")
-        private val elemental_slasher_proj_2 = ProjectileData("ElementalSlasher_proj_3")
-        private val elemental_slasher_proj_3 = ProjectileData("ElementalSlasher_proj_4")
-        private val elemental_slasher_proj_4 = ProjectileData("ElementalSlasher_proj_5")
-        private val elemental_slasher_proj_5 = ProjectileData("ElementalSlasher_proj_6")
+        private val elemental_slasher_proj_1 = ProjectileProperties("ElementalSlasher_proj_2")
+        private val elemental_slasher_proj_2 = ProjectileProperties("ElementalSlasher_proj_3")
+        private val elemental_slasher_proj_3 = ProjectileProperties("ElementalSlasher_proj_4")
+        private val elemental_slasher_proj_4 = ProjectileProperties("ElementalSlasher_proj_5")
+        private val elemental_slasher_proj_5 = ProjectileProperties("ElementalSlasher_proj_6")
 
         private fun doShoot(player:ClientPlayer) {
             player.shoot(scythe_proj_1).also { it.bulletId = 0 }

@@ -1,0 +1,13 @@
+[meta]
+tex_data = "silver_sickle"
+name = "Silver Sickle"
+desc = "This sickle is so silvery it's silver. Silver sickles deliver more pickles when cutting cucumbers, putting larger numbers into your bank account." # what? I think it kind of rhymes, right?
+tier = "heroic"
+
+[meta.stats]
+spd = +10
+
+[weapon_meta]
+aps_multiplier = 1.1
+shot_pattern = ["SilverSickle_proj"]
+damage = "90-150"

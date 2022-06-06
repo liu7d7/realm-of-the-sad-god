@@ -49,6 +49,10 @@ open class Effect(
 
     }
 
+    open fun onEntityDie(entt:AEntity) {
+
+    }
+
     final override fun clientTick() {
         if (System.currentTimeMillis() - initTime >= lifetime) {
             entt.removeEffect(this.id)
@@ -78,7 +82,7 @@ open class Effect(
 
     override fun toString():string {
         return buildString {
-            append("$id|$lifetime|$amplifier|$initTime")
+            append("$id|$lifetime|$amplifier")
             for (i in data) {
                 append("|${i.key}:${i.value}")
             }

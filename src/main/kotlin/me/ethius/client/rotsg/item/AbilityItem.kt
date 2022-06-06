@@ -5,7 +5,7 @@ import me.ethius.client.calcAngleMPToMouse
 import me.ethius.shared.*
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.data.EffectInfo
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.PassableEntity
 import me.ethius.shared.rotsg.entity.Stat
@@ -110,14 +110,14 @@ open class DasherItem(
     name:string,
     desc:string,
     private val atkGiven:int,
-    private val projectileData:ProjectileData,
+    private val projectileProperties:ProjectileProperties,
 ):AbilityItem(texData, tier, { }, mpCost, statMap, name, desc) {
 
     override fun onAbilityUse() {
         if (Client.player.mp >= mpCost) {
             Client.player.mp -= mpCost
             Client.player.addEffect(EffectInfo.atk_add(4000, atkGiven))
-            Client.player.shoot(projectileData)
+            Client.player.shoot(projectileProperties)
             Client.player.addEffect(EffectInfo.shield(480L))
 
             val angle = calcAngleMPToMouse()

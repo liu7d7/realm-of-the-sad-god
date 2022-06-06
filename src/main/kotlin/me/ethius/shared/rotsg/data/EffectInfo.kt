@@ -1,5 +1,7 @@
 package me.ethius.shared.rotsg.data
 
+import me.ethius.client.Profiles
+import me.ethius.shared.ifclient
 import me.ethius.shared.int
 import me.ethius.shared.long
 import me.ethius.shared.opti.TexData
@@ -8,6 +10,7 @@ import me.ethius.shared.rotsg.entity.Stat
 import me.ethius.shared.rotsg.entity.StatEntity
 import me.ethius.shared.rotsg.entity.other.Effect
 import me.ethius.shared.string
+import kotlin.math.absoluteValue
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.jvmErasure
@@ -31,18 +34,23 @@ class EffectInfo(val supplier:(long, int) -> Effect) {
         val shield = EffectInfo { duration, amplifier ->
             Effect(duration, TexData.shield_effect, amplifier)
         }
+
         val berserk = EffectInfo { duration, amplifier ->
             Effect(duration, TexData.berserk_effect, amplifier)
         }
+
         val damaging = EffectInfo { duration, amplifier ->
             Effect(duration, TexData.damaging_effect, amplifier)
         }
+
         val sick = EffectInfo { duration, amplifier ->
             Effect(duration, TexData.sick_effect, amplifier)
         }
+
         val curse = EffectInfo {  duration, amplifier ->
             Effect(duration, TexData.curse_effect, amplifier)
         }
+
         val atk_add = EffectInfo { duration, amplifier ->
             object:Effect(duration, TexData.atk_add_effect, amplifier) {
                 override fun onAdd(entt:AEntity) {
@@ -55,6 +63,16 @@ class EffectInfo(val supplier:(long, int) -> Effect) {
                 override fun onRem(entt:AEntity) {
                     if (entt is StatEntity) {
                         entt.incStat(Stat.atk, -amplifier, false)
+                    }
+                }
+            }
+        }
+
+        val fame = EffectInfo { duration, amplifier ->
+            object:Effect(duration, TexData.fame, amplifier) {
+                override fun onEntityDie(entt:AEntity) {
+                    ifclient(entt.life > 300) {
+                        Profiles.global.fame += amplifier * (Math.cbrt(entt.hp - 300)).toInt().absoluteValue
                     }
                 }
             }
@@ -82,11 +100,8 @@ class EffectInfo(val supplier:(long, int) -> Effect) {
             val id = split[0]
             val duration = split[1].toLong()
             val amplifier = split[2].toInt()
-            val initTime = split[3].toLong()
-            val effect = (values[id] ?: return null)(duration, amplifier).also {
-                it.initTime = initTime
-            }
-            for (i in 4 until split.size) {
+            val effect = (values[id] ?: return null)(duration, amplifier)
+            for (i in 3 until split.size) {
                 val split1 = split[i].split(":")
                 val key = split1[0]
                 val value = split1[1]

@@ -1,7 +1,7 @@
 package me.ethius.shared.rotsg.data
 
 import me.ethius.server.rotsg.world.CrystalCaveWorld
-import me.ethius.server.rotsg.world.FloweringGarden
+import me.ethius.server.rotsg.world.FloweringGardens
 import me.ethius.server.rotsg.world.IceWorld
 import me.ethius.server.rotsg.world.RottenWorld
 import me.ethius.server.rotsg.world.biome.BiomeType
@@ -46,7 +46,7 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
         val cube_entity = EntityInfo {
             Enemy.newEnemy(Enemy.Builder.newBuilder().withHealth(80).withScale(0.7).withDex(5)
                                      .withShotPattern {
-                                         listOf(ProjectileData.salmon_proj(9..15, 5.0, 8.0, true))
+                                         listOf(ProjectileProperties.salmon_proj(9..15, 5.0, 8.0, true))
                                      }.withTexData("cube")
                                      .addToLootTable(LootTableEntry.t1_gear).addToLootTable(LootTableEntry.t1_gear)
                                      .withExp(50)).also {
@@ -58,9 +58,9 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
         val minion_entity = EntityInfo {
             Enemy.newEnemy(Enemy.Builder.newBuilder().withHealth(300).withScale(0.95).withDex(3)
                                      .withShotPattern {
-                                         val tmp = ArrayList<ProjectileData>()
+                                         val tmp = ArrayList<ProjectileProperties>()
                                          for (i in -5..5) {
-                                             tmp.add(ProjectileData.salmon_proj(20..30, 2.5, 6.5, false))
+                                             tmp.add(ProjectileProperties.salmon_proj(20..30, 2.5, 6.5, false))
                                          }
                                          tmp
                                      }.withTexData("minion")
@@ -78,7 +78,7 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
         val swordsman_entity = EntityInfo {
             Enemy.newEnemy(Enemy.Builder.newBuilder().withHealth(160).withDef(10).withDex(6)
                                      .withShotPattern {
-                                         listOf(ProjectileData.basic_proj_x1)
+                                         listOf(ProjectileProperties.basic_proj_x1)
                                      }.withTexData("swords_man")
                                      .withScale(0.85)
                                      .addToLootTable(LootTableEntry.t1_gear)
@@ -109,10 +109,10 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
             Enemy.newEnemy(Enemy.Builder.newBuilder().withHealth(1500).withDef(15)
                                      .withTexData("flayer_entity")
                                      .withExp(1500).withScale(1.05).withShotPattern {
-                    listOf(ProjectileData.flayer_proj_1)
+                    listOf(ProjectileProperties.flayer_proj_1)
                 }.addToLootTable(LootTableEntry.flayer_table, LootTableEntry.t1_gear)
                                      .emptyPortalChance(1.0)
-                                     .addToPortalTable(0.5) { FloweringGarden() }).also {
+                                     .addToPortalTable(0.5) { FloweringGardens() }).also {
                 it.movementAIs.add(1.0, AIWander(it))
                 it.movementAIs.add(1.0, AIFollowPlayer(it))
                 it.attackAIs.add(1.0, AIAttackDefault(it))
@@ -123,8 +123,8 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
             Enemy.newEnemy(Enemy.Builder.newBuilder().withHealth(9000).withDef(20)
                                      .withTexData("rotting_dude1")
                                      .withShotPattern {
-                                         listOf(ProjectileData.rotten_shot(true, 90..100),
-                                                ProjectileData.rotten_shot(true, 90..100))
+                                         listOf(ProjectileProperties.rotten_shot(true, 90..100),
+                                                ProjectileProperties.rotten_shot(true, 90..100))
                                      }.addToLootTable(LootTableEntry.rotten_dude_leggys).withArcGap(30.0)
                                      .withExp(4500)
                                      .emptyPortalChance(0.6).addToPortalTable(0.1) { RottenWorld() }).also {
@@ -170,9 +170,9 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
                                      .withTexData("white_demon")
                                      .withExp(10000).withDex(15).withScale(1.25).withShotPattern {
                     listOf(
-                        ProjectileData.white_demon_shot(0.0),
-                        ProjectileData.white_demon_shot(30.0),
-                        ProjectileData.white_demon_shot(-30.0)
+                        ProjectileProperties.white_demon_shot(0.0),
+                        ProjectileProperties.white_demon_shot(30.0),
+                        ProjectileProperties.white_demon_shot(-30.0)
                     )
                 }.addToLootTable(LootTableEntry.ice_demon_table,
                                  LootTableEntry.random_potion,
@@ -225,7 +225,7 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
         val fb_clone_1 = EntityInfo {
             Enemy.newEnemy(Enemy.Builder.newBuilder().withHealth(5000).withDef(10).withExp(2000)
                                      .withTexData("fb_1").withDex(20).withShotPattern {
-                    listOf(ProjectileData.fb_1_proj)
+                    listOf(ProjectileProperties.fb_1_proj)
                 }.addToLootTable(LootTableEntry.random_potion, LootTableEntry.random_potion)
                                      .emptyPortalChance(1.5).addToPortalTable(0.9) { CrystalCaveWorld() }).also {
                 it.attackAIs.add(1.0, AIAttackDefault(it))
@@ -238,7 +238,7 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
             Enemy.newEnemy(Enemy.Builder.newBuilder().withHealth(5000).withDef(10)
                                      .withTexData("fb_2")
                                      .withExp(2000).withDex(20).withShotPattern {
-                    listOf(ProjectileData.fb_2_proj, ProjectileData.fb_2_proj)
+                    listOf(ProjectileProperties.fb_2_proj, ProjectileProperties.fb_2_proj)
                 }.addToLootTable(LootTableEntry.random_potion, LootTableEntry.random_potion)
                                      .emptyPortalChance(1.5).addToPortalTable(0.9) { CrystalCaveWorld() }).also {
                 it.attackAIs.add(1.0, AIAttackDefault(it))
@@ -251,7 +251,7 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
             Enemy.newEnemy(Enemy.Builder.newBuilder().withHealth(5000).withDef(10)
                                      .withTexData("fb_3")
                                      .withExp(2000).withDex(20).withShotPattern {
-                    listOf(ProjectileData.fb_3_proj, ProjectileData.fb_3_proj, ProjectileData.fb_3_proj)
+                    listOf(ProjectileProperties.fb_3_proj, ProjectileProperties.fb_3_proj, ProjectileProperties.fb_3_proj)
                 }.addToLootTable(LootTableEntry.random_potion, LootTableEntry.random_potion)
                                      .emptyPortalChance(1.5).addToPortalTable(0.9) { CrystalCaveWorld() }).also {
                 it.attackAIs.add(1.0, AIAttackDefault(it))
@@ -305,15 +305,15 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
                 dex = 6
                 shotPattern = {
                     it.pushDataIfAbsent("shots", 0)
-                    val list = mutableListOf<ProjectileData>()
+                    val list = mutableListOf<ProjectileProperties>()
                     when (it.getData<int>("shots") % 2) {
                         1 -> {
                             it.arcGap = 8.0
-                            list.addAll(arrayOf(ProjectileData.shadow_scale_proj_1, ProjectileData.shadow_scale_proj_1, ProjectileData.shadow_scale_proj_1))
+                            list.addAll(arrayOf(ProjectileProperties.shadow_scale_proj_1, ProjectileProperties.shadow_scale_proj_1, ProjectileProperties.shadow_scale_proj_1))
                         }
                         0 -> {
                             it.arcGap = 15.0
-                            list.addAll(arrayOf(ProjectileData.shadow_scale_proj_2, ProjectileData.shadow_scale_proj_2, ProjectileData.shadow_scale_proj_2))
+                            list.addAll(arrayOf(ProjectileProperties.shadow_scale_proj_2, ProjectileProperties.shadow_scale_proj_2, ProjectileProperties.shadow_scale_proj_2))
                         }
                     }
                     it.pushData("shots", it.getData<int>("shots") + 1)
@@ -337,18 +337,18 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
                 dex = 6
                 shotPattern = {
                     it.pushDataIfAbsent("shots", 0)
-                    val list = mutableListOf<ProjectileData>()
+                    val list = mutableListOf<ProjectileProperties>()
                     when (it.getData<int>("shots") % 2) {
                         1 -> {
                             it.arcGap = 8.0
-                            list.addAll(arrayOf(ProjectileData.fire_breather_proj_1, ProjectileData.fire_breather_proj_1, ProjectileData.fire_breather_proj_1))
+                            list.addAll(arrayOf(ProjectileProperties.fire_breather_proj_1, ProjectileProperties.fire_breather_proj_1, ProjectileProperties.fire_breather_proj_1))
                         }
                         0 -> {
                             it.arcGap = 12.0
-                            list.addAll(arrayOf(ProjectileData.fire_breather_proj_2,
-                                                ProjectileData.fire_breather_proj_2,
-                                                ProjectileData.fire_breather_proj_2,
-                                                ProjectileData.fire_breather_proj_2))
+                            list.addAll(arrayOf(ProjectileProperties.fire_breather_proj_2,
+                                                ProjectileProperties.fire_breather_proj_2,
+                                                ProjectileProperties.fire_breather_proj_2,
+                                                ProjectileProperties.fire_breather_proj_2))
                         }
                     }
                     it.pushData("shots", it.getData<int>("shots") + 1)

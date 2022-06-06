@@ -43,7 +43,7 @@ abstract class Tickable(autoInit:bool = false, var priority:int = 3) {
     }
 
     fun delayNumSeconds(num:double):bool {
-        return ticksExisted % (num / (tickTime / 1000f)).roundToInt() == 0
+        return ticksExisted % (num / (tick_time / 1000f)).roundToInt() == 0
     }
 
     init {

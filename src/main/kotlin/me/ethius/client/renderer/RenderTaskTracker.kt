@@ -3,6 +3,7 @@ package me.ethius.client.renderer
 import me.ethius.client.Client
 import me.ethius.client.iden_m4d
 import me.ethius.shared.bool
+import me.ethius.shared.rotsg.entity.AEntity
 import org.joml.Matrix4d
 import java.util.*
 
@@ -20,10 +21,12 @@ class RenderTaskTracker {
     val threeD = ScreenFramebuffer(true)
     val outlines = ScreenFramebuffer(true)
     val shadows = ScreenFramebuffer(true)
-    val texCoords = ScreenFramebuffer(true)
+    
     var lookAt:Matrix4d = iden_m4d
 
     var hasWorld3d:bool = false
+
+    var currentRenderEntity = null as AEntity?
 
     fun layer(layer:RenderLayer) {
         this.layer = layer

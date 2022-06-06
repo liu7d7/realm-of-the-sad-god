@@ -31,7 +31,7 @@ import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.data.EffectInfo
 import me.ethius.shared.rotsg.data.EntityInfo
 import me.ethius.shared.rotsg.data.Formatting
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.tile.Bushery
 import me.ethius.shared.rotsg.world.biome.BiomeFeature
 import org.joml.Matrix4d
@@ -129,9 +129,11 @@ object Client {
     fun main(args:Array<string>) {
         Side.currentSide = Side.client
         System.setProperty("joml.format", "false")
+        System.setProperty("joml.sinLookup", "true")
+        System.setProperty("joml.fastMath", "true")
         options = Options()
         getRuntime().addShutdownHook(Thread { shutdown() })
-        window = Window(1216f, 760f)
+        window = Window(1216.0, 760.0)
         glClearColor(0.109803f, 0.1058823f, 0.1333333f, 1f)
         glEnable(GL_DEBUG_OUTPUT)
         glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS)
@@ -150,7 +152,7 @@ object Client {
         font = FontRenderer(Client::class.java.getResourceAsStream("/assets/font/MyriadPro_sb.otf")!!)
         Bushery.init()
         Fx.init()
-        ProjectileData.init()
+        ProjectileProperties.init()
         EffectInfo.init()
         ItemInfo.init()
         LootTableEntry.init()
@@ -225,9 +227,9 @@ object Client {
         updatePaused()
         projMat = Matrix4d().ortho(
             0.0,
-            window.scaledWidth.toDouble(),
+            window.scaledWidth,
             0.0,
-            window.scaledHeight.toDouble(),
+            window.scaledHeight,
             -10000.0,
             100.0)
         if (isPaused) {
@@ -512,7 +514,7 @@ object Client {
 
     }
 
-    class Window(var width:float, var height:float) {
+    class Window(var width:double, var height:double) {
 
         var handle:long = 0
         var scale:float
@@ -529,8 +531,8 @@ object Client {
             get() = scaledWidth / 2
         val midY
             get() = scaledHeight / 2
-        private var x:float = 0f
-        private var y:float = 0f
+        private var x = 0.0
+        private var y = 0.0
         private var prevX = 0
         private var prevY = 0
         private var prevWidth = 0
@@ -544,10 +546,10 @@ object Client {
             if (this.fullscreen) {
                 val videoMode = monitor.findClosestVideoMode(this.videoMode)
                 setPrev()
-                x = 0f
-                y = 0f
-                width = videoMode.width.toFloat()
-                height = videoMode.height.toFloat()
+                x = 0.0
+                y = 0.0
+                width = videoMode.width.toDouble()
+                height = videoMode.height.toDouble()
                 glfwSetWindowMonitor(handle,
                                      monitor.handle,
                                      x.roundToInt(),
@@ -568,10 +570,10 @@ object Client {
         }
 
         private fun toPrev() {
-            this.x = prevX.toFloat()
-            this.y = prevY.toFloat()
-            this.width = prevWidth.toFloat()
-            this.height = prevHeight.toFloat()
+            this.x = prevX.toDouble()
+            this.y = prevY.toDouble()
+            this.width = prevWidth.toDouble()
+            this.height = prevHeight.toDouble()
             glfwSetWindowMonitor(handle, 0L, x.toInt(), y.toInt(), width.toInt(), height.toInt(), -1)
         }
 
@@ -579,8 +581,8 @@ object Client {
             if (handle == window) {
                 if (width != 0 && height != 0) {
                     glViewport(0, 0, width, height)
-                    this.width = width.toFloat()
-                    this.height = height.toFloat()
+                    this.width = width.toDouble()
+                    this.height = height.toDouble()
                     events.dispatch(WindowResizedEvent(this.width, this.height))
                 }
             }
@@ -588,8 +590,8 @@ object Client {
 
         private fun handleMove(window:long, x:int, y:int) {
             if (handle == window) {
-                this.x = x.toFloat()
-                this.y = y.toFloat()
+                this.x = x.toDouble()
+                this.y = y.toDouble()
             }
         }
 
@@ -621,8 +623,8 @@ object Client {
             val `is` = IntArray(1)
             val js = IntArray(1)
             glfwGetWindowPos(handle, `is`, js)
-            this.x = `is`[0].toFloat()
-            this.y = js[0].toFloat()
+            this.x = `is`[0].toDouble()
+            this.y = js[0].toDouble()
             glfwMakeContextCurrent(handle)
             GL.createCapabilities()
             glViewport(0, 0, width.toInt(), height.toInt())

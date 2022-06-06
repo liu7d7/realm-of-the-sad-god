@@ -24,10 +24,10 @@ class InGameMenuScreen:Screen() {
     private val buttons:ArrayList<Button> = ArrayList()
 
     override fun render(matrix:Matrix4dStack) {
-        Client.render.drawRectAlpha(matrix, 0.0, 0.0, Client.window.scaledWidth.toDouble(), 100.0, ldu, 0.4f)
-        Client.render.drawGradientRect(matrix, 0.0, 100.0, Client.window.scaledWidth.toDouble(), 107.0, withAlpha(ldu, 0.7f), 0x00000000L, Axis.vertical)
-        Client.render.drawRectAlpha(matrix, 0.0, Client.window.scaledHeight - 100.0, Client.window.scaledWidth.toDouble(), Client.window.scaledHeight.toDouble(), ldu, 0.4f)
-        Client.render.drawGradientRect(matrix, 0.0, Client.window.scaledHeight - 107.0, Client.window.scaledWidth.toDouble(), Client.window.scaledHeight - 100.0, 0x00000000L, withAlpha(ldu, 0.7f), Axis.vertical)
+        Client.render.drawRectAlpha(matrix, 0.0, 0.0, Client.window.scaledWidth, 100.0, ldu, 0.4f)
+        Client.render.drawGradientRect(matrix, 0.0, 100.0, Client.window.scaledWidth, 107.0, withAlpha(ldu, 0.7f), 0x00000000L, Axis.vertical)
+        Client.render.drawRectAlpha(matrix, 0.0, Client.window.scaledHeight - 100.0, Client.window.scaledWidth, Client.window.scaledHeight, ldu, 0.4f)
+        Client.render.drawGradientRect(matrix, 0.0, Client.window.scaledHeight - 107.0, Client.window.scaledWidth, Client.window.scaledHeight - 100.0, 0x00000000L, withAlpha(ldu, 0.7f), Axis.vertical)
         for (button in buttons) {
             button.render(matrix)
         }

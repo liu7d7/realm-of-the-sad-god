@@ -3,7 +3,7 @@ package me.ethius.client.rotsg.item.bow
 import me.ethius.client.rotsg.item.BowItem
 import me.ethius.client.rotsg.item.ItemTier
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.Stat
 
 class IceBow:BowItem(TexData.ice_bow,
@@ -22,7 +22,7 @@ class IceBow:BowItem(TexData.ice_bow,
     }
 
     companion object {
-        private val pData = ProjectileData(TexData.ice_arrow, 0.0, 0.0, 7.0, 7.5, true, false, false, false, 100..115).also { it.renderAngleAdd = ProjectileData.slant_angle_correction }
+        private val pData = ProjectileProperties(TexData.ice_arrow, 0.0, 0.0, 7.0, 7.5, true, false, false, false, 100..115).also { it.renderAngleAdd = ProjectileProperties.slant_angle_correction }
     }
 
 }

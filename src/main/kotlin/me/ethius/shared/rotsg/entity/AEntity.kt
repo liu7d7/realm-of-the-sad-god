@@ -15,7 +15,7 @@ import me.ethius.shared.ext.distanceSquared
 import me.ethius.shared.ext.r
 import me.ethius.shared.maths.BoundingCircle
 import me.ethius.shared.network.Packet
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.other.Effect
 import me.ethius.shared.rotsg.entity.other.Projectile
 import me.ethius.shared.rotsg.tile.tile_size
@@ -112,7 +112,7 @@ abstract class AEntity:Tickable() {
         }
     open var life:int = 0
     val boundingCircle:BoundingCircle = BoundingCircle()
-    val effects = ArrayList<Effect>()
+    val effects = CopyOnWriteArrayList<Effect>()
     val entityNotifications = CopyOnWriteArrayList<EntityNotification>()
     abstract val texDataId:string
 
@@ -122,7 +122,8 @@ abstract class AEntity:Tickable() {
         this.prevX = this.x
         this.prevY = this.y
         for (i in effects) {
-            i.release()
+            i.onEntityDie(this)
+            removeEffect(i.id)
         }
     }
 
@@ -178,7 +179,7 @@ abstract class AEntity:Tickable() {
     }
 
     fun shoot(
-        proj:ProjectileData,
+        proj:ProjectileProperties,
         angle:double = Double.NaN,
     ):Projectile {
         val proj = Projectile().reset(this, proj, if (!angle.isNaN()) angle else proj.baseAngle)

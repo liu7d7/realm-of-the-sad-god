@@ -8,7 +8,7 @@ import me.ethius.client.rotsg.entity.OtherPlayer
 import me.ethius.client.rotsg.entity.Portal
 import me.ethius.server.rotsg.entity.ServerPlayer
 import me.ethius.shared.network.Packet
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.enemy.Aoe
 import me.ethius.shared.rotsg.entity.enemy.Enemy
 import me.ethius.shared.rotsg.entity.other.Projectile
@@ -184,7 +184,7 @@ fun AEntity.Companion.fromSpawnPacket(packet:Packet):AEntity? {
             return Client.world.getEntityById(ownerId)?.let {
                 Projectile().reset(
                     it,
-                    ProjectileData().also {
+                    ProjectileProperties().also {
                         it.texDataId = texDataId
                         it.amplitude = amplitude
                         it.frequency = frequency

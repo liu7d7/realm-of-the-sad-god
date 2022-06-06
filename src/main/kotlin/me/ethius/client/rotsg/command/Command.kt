@@ -1,5 +1,6 @@
 package me.ethius.client.rotsg.command
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import me.ethius.client.Client
 import me.ethius.shared.bool
 import me.ethius.shared.rotsg.data.Formatting
@@ -27,7 +28,7 @@ abstract class Command(
         const val prefix = "/"
 
         // the command list
-        val values = ArrayList<Command>()
+        val values = ObjectArrayList<Command>()
 
         // try to find a command with the specified name and execute it
         fun tryExec(chat:string, autoExec:bool):bool {

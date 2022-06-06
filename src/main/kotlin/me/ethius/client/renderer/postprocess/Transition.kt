@@ -22,7 +22,7 @@ object Transition {
         transition["diamondPixelSize"] = 20f
         transition["Size", Client.window.scaledWidth] = Client.window.scaledHeight
         bindTexture(Client.frameBufferObj.colorAttatchment)
-        PostProcessRenderer.renderFs(0.0, 0.0, Client.window.scaledWidth.toDouble(), Client.window.scaledHeight.toDouble())
+        PostProcessRenderer.renderFs(0.0, 0.0, Client.window.scaledWidth, Client.window.scaledHeight)
     }
 
 }

@@ -5,7 +5,7 @@ import me.ethius.shared.bool
 import me.ethius.shared.calcAngle
 import me.ethius.shared.measuringTimeMS
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.ai.AIBase
 import me.ethius.shared.rotsg.entity.enemy.Enemy
 
@@ -19,8 +19,8 @@ class AIVoidEntityAttack(entityIn:Enemy):AIBase(entityIn) {
         }
 
     private val projData1 =
-        ProjectileData(TexData.void_dude_proj_1, 0.0, 0.0, 11.0, 7.0, true, false, false, false, 100..120)
-    private val projData2 = ProjectileData(TexData.cutter_proj, 0.0, 0.0, 11.0, 7.0, true, false, false, true, 60..80)
+        ProjectileProperties(TexData.void_dude_proj_1, 0.0, 0.0, 11.0, 7.0, true, false, false, false, 100..120)
+    private val projData2 = ProjectileProperties(TexData.cutter_proj, 0.0, 0.0, 11.0, 7.0, true, false, false, true, 60..80)
 
     override fun update() {
         if (entity.world == null) return

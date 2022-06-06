@@ -6,6 +6,7 @@ import me.ethius.client.renderer.Shader
 import me.ethius.client.renderer.Shaders
 import me.ethius.client.renderer.bindTexture
 import me.ethius.shared.bool
+import me.ethius.shared.double
 import me.ethius.shared.float
 import kotlin.math.floor
 
@@ -17,7 +18,7 @@ object Shadow {
         shadow_blur = Shaders.shadow_blur
     }
 
-    fun render(fbo:ScreenFramebuffer, radius:float, scale:bool = false) {
+    fun render(fbo:ScreenFramebuffer, radius:float, scale:bool = false, x0:double = 0.0, y0:double = 0.0, x1:double = if (scale) Client.window.scaledWidth else Client.window.width, y1:double = if (scale) Client.window.scaledHeight else Client.window.height) {
         if (radius == 0f) {
             return
         }
@@ -35,7 +36,7 @@ object Shadow {
         // Render the blur
         shadow_blur["u_Radius"] = floor(radius)
         bindTexture(fbo.colorAttatchment)
-        PostProcessRenderer.render()
+        PostProcessRenderer.renderNormalized(x0, y0, x1, y1)
 
     }
 

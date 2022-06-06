@@ -180,8 +180,9 @@ class CNetworkHandler:Tickable(true, 1) {
     }
 
     fun shutdown() {
-        if (this::recieveThread.isInitialized)
+        if (this::recieveThread.isInitialized) {
             recieveThread.interrupt()
+        }
         if (this::serverView.isInitialized) {
             send(Packet._id_logoff)
             serverView.close()
@@ -197,6 +198,7 @@ class CNetworkHandler:Tickable(true, 1) {
                     Client.world.name = packet.data[0]
                     Client.world.clear()
                 }
+                Packet._id_logoff -> connected = false
             }
             serverView.to.write(packet.toString())
             serverView.to.newLine()
@@ -207,12 +209,21 @@ class CNetworkHandler:Tickable(true, 1) {
         send(Packet(id, *data))
     }
 
+    fun sendImmediately(id:int, vararg data:Any) {
+        send(id, *data)
+        serverView.to.flush()
+    }
+
     override fun clientTick() {
         if (serverView.socket.isClosed) {
             release()
             return
+        } else {
+            serverView.to.flush()
         }
-        serverView.to.flush()
+        if (!connected) {
+            shutdown()
+        }
     }
 
 }

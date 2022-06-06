@@ -55,15 +55,15 @@ enum class RenderLayer(val begin:(RenderTaskTracker) -> void, val end:(RenderTas
             Client.render.setRendering3d(false)
             Client.frameBufferObj.bind()
             it.shadows.draw(false,
-                                                  0.0,
-                                                  0.0,
-                                                  Client.window.scaledWidth.toDouble(),
-                                                  Client.window.scaledHeight.toDouble())
+                            0.0,
+                            0.0,
+                            Client.window.scaledWidth,
+                            Client.window.scaledHeight)
             it.outlines.draw(false,
-                                                   0.0,
-                                                   Client.window.scaledHeight.toDouble(),
-                                                   Client.window.scaledWidth.toDouble(),
-                                                   0.0)
+                             0.0,
+                             Client.window.scaledHeight,
+                             Client.window.scaledWidth,
+                             0.0)
         }),
     world_feature_text(
         {

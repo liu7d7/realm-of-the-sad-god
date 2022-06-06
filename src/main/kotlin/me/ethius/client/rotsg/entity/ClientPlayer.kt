@@ -1,6 +1,7 @@
 package me.ethius.client.rotsg.entity
 
 import me.ethius.client.Client
+import me.ethius.client.Profiles
 import me.ethius.client.rotsg.data.ItemInfo
 import me.ethius.client.rotsg.gui.Exp
 import me.ethius.client.rotsg.gui.LevelUp
@@ -233,6 +234,7 @@ class ClientPlayer(pClass:PlayerClass, playerProfile:PlayerProfile):Player(pClas
             Client.network.send(Packet._id_logoff)
             Client.screen = DeathScreen()
             Client.world.remEntity(this)
+            Profiles.global.fame += this.exp / 2000
         }
         Client.network.send(Packet._id_move, this.x, this.y)
         Client.network.send(Packet._id_hp_update, this.hp)
@@ -403,11 +405,6 @@ class ClientPlayer(pClass:PlayerClass, playerProfile:PlayerProfile):Player(pClas
                 }
             }
             return Client.player
-        }
-
-        fun copyToMainProfile() {
-            Client.player.playerProfile.set(Client.player,
-                                            Client.player.name)
         }
     }
 

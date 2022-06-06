@@ -1,7 +1,7 @@
 [meta]
-tex_data = "frozen_katana"
-name = "Frozen Katana"
-desc = "A katana left in ice since crafted."
+tex_data = "frozen_dagger"
+name = "Frozen Dagger"
+desc = "A dagger left in ice since crafted."
 tier = "legendary"
 legendary_effect = "berserk_on_shoot_50_no_delay"
 [meta.stats]
@@ -12,5 +12,5 @@ vit = -3
 [weapon_meta]
 damage = "100-130"
 num_shots = 3
-shot_pattern = ["frozen_katana_proj", "frozen_katana_proj"]
+shot_pattern = ["frozen_dagger_proj", "frozen_dagger_proj"]
 aps_multiplier = 0.75

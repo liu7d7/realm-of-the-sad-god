@@ -60,8 +60,8 @@ open class Screen {
         Client.render.drawGradientRect(matrix,
                                        0.0,
                                        0.0,
-                                       Client.window.scaledWidth.toDouble(),
-                                       Client.window.scaledHeight.toDouble(),
+                                       Client.window.scaledWidth,
+                                       Client.window.scaledHeight,
                                        0xff0a89ff,
                                        0xff1b64a7,
                                        me.ethius.client.renderer.Axis.vertical)

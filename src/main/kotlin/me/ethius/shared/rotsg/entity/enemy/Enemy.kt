@@ -14,7 +14,7 @@ import me.ethius.shared.maths.Facing
 import me.ethius.shared.maths.WeightedCollection
 import me.ethius.shared.network.Packet
 import me.ethius.shared.opti.TexData
-import me.ethius.shared.rotsg.data.ProjectileData
+import me.ethius.shared.rotsg.data.ProjectileProperties
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.StatEntity
 import me.ethius.shared.rotsg.entity.ai.AIBase
@@ -27,7 +27,7 @@ import kotlin.math.sign
 
 class Enemy private constructor(
     scale:double,
-    var shotPattern:(Enemy) -> List<ProjectileData>,
+    var shotPattern:(Enemy) -> List<ProjectileProperties>,
     dex:int,
     var lootTable:MutableList<LootTableEntry>,
     var portal:WeightedCollection<() -> ServerWorld?>,
@@ -236,7 +236,7 @@ class Enemy private constructor(
         var health:int = 1
         var def:int = 1
         var dex:int = 10
-        var shotPattern:(Enemy) -> List<ProjectileData> = { emptyList() }
+        var shotPattern:(Enemy) -> List<ProjectileProperties> = { emptyList() }
         var lootTable = ArrayList<LootTableEntry>()
         var exp:int = 30
         var portal = WeightedCollection<() -> ServerWorld?>()
@@ -247,7 +247,7 @@ class Enemy private constructor(
         constructor()
 
         private constructor(assetLoc:string) {
-            val toml = Toml().read(Client::class.java.getResourceAsStream(assetLoc))
+            val toml = Toml().readCached(assetLoc)
             val meta = toml.getTable("meta")
             this.texDataId = meta.getString("tex_data")
             this.health = meta.getInt("health")
@@ -258,7 +258,7 @@ class Enemy private constructor(
             this.leadShot = meta.getBoolean("lead_shot", false)
             if (meta.contains("shot_pattern")) {
                 this.shotPattern =
-                    { meta.getList<string>("shot_pattern").map { i -> ProjectileData.values.find { it.id == i }!! } }
+                    { meta.getList<string>("shot_pattern").map { i -> ProjectileProperties.values.find { it.id == i }!! } }
             }
             if (meta.contains("loot_table")) {
                 for (i in meta.getList<string>("loot_table")) {
@@ -312,7 +312,7 @@ class Enemy private constructor(
             return this
         }
 
-        fun withShotPattern(shotPattern:(Enemy) -> List<ProjectileData>):Builder {
+        fun withShotPattern(shotPattern:(Enemy) -> List<ProjectileProperties>):Builder {
             this.shotPattern = shotPattern
             return this
         }

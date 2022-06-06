@@ -1,6 +1,9 @@
 package me.ethius.shared
 
+import com.moandjiezana.toml.Toml
 import com.moandjiezana.toml.TomlWriter
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
+import me.ethius.client.Client
 import me.ethius.server.rotsg.world.biome.ABiome
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.StatEntity
@@ -9,10 +12,7 @@ import me.ethius.shared.rotsg.world.IWorld
 import org.apache.commons.lang3.RandomUtils
 import org.lwjgl.glfw.GLFW.glfwGetTime
 import org.lwjgl.system.MemoryUtil
-import java.io.ByteArrayOutputStream
-import java.io.FileInputStream
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 import java.nio.ByteBuffer
 import java.nio.channels.Channels
 import kotlin.math.*
@@ -44,7 +44,7 @@ fun calcAngle(eye:AEntity, target:AEntity, lead:bool = false, leadAmt:double = 4
     return calcAngle(dy, dx)
 }
 
-fun fastInverseSqrt(x:Double):Double {
+fun fastInverseSqrt(x:double):Double {
     var x1 = x
     val d = 0.5 * x1
     var l = java.lang.Double.doubleToRawLongBits(x1)
@@ -366,6 +366,29 @@ fun getRandomInRange(min:float, max:float):float {
 
 fun safeRange(min:Int, max:Int):IntRange = min(min, max)..max(min, max)
 
+val pathToToml = Object2ObjectOpenHashMap<string, Toml>()
+
+fun Toml.readCached(path:string):Toml {
+    return if (pathToToml.containsKey(path)) {
+        pathToToml[path]!!
+    } else {
+        val toml = read(Client.javaClass.getResourceAsStream(path))
+        pathToToml[path] = toml
+        toml
+    }
+}
+
+fun Toml.readCached(path:File):Toml {
+    val ts = path.toString()
+    return if (pathToToml.containsKey(ts)) {
+        pathToToml[ts]!!
+    } else {
+        val toml = read(path)
+        pathToToml[ts] = toml
+        toml
+    }
+}
+
 val toml = TomlWriter()
 
 fun Float.toRadians():float {
@@ -394,8 +417,8 @@ inline fun ifserver(block:() -> Unit) {
     }
 }
 
-inline fun ifclient(block:() -> Unit) {
-    if (Side._client) {
+inline fun ifclient(also:bool = true, block:() -> Unit) {
+    if (Side._client && also) {
         block()
     }
 }
