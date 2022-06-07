@@ -17,6 +17,7 @@ class DiscordRPC {
     lateinit var thread:Thread
 
     fun startup() {
+        return
         val discEventHandlers = DiscordEventHandlers()
         val id = "922663266830929951"
         this.inst.Discord_Initialize(id, discEventHandlers, true, "")
@@ -64,7 +65,7 @@ class DiscordRPC {
                 }
                 try {
                     Thread.sleep(1000)
-                } catch (e:InterruptedException) {
+                } catch (_:InterruptedException) {
 
                 }
             }
@@ -75,6 +76,7 @@ class DiscordRPC {
     }
 
     fun shutdown() {
+        return
         this.inst.Discord_Shutdown()
         this.thread.interrupt()
     }

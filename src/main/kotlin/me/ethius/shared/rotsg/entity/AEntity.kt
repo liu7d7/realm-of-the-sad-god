@@ -221,13 +221,13 @@ abstract class AEntity:Tickable() {
     private fun broadcastPosition() {
         when (this) {
             is ServerPlayer -> {
-                Server.network.broadcastIf(Packet(Packet._id_move, this.entityId, this.x, this.y), fun(it:SNetworkHandler.ClientView):bool {
+                Server.network.broadcastIf(Packet(Packet._id_move, this.entityId, this.x.roundToInt(), this.y.roundToInt()), fun(it:SNetworkHandler.ClientView):bool {
                     val them = ServerPlayer[it] ?: return false
                     return them.client != this.client && them.world == this.world && them.pos.distance2d(this.pos) / tile_size <= 21
                 })
             }
             else -> {
-                Server.network.broadcastIf(Packet(Packet._id_move, this.entityId, this.x, this.y),
+                Server.network.broadcastIf(Packet(Packet._id_move, this.entityId, this.x.roundToInt(), this.y.roundToInt()),
                                            fun(it:SNetworkHandler.ClientView):bool {
                                                val player = ServerPlayer[it] ?: return false
                                                return (this.world == player.world && player.pos.distance2d(this.pos) / tile_size <= 21)

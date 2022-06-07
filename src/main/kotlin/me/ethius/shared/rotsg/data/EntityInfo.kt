@@ -111,8 +111,8 @@ class EntityInfo<T:AEntity>(val supplier:() -> T) {
                                      .withExp(1500).withScale(1.05).withShotPattern {
                     listOf(ProjectileProperties.flayer_proj_1)
                 }.addToLootTable(LootTableEntry.flayer_table, LootTableEntry.t1_gear)
-                                     .emptyPortalChance(1.0)
-                                     .addToPortalTable(0.5) { FloweringGardens() }).also {
+                 .emptyPortalChance(1.0)
+                 .addToPortalTable(0.5) { FloweringGardens() }).also {
                 it.movementAIs.add(1.0, AIWander(it))
                 it.movementAIs.add(1.0, AIFollowPlayer(it))
                 it.attackAIs.add(1.0, AIAttackDefault(it))

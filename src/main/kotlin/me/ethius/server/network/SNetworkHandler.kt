@@ -22,6 +22,7 @@ import java.net.ServerSocket
 import java.net.Socket
 import java.util.*
 import kotlin.concurrent.thread
+import kotlin.math.roundToInt
 
 class SNetworkHandler {
 
@@ -46,21 +47,21 @@ class SNetworkHandler {
                     socket.tcpNoDelay = true
                     clients.add(ClientView(socket))
                 } catch (e:Exception) {
-                    e.printStackTrace()
+                    Log.error + "Could not instantiate a ClientView!" + Log.endl
                 }
             }
         }
-        println("Started server on $addr:$port")
+        Log.info + "Started server on " + addr + ":" + port + Log.endl
     }
 
     private fun doPacketAction(queuedPacket:QueuedPacket) {
+        val packet = queuedPacket.packet
+        val client = queuedPacket.client
         try {
-            val packet = queuedPacket.packet
-            val client = queuedPacket.client
             when (packet.id) {
                 Packet._id_logon -> {
                     this.players.add(ServerPlayer(client, PlayerProfile.read(packet.data[1], false), packet.data[0].toLong()))
-                    println("${client.id} logged in as ${ServerPlayer[client]?.name}")
+                    Log.info + client.id + " logged in as " + ServerPlayer[client]?.name + Log.endl
                 }
                 Packet._id_logoff -> {
                     val pl = ServerPlayer[client] ?: return
@@ -100,7 +101,7 @@ class SNetworkHandler {
                         entity.world?.remEntity(entity)
                         world.addEntity(entity)
                         send(client, Packet._id_world_info, world.worldId)
-                        send(client, Packet._id_move, entity.entityId, world.spawnPosition.x * tile_size, world.spawnPosition.y * tile_size)
+                        send(client, Packet._id_move, entity.entityId, (world.spawnPosition.x * tile_size).roundToInt(), (world.spawnPosition.y * tile_size).roundToInt())
                     }
                 }
                 Packet._id_spawn_entity -> {
@@ -181,8 +182,9 @@ class SNetworkHandler {
                     }
                 }
             }
-        } catch (_:Exception) {
-
+        } catch (e:Exception) {
+            Log.error + "Failed to do action for " + packet + Log.endl
+            e.printStackTrace()
         }
     }
     
@@ -212,6 +214,7 @@ class SNetworkHandler {
             client.to.newLine()
             client.writes++
         } catch (_:Exception) {
+            Log.error + "Failed to write packets to " + client.id + Log.endl
             client.close()
         }
     }
@@ -232,6 +235,7 @@ class SNetworkHandler {
             try {
                 client.to.flush()
             } catch (_:Exception) {
+                Log.error + "Failed to flush packets to " + client.id + Log.endl
                 client.close()
             }
         }
@@ -276,15 +280,17 @@ class SNetworkHandler {
         val id = getId()
         private val receiveThread = thread(true, false) {
             while (!Thread.currentThread().isInterrupted) {
-                try {
                     while (from.ready()) {
-                        val line = from.readLine()
-                        Server.network.receivedPackets.add(QueuedPacket(this@ClientView, Packet.fromString(line)))
+                        try {
+                            val line = from.readLine()
+                            val pack = Packet.fromString(line) ?: continue
+                            Server.network.receivedPackets.add(QueuedPacket(this@ClientView, pack))
+                        } catch (e:Exception) {
+                            Log.error + "Failed to read packet" + Log.endl
+                            e.printStackTrace()
+                            close()
+                        }
                     }
-                } catch (e:Exception) {
-                    e.printStackTrace()
-                    close()
-                }
             }
         }
 
@@ -296,7 +302,7 @@ class SNetworkHandler {
             if (closed) {
                 return
             }
-            println("Client $id disconnected.")
+            Log.info + "Client " + id + " disconnected." + Log.endl
             ServerPlayer.clientToPlayer -= this
             socket.close()
             receiveThread.interrupt()

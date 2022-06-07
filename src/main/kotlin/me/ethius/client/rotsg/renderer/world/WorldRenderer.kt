@@ -52,7 +52,7 @@ class WorldRenderer:Tickable(true) {
                         it.renderBlend(matrix)
                     }
                 } catch (_:Exception) {
-
+                    Log.warn + "Failed to render some tiles" + Log.endl
                 }
             }
             Client.renderTaskTracker.layer(RenderLayer.world_feature)

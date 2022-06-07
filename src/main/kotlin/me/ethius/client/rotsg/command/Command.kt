@@ -2,6 +2,7 @@ package me.ethius.client.rotsg.command
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import me.ethius.client.Client
+import me.ethius.shared.Log
 import me.ethius.shared.bool
 import me.ethius.shared.rotsg.data.Formatting
 import me.ethius.shared.string
@@ -48,6 +49,7 @@ abstract class Command(
                     } catch (e:Exception) {
                         // if the command fails, send the error to the chat
                         Client.inGameHud.chatHud.addChat("${Formatting.red}Error executing command: ${e.message}${Formatting.reset}")
+                        Log.error + "Failed to run command " + chat + Log.endl
                         e.printStackTrace()
                     }
                     // we've successfully executed the command; return true
@@ -66,7 +68,6 @@ abstract class Command(
             values.add(GiveItemCommand())
             values.add(TpCommand())
             values.add(SpawnCommand())
-            values.add(ProfileCommand())
             values.add(NameCommand())
             values.add(LoadBiomeFeatureCommand())
             values.add(RepeatCommand())

@@ -42,7 +42,6 @@ import org.lwjgl.openal.*
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL43.*
 import org.lwjgl.opengl.GLDebugMessageCallback.getMessage
-import java.lang.Runtime.getRuntime
 import java.nio.ByteBuffer
 import java.nio.IntBuffer
 import java.util.*
@@ -93,6 +92,7 @@ object Client {
     lateinit var worldRenderer:WorldRenderer
     lateinit var network:CNetworkHandler
     lateinit var ticker:Ticker
+    lateinit var runArgs:RunArgs
     var lookAtInit = false
     var playerInit = false
     var worldInit = false
@@ -126,30 +126,55 @@ object Client {
             value?.onEnter()
         }
 
-    fun main(args:Array<string>) {
+    fun main(args:RunArgs) {
         Side.currentSide = Side.client
+        this.runArgs = args
+        Log.info + "Starting client with " + args
+
         System.setProperty("joml.format", "false")
+        Log.info + "JOML format set to false" + Log.endl
         System.setProperty("joml.sinLookup", "true")
+        Log.info + "JOML sin lookup table set to true" + Log.endl
         System.setProperty("joml.fastMath", "true")
+        Log.info + "JOML fastMath set to true" + Log.endl
+        Runtime.getRuntime().addShutdownHook(Thread { shutdown() })
+        Log.info + "Set shutdown hook" + Log.endl
+
         options = Options()
-        getRuntime().addShutdownHook(Thread { shutdown() })
+
         window = Window(1216.0, 760.0)
-        glClearColor(0.109803f, 0.1058823f, 0.1333333f, 1f)
-        glEnable(GL_DEBUG_OUTPUT)
-        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS)
+        Log.info + "Initialized the Window" + Log.endl
+
         ticker = Ticker()
+        Log.info + "Initialized the Ticker" + Log.endl
+
         frameBufferObj = ScreenFramebuffer(true)
+        Log.info + "Initialized the main ScreenFramebuffer" + Log.endl
+
         audio = AudioOutput()
+        Log.info + "Initialized the AudioOutput" + Log.endl
+
         main_tex = Texture.loadTexture(texLoc)
+        Log.info + "Loaded the main texture atlas" + Log.endl
+
         TexData.init()
         Shaders.init()
         PostProcessRenderer.init()
         Mesh.init()
+        Model3d.init()
         render = Renderer()
         renderTaskTracker = RenderTaskTracker()
+        fxManager = FxManager()
+        worldRenderer = WorldRenderer()
+        Log.info + "Initialized Renderer" + Log.endl
+
         mouse = Mouse()
         keyboard = Keyboard()
+        Log.info + "Initialized Mouse/Keyboard" + Log.endl
+
         font = FontRenderer(Client::class.java.getResourceAsStream("/assets/font/MyriadPro_sb.otf")!!)
+        Log.info + "Initialized FontRenderer" + Log.endl
+
         Bushery.init()
         Fx.init()
         ProjectileProperties.init()
@@ -158,14 +183,17 @@ object Client {
         LootTableEntry.init()
         EntityInfo.init()
         BiomeFeature.init()
-        Model3d.init()
+        Log.info + "Initialized various data collections" + Log.endl
+
         inGameHud = GameHud()
-        fxManager = FxManager()
-        screen = MainMenuScreen()
+        Log.info + "Initialized GameHud" + Log.endl
+
         discordRpc = DiscordRPC()
         discordRpc.startup()
+        Log.info + "Initialized Discord integration" + Log.endl
+
+        screen = MainMenuScreen()
         inGameHud.chatHud.addChat("${Formatting.aqua}Welcome${Formatting.reset} to ${Formatting.gold}Realm of the Sad God!${Formatting.reset}")
-        worldRenderer = WorldRenderer()
         network = CNetworkHandler()
         updateTime()
         overlay = TransitionOverlay(1000f, false, false)
@@ -312,6 +340,8 @@ object Client {
             }
         }
     }
+
+    data class RunArgs(val testing:bool)
 
     init {
         events.register(this)
@@ -597,17 +627,16 @@ object Client {
 
         private fun getMsgString(msg:int):string {
             return when (msg) {
-                GL_DEBUG_TYPE_ERROR -> "An error, typically from the API"
-                GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR -> "Some behavior marked deprecated has been used"
-                GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR -> "Something has invoked undefined behavior"
-                GL_DEBUG_TYPE_PORTABILITY -> "Some functionality the user relies upon is not portable"
-                GL_DEBUG_TYPE_PERFORMANCE -> "Code has triggered possible performance issues"
-                GL_DEBUG_TYPE_MARKER -> "Command stream annotation"
-                GL_DEBUG_TYPE_PUSH_GROUP -> "Group pushing"
-                GL_DEBUG_TYPE_POP_GROUP -> "Group popping"
-                GL_DEBUG_TYPE_OTHER -> "Some type that isn't one of these"
+                GL_DEBUG_TYPE_ERROR -> "ERROR"
+                GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR -> "DEPRECATED_BEHAVIOR"
+                GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR -> "UNDEFINED_BEHAVIOR"
+                GL_DEBUG_TYPE_PORTABILITY -> "PORTABILITY"
+                GL_DEBUG_TYPE_PERFORMANCE -> "PERFORMANCE"
+                GL_DEBUG_TYPE_MARKER -> "MARKER"
+                GL_DEBUG_TYPE_PUSH_GROUP -> "PUSH_GROUP"
+                GL_DEBUG_TYPE_POP_GROUP -> "POP_GROUP"
                 else -> {
-                    "Unknown"
+                    "NO_IDEA"
                 }
             }
         }
@@ -636,20 +665,14 @@ object Client {
             glDebugMessageCallback({ _, type, _, severity, len, message, _ ->
                                        if (options.debug) {
                                            when (severity) {
-                                               GL_DEBUG_SEVERITY_HIGH -> println("OpenGL encountered a high severity error: ${
-                                                   getMessage(len, message)
-                                               } | ${getMsgString(type)}")
-                                               GL_DEBUG_SEVERITY_MEDIUM -> println("OpenGL encountered a medium severity error: ${
-                                                   getMessage(len,
-                                                              message)
-                                               } | ${getMsgString(type)}")
-                                               GL_DEBUG_SEVERITY_LOW -> println("OpenGL encountered a low severity error: ${
-                                                   getMessage(len,
-                                                              message)
-                                               } | ${getMsgString(type)}")
+                                               GL_DEBUG_SEVERITY_HIGH -> Log.error + "OpenGL" + getMsgString(type) + " error : " + getMessage(len, message) + Log.endl
+                                               GL_DEBUG_SEVERITY_MEDIUM -> Log.warn + "OpenGL" + getMsgString(type) + " warn : " + getMessage(len, message) + Log.endl
+                                               GL_DEBUG_SEVERITY_LOW -> Log.info + "OpenGL" + getMsgString(type) + " info : " + getMessage(len, message) + Log.endl
                                            }
                                        }
                                    }, 0L)
+            glEnable(GL_DEBUG_OUTPUT)
+            glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS)
         }
 
     }

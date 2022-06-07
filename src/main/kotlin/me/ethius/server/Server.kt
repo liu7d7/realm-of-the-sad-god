@@ -24,6 +24,8 @@ object Server {
     fun main(args:RunArgs) {
         Side.currentSide = Side.server
         System.setProperty("joml.format", "false")
+        Log.info + "JOML format set to false" + Log.endl
+
         BiomeFeature.init()
         EntityInfo.init()
         EffectInfo.init()
@@ -33,19 +35,29 @@ object Server {
         Bushery.init()
         WorldEvent.init()
         LootTableEntry.init()
+        Log.info + "Initialized various data collections" + Log.endl
+
         this.ticker = Ticker()
+        Log.info + "Initialized Ticker" + Log.endl
+
         this.network = SNetworkHandler()
-        this.network.start(args.addr)
+        Log.info + "Initialized NetworkHandler" + Log.endl
+
+        this.network.start(args.addr, if (args.testing) 9928 else 9927)
+
         timeGetter = {
             (System.currentTimeMillis() - start).toFloat()
         }
+
         Realm.worldId = WorldTracker.newWorld { Realm() }
         Nexus.worldId = WorldTracker.newWorld { Nexus() }
+        Log.info + "Initialized worlds" + Log.endl
+
         mainloop()
         shutdown()
     }
 
-    class RunArgs(val addr:string)
+    class RunArgs(val addr:string, val testing:bool)
 
     private fun shutdown() {
         this.network.shutdown()
@@ -63,7 +75,7 @@ object Server {
             network.actOnQueuedPackets()
             network.flush()
             val end = System.currentTimeMillis()
-            val timeSleep = (tick_time.toInt() - (end - begin)).coerceAtLeast(0)
+            val timeSleep = (20 - (end - begin)).coerceAtLeast(0)
             if (timeSleep > 0) {
                 Thread.sleep(timeSleep)
             }

@@ -20,6 +20,7 @@ class Shader(vsh:string, fsh:string) {
         return try {
             IOUtils.toString(javaClass.getResource(path)!!, StandardCharsets.UTF_8)
         } catch (e:IOException) {
+            Log.error + "Failed to read shader from " + path + Log.endl
             e.printStackTrace()
             ""
         }

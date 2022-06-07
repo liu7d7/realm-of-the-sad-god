@@ -5,13 +5,18 @@ import me.ethius.server.Server
 
 fun main(args: Array<String>) {
     if (args.isEmpty()) {
-        Client.main(args)
+        Client.main(Client.RunArgs(false))
     } else {
         when (args[0].lowercase()) {
-            "-client" -> Client.main(args)
-            "-server" -> Server.main(Server.RunArgs(args[1].lowercase()))
-            else -> Client.main(args)
+            "-client" -> Client.main(Client.RunArgs(args.safeGet(1).equals("testing", true)))
+            "-server" -> {
+                Server.main(Server.RunArgs(args[1].lowercase(), args.safeGet(2).equals("testing", true)))
+            }
+            else -> Client.main(Client.RunArgs(false))
         }
-
     }
+}
+
+fun Array<String>.safeGet(index: Int): String {
+    return if (index < this.size) this[index] else ""
 }

@@ -15,6 +15,7 @@ import me.ethius.shared.rotsg.entity.other.Projectile
 import me.ethius.shared.rotsg.entity.player.PlayerClass
 import me.ethius.shared.rotsg.entity.player.PlayerProfile
 import me.ethius.shared.string
+import kotlin.math.roundToInt
 
 fun AEntity.createSpawnPacket(): Packet {
 
@@ -102,7 +103,7 @@ fun AEntity.createSpawnPacket(): Packet {
             throw IllegalArgumentException("Unknown entity type ${this::class.simpleName}")
         }
     }
-    return Packet(Packet._id_spawn_entity, this.entityId, "${this.javaClass.simpleName.lowercase()}|${this.world?.name}", this.x, this.y, *data)
+    return Packet(Packet._id_spawn_entity, this.entityId, "${this.javaClass.simpleName.lowercase()}|${this.world?.name}", this.x.roundToInt(), this.y.roundToInt(), *data)
 }
 
 fun AEntity.Companion.getWorldNameFromSpawnPacket(packet:Packet):string {

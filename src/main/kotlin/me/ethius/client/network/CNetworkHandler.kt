@@ -6,9 +6,7 @@ import me.ethius.client.rotsg.entity.Bag
 import me.ethius.client.rotsg.gui.Damage
 import me.ethius.client.rotsg.gui.EntityNotification
 import me.ethius.client.rotsg.item.Item
-import me.ethius.shared.Tickable
-import me.ethius.shared.int
-import me.ethius.shared.ivec2
+import me.ethius.shared.*
 import me.ethius.shared.network.Packet
 import me.ethius.shared.opti.TexData
 import me.ethius.shared.rotsg.data.EffectInfo
@@ -16,7 +14,6 @@ import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.fromSpawnPacket
 import me.ethius.shared.rotsg.tile.Bushery
 import me.ethius.shared.rotsg.tile.Tile
-import me.ethius.shared.string
 import org.apache.commons.lang3.RandomUtils
 import java.util.concurrent.CopyOnWriteArraySet
 import kotlin.concurrent.thread
@@ -52,8 +49,8 @@ class CNetworkHandler:Tickable(true, 1) {
     }
 
     private fun doPacketAction(line:string) {
+        val packet = Packet.fromString(line) ?: return
         try {
-            val packet = Packet.fromString(line)
             when (packet.id) {
                 Packet._id_particle -> {
                     Client.fxManager.createFx(TexData[packet.data[0]], packet.data[1].toDouble(), packet.data[2].toDouble())
@@ -175,6 +172,7 @@ class CNetworkHandler:Tickable(true, 1) {
                 }
             }
         } catch (e:Exception) {
+            Log.error + "Failed to run packet of type " + packet.id + Log.endl
             e.printStackTrace()
         }
     }

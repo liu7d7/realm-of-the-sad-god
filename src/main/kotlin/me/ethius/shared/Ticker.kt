@@ -47,6 +47,7 @@ class Ticker {
                             i.clientTick()
                             i.ticksExisted++
                         } catch (e:Exception) {
+                            Log.error + "Failed to run tick" + Log.endl
                             e.printStackTrace()
                         }
                     }
@@ -59,6 +60,7 @@ class Ticker {
                             i.serverTick()
                             i.ticksExisted++
                         } catch (e:Exception) {
+                            Log.error + "Failed to run tick" + Log.endl
                             e.printStackTrace()
                         }
                     }

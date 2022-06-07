@@ -2,6 +2,7 @@
 
 package me.ethius.shared.events
 
+import me.ethius.shared.Log
 import me.ethius.shared.bool
 import java.lang.reflect.InvocationTargetException
 import java.util.concurrent.CopyOnWriteArrayList
@@ -22,7 +23,7 @@ class EventBus {
                     listeners.add(data)
                     listeners.sortWith(Comparator.comparing { -it.annotation.priority })
                     if (logging) {
-                        println("added data - $data")
+                        Log.info + "added data - " + data + Log.endl
                     }
                 }
             }
@@ -32,7 +33,7 @@ class EventBus {
     fun unregister(listenerObject:Any) {
         listeners.removeIf { it.parent == listenerObject }
         if (logging) {
-            println("removed data - $listenerObject")
+            Log.info + "removed data - " + listenerObject + Log.endl
         }
     }
 
@@ -45,13 +46,16 @@ class EventBus {
                     break
                 }
                 if (logging) {
-                    println("called event - $data")
+                    Log.info + "called event - " + data + Log.endl
                 }
             } catch (e:IllegalAccessException) {
+                Log.error + "Failed to dispatch event " + eventObject + Log.endl
                 e.printStackTrace()
             } catch (e:IllegalArgumentException) {
+                Log.error + "Failed to dispatch event " + eventObject + Log.endl
                 e.printStackTrace()
             } catch (e:InvocationTargetException) {
+                Log.error + "Failed to dispatch event " + eventObject + Log.endl
                 e.printStackTrace()
             }
         }

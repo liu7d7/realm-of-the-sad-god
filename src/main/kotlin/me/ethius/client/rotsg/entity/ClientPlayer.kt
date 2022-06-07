@@ -29,6 +29,7 @@ import me.ethius.shared.rotsg.tile.tile_size
 import org.apache.commons.lang3.RandomUtils
 import org.lwjgl.glfw.GLFW
 import kotlin.math.floor
+import kotlin.math.roundToInt
 
 private const val sqrt2 = 1.4142135
 
@@ -236,7 +237,7 @@ class ClientPlayer(pClass:PlayerClass, playerProfile:PlayerProfile):Player(pClas
             Client.world.remEntity(this)
             Profiles.global.fame += this.exp / 2000
         }
-        Client.network.send(Packet._id_move, this.x, this.y)
+        Client.network.send(Packet._id_move, this.x.roundToInt(), this.y.roundToInt())
         Client.network.send(Packet._id_hp_update, this.hp)
     }
 

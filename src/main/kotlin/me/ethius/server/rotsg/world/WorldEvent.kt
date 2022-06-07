@@ -24,6 +24,7 @@ abstract class WorldEvent {
             if (world.name == "realm") {
                 (world as Realm).worldEvent = null
             }
+            Log.error + "Failed to run WorldEvent" + Log.endl
             e.printStackTrace()
         }
     }

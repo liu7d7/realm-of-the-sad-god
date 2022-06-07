@@ -184,8 +184,8 @@ open class Packet(val id:int, vararg val data:string) {
          */
         const val _id_entity_notification = 14
 
-        fun fromString(str:string):Packet {
-            if (!str.startsWith("#")) throw IllegalArgumentException("Invalid packet string: $str")
+        fun fromString(str:string):Packet? {
+            if (!str.startsWith("#")) return null
             val str = str.drop(1)
             val split = str.split(";")
             val id = split[0].toInt()

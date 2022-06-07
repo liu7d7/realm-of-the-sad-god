@@ -3,7 +3,6 @@ package me.ethius.shared
 import com.moandjiezana.toml.Toml
 import com.moandjiezana.toml.TomlWriter
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
-import me.ethius.client.Client
 import me.ethius.server.rotsg.world.biome.ABiome
 import me.ethius.shared.rotsg.entity.AEntity
 import me.ethius.shared.rotsg.entity.StatEntity
@@ -372,7 +371,7 @@ fun Toml.readCached(path:string):Toml {
     return if (pathToToml.containsKey(path)) {
         pathToToml[path]!!
     } else {
-        val toml = read(Client.javaClass.getResourceAsStream(path))
+        val toml = read(this.javaClass.getResourceAsStream(path))
         pathToToml[path] = toml
         toml
     }

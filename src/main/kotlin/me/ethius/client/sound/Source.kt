@@ -1,6 +1,7 @@
 package me.ethius.client.sound
 
 import me.ethius.client.sound.AlUtil.checkErrors
+import me.ethius.shared.Log
 import me.ethius.shared.bool
 import me.ethius.shared.float
 import me.ethius.shared.int
@@ -24,6 +25,7 @@ class Source private constructor(private val pointer:int) {
                 try {
                     stream!!.close()
                 } catch (var2:IOException) {
+                    Log.error + "Failed to close AudioStream" + Log.endl
                     var2.printStackTrace()
                 }
                 removeProcessedBuffers()
@@ -122,6 +124,7 @@ class Source private constructor(private val pointer:int) {
                     }
                 }
             } catch (var4:IOException) {
+                Log.info + "Failed to source an AudioStream" + Log.endl
                 var4.printStackTrace()
             }
         }
