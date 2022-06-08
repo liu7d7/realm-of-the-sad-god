@@ -20,7 +20,7 @@ class AIVoidEntityAttack(entityIn:Enemy):AIBase(entityIn) {
 
     private val projData1 =
         ProjectileProperties(TexData.void_dude_proj_1, 0.0, 0.0, 11.0, 7.0, true, false, false, false, 100..120)
-    private val projData2 = ProjectileProperties(TexData.cutter_proj, 0.0, 0.0, 11.0, 7.0, true, false, false, true, 60..80)
+    private val projData2 = ProjectileProperties(TexData.cutter_proj, 0.0, 0.0, 11.0, 7.0, true, false, false, true, 60..80).also { it.renderAngleAdd = -45.0 }
 
     override fun update() {
         if (entity.world == null) return

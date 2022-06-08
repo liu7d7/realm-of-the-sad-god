@@ -79,6 +79,9 @@ object Server {
             if (timeSleep > 0) {
                 Thread.sleep(timeSleep)
             }
+            if (timeSleep < 0) {
+                Log.warn + "Can't keep up! Tried to sleep for " + timeSleep + " milliseconds before next tick. Should be ~15-20." + Log.endl
+            }
             if (System.currentTimeMillis() - lastTime >= 1000) {
                 ticks = 0
                 lastTime = System.currentTimeMillis()

@@ -260,10 +260,10 @@ abstract class AEntity:Tickable() {
         afterMove()
     }
 
-    open fun moveTo(x:double, y:double, prev:bool = false) {
+    open fun moveTo(x:double, y:double, setPrev:bool = false) {
         this.x = x
         this.y = y
-        if (prev) {
+        if (setPrev) {
             this.prevX = x
             this.prevY = y
         }
@@ -320,7 +320,9 @@ abstract class AEntity:Tickable() {
 
     open fun damage(damage:double, throughDef:bool, damageSourceId:long = -2) {
         val damage = damage * if (this.hasEffect("curse")) 1.2 else 1.0
-        hp -= damage.also { if (Side._client) entityNotifications.add(Damage(this, it.roundToInt(), throughDef)) }
+        hp -= damage.also {
+            if (Side._client) entityNotifications.add(Damage(this, it.roundToInt(), throughDef))
+        }
     }
 
     fun collidesWith(other:AEntity):bool {

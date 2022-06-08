@@ -59,7 +59,7 @@ enum class PlayerClass(
                it.weapon.item = ItemInfo.basic_dagger_1()
                it.ability.item = ItemInfo.basic_dasher_1()
            },
-           arrayOf(TexData.dasher, TexData.key_dasher, TexData.traffic_cone_dasher, TexData.demon_dasher),
+           arrayOf(TexData.dasher, TexData.key_dasher, TexData.traffic_cone_dasher, TexData.demon_dasher, TexData.mushroom_dasher),
            arrayOf(625, 195, 65, 30, 60, 65, 60, 50)),
     diviner(
         "Diviner",

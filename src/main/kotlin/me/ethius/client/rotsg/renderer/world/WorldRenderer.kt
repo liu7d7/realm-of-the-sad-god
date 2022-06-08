@@ -32,8 +32,7 @@ class WorldRenderer:Tickable(true) {
 
     val windX:float
         get() {
-            return lerp(prevWindX, curWindX, Animations.getDecelerateAnimation(1f, (measuringTimeMS() - lastWindUpdate) / 75.tickToMs.toFloat())
-            )
+            return lerp(prevWindX, curWindX, Animations.getDecelerateAnimation(1f, (measuringTimeMS() - lastWindUpdate) / 75.tickToMs.toFloat())) * if (Client.playerInit) sinD(Client.player.r).toFloat() else 0.0f
         }
     private var lastWindUpdate:float = measuringTimeMS()
     private var curWindX:float = 0f

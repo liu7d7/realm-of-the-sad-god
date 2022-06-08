@@ -52,28 +52,19 @@ object Log {
 
     val side:string
         get() {
-            return if (Side._client) " LOCAL " else " SERVER "
+            return if (Side._client) "_LOCAL_" else "_SERVER_"
         }
 
     private var sb = StringBuffer()
-    var firstRun = false
+    var firstRun = true
 
     object info {
         operator fun plus(message:Any?):info {
             if (firstRun) {
-                sb.append("[$side/$fg_cyan$style_bold INFO $reset] ")
+                sb.append("[$side/${fg_cyan}_INFO_$reset] ")
                 firstRun = false
             }
-            when (message) {
-                endl -> {
-                    println(sb.append(reset))
-                    sb = StringBuffer()
-                    firstRun = true
-                }
-                else -> {
-                    sb.append(message)
-                }
-            }
+            default(message)
             return this
         }
     }
@@ -81,19 +72,10 @@ object Log {
     object warn {
         operator fun plus(message:Any?):warn {
             if (firstRun) {
-                sb.append("[$side/$fg_yellow$style_bold WARN $reset] ")
+                sb.append("[$side/${fg_yellow}_WARN_$reset] ")
                 firstRun = false
             }
-            when (message) {
-                endl -> {
-                    println(sb.append(reset))
-                    sb = StringBuffer()
-                    firstRun = true
-                }
-                else -> {
-                    sb.append(message)
-                }
-            }
+            default(message)
             return this
         }
     }
@@ -101,20 +83,24 @@ object Log {
     object error {
         operator fun plus(message:Any?):error {
             if (firstRun) {
-                sb.append("[$side/$fg_red ERROR $reset] ")
+                sb.append("[$side/${fg_red}_ERROR_$reset] ")
                 firstRun = false
             }
-            when (message) {
-                endl -> {
-                    println(sb.append(reset))
-                    sb = StringBuffer()
-                    firstRun = true
-                }
-                else -> {
-                    sb.append(message)
-                }
-            }
+            default(message)
             return this
+        }
+    }
+
+    fun default(message:Any?) {
+        when (message) {
+            endl -> {
+                println(sb.append(reset))
+                sb = StringBuffer()
+                firstRun = true
+            }
+            else -> {
+                sb.append(message)
+            }
         }
     }
 

@@ -129,12 +129,12 @@ object Client {
     fun main(args:RunArgs) {
         Side.currentSide = Side.client
         this.runArgs = args
-        Log.info + "Starting client with " + args
+        Log.info + "Starting client with " + args + Log.endl
 
         System.setProperty("joml.format", "false")
         Log.info + "JOML format set to false" + Log.endl
         System.setProperty("joml.sinLookup", "true")
-        Log.info + "JOML sin lookup table set to true" + Log.endl
+        Log.info + "JOML sinLookup set to true" + Log.endl
         System.setProperty("joml.fastMath", "true")
         Log.info + "JOML fastMath set to true" + Log.endl
         Runtime.getRuntime().addShutdownHook(Thread { shutdown() })
@@ -665,9 +665,9 @@ object Client {
             glDebugMessageCallback({ _, type, _, severity, len, message, _ ->
                                        if (options.debug) {
                                            when (severity) {
-                                               GL_DEBUG_SEVERITY_HIGH -> Log.error + "OpenGL" + getMsgString(type) + " error : " + getMessage(len, message) + Log.endl
-                                               GL_DEBUG_SEVERITY_MEDIUM -> Log.warn + "OpenGL" + getMsgString(type) + " warn : " + getMessage(len, message) + Log.endl
-                                               GL_DEBUG_SEVERITY_LOW -> Log.info + "OpenGL" + getMsgString(type) + " info : " + getMessage(len, message) + Log.endl
+                                               GL_DEBUG_SEVERITY_HIGH -> Log.error + "OpenGL " + getMsgString(type) + " error : " + getMessage(len, message) + Log.endl
+                                               GL_DEBUG_SEVERITY_MEDIUM -> Log.warn + "OpenGL " + getMsgString(type) + " warn : " + getMessage(len, message) + Log.endl
+                                               GL_DEBUG_SEVERITY_LOW -> Log.info + "OpenGL " + getMsgString(type) + " info : " + getMessage(len, message) + Log.endl
                                            }
                                        }
                                    }, 0L)

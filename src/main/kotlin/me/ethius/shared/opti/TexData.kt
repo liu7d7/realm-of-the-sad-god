@@ -120,6 +120,8 @@ open class TexData(
         val kunoichi = PlayerTexData(213, 100, 11)
         val diviner = PlayerTexData(285, 1, 10)
         val knight = PlayerTexData(285, 26, 11)
+        val mushroom_dasher = PlayerTexData(286, 51, 9)
+
 
         // ITEMS //
         init {
@@ -250,10 +252,10 @@ open class TexData(
         val dex_rock = TexData(202, 233, 8, 8)
         val wood_1 = TexData(222, 153, 8, 8)
         val cave_floor_3 = TexData(222, 253, 8, 8)
-        val metal_floor_1 = TexData(102, 163, 8, 8)
-        val cracked_metal_floor_1 = RandomTexData(TexData(202, 163, 8, 8),
-                                                  TexData(212, 163, 8, 8),
-                                                  TexData(222, 163, 8, 8))
+        val metal_floor_1 = TexData(202, 163, 8, 8)
+        val cracked_metal_floor_1 = RandomTexData(TexData(212, 163, 8, 8),
+                                                  TexData(222, 163, 8, 8),
+                                                  TexData(232, 163, 8, 8))
         val metal_floor_2 = TexData(242, 163, 8, 8)
         val dirt_floor = TexData(202, 213, 8, 8)
         val sick = FlowingTexData(TexData(396, 240, 16, 16), 8.0, 8.0)
