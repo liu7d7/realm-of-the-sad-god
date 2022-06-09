@@ -370,13 +370,17 @@ class ClientPlayer(pClass:PlayerClass, playerProfile:PlayerProfile):Player(pClas
 
     @Listen
     fun click(event:MouseClickedEvent) {
-        if (this == null) return
+        if (!Client.playerInit) return
         if (this != Client.player) return
         if (event.action == GLFW.GLFW_PRESS && event.button == GLFW.GLFW_MOUSE_BUTTON_RIGHT && !inventory.isIn(event.x.toDouble(), event.y.toDouble())) {
             val item = this.inventory.ability.getItemForUse()
             if (item is AbilityItem)
                 item.onAbilityUse()
         }
+    }
+
+    fun copyToMainProfile() {
+        this.playerProfile.set(this)
     }
 
     enum class MainPlayerHook {

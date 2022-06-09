@@ -45,9 +45,7 @@ object Server {
 
         this.network.start(args.addr, if (args.testing) 9928 else 9927)
 
-        timeGetter = {
-            (System.currentTimeMillis() - start).toFloat()
-        }
+        timeGetter = { (System.currentTimeMillis() - start).toFloat() }
 
         Realm.worldId = WorldTracker.newWorld { Realm() }
         Nexus.worldId = WorldTracker.newWorld { Nexus() }
@@ -65,26 +63,27 @@ object Server {
     }
 
     private fun mainloop() {
-        var lastTime = System.currentTimeMillis()
+        var lastTime = measuringTimeMS()
         var ticks = 0
         while (true) {
-            val begin = System.currentTimeMillis()
+            updateTime()
+            val begin = measuringTimeMS()
             network.reset()
             ticker.tickMain()
             ticks++
             network.actOnQueuedPackets()
             network.flush()
-            val end = System.currentTimeMillis()
-            val timeSleep = (20 - (end - begin)).coerceAtLeast(0)
+            val end = measuringTimeMS()
+            val timeSleep = (20 - (end - begin)).toLong().coerceAtLeast(0)
             if (timeSleep > 0) {
                 Thread.sleep(timeSleep)
             }
             if (timeSleep < 0) {
                 Log.warn + "Can't keep up! Tried to sleep for " + timeSleep + " milliseconds before next tick. Should be ~15-20." + Log.endl
             }
-            if (System.currentTimeMillis() - lastTime >= 1000) {
+            if (measuringTimeMS() - lastTime >= 1000) {
                 ticks = 0
-                lastTime = System.currentTimeMillis()
+                lastTime = measuringTimeMS()
             }
         }
     }

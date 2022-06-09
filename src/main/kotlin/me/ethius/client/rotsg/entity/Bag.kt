@@ -90,6 +90,12 @@ class Bag(var bagTier:BagTier, items:List<Item>):PassableEntity() {
         }
     }
 
+    override fun serverTick() {
+        if (measuringTimeMS()- timeSpawned >= 20000) {
+            this.world?.remEntity(this)
+        }
+    }
+
     init {
         height = this.bagTier.texData.height * 4f
         pivotX = this.bagTier.texData.pivotX * 4f

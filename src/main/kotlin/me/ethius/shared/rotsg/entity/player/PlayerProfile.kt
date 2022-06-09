@@ -34,7 +34,7 @@ class PlayerProfile {
         this.skin = skin
     }
 
-    fun set(player:ClientPlayer, name:string) {
+    fun set(player:ClientPlayer, name:string = player.name) {
         this.clazz = player.pClass.name
         this.skin = player.selectedTexData
         this.stats = listOf(player.lifeMaxed,
@@ -50,7 +50,7 @@ class PlayerProfile {
         this.name = name
     }
 
-    fun set(player:ServerPlayer, name:string) {
+    fun set(player:ServerPlayer, name:string = player.name) {
         this.clazz = player.pClass.name
         this.skin = player.selectedTexData
         this.stats = listOf(player.lifeMaxed,

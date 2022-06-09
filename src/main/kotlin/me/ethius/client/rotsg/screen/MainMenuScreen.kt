@@ -9,6 +9,7 @@ import me.ethius.client.rotsg.entity.ClientPlayer
 import me.ethius.client.rotsg.gui.Button
 import me.ethius.client.rotsg.screen.worldbuilder.WorldBuilderScreen
 import me.ethius.client.rotsg.world.ClientWorld
+import me.ethius.shared.Log
 import me.ethius.shared.bool
 import me.ethius.shared.events.def.MouseClickedEvent
 import me.ethius.shared.ext.POSITIVE_Z
@@ -50,19 +51,29 @@ class MainMenuScreen:Screen() {
                 else -> "Loading World"
             }
         }
+        val left = it.left
         it.setOnLeft { }
         Client.ticker.submitTask(Client) {
-            Client.network.connect("rotsg.ethius.us", if (Client.runArgs.testing) 9928 else 9927)
-            if (this::playerProfile.isInitialized) {
-                ClientPlayer.load(playerProfile)
-            } else {
-                Client.inGameHud.chatHud.addChat("${Formatting.red} Player profile not initialized! Exiting...")
-                throw IllegalStateException("Player profile not initialized!")
+            try {
+                Client.network.connect("rotsg.ethius.us", if (Client.runArgs.testing) 9928 else 9927)
+                if (this::playerProfile.isInitialized) {
+                    ClientPlayer.load(playerProfile)
+                } else {
+                    Client.inGameHud.chatHud.addChat("${Formatting.red}Player profile not initialized! Exiting...")
+                    throw IllegalStateException("Player profile not initialized!")
+                }
+                Client.world = ClientWorld()
+                Client.network.send(Packet._id_logon, Client.player.entityId, Client.player.playerProfile.toTomlString())
+                Client.network.send(Packet._id_world_request, "nexus")
+                Client.tasksToRun.add { glfwSwapInterval(0) }
+            } catch (e:Exception) {
+                Client.network.shutdown()
+                it.setOnLeft(left)
+                it.setText { "Start Game" }
+                Client.worldToNull()
+                Log.error + "Failed to connect to the server!" + Log.endl
+                Client.inGameHud.chatHud.addChat("${Formatting.red}Failed to connect to the server!")
             }
-            Client.world = ClientWorld()
-            Client.network.send(Packet._id_logon, Client.player.entityId, Client.player.playerProfile.toTomlString())
-            Client.network.send(Packet._id_world_request, "nexus")
-            Client.tasksToRun.add { glfwSwapInterval(0) }
         }
     }.setText { "Start Game" }
 

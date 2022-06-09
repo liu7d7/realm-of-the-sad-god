@@ -89,9 +89,15 @@ open class Portal(final override val texDataId:string, val worldId:string, val n
         }
     }
 
+    override fun serverTick() {
+        if (measuringTimeMS() - timeSpawned >= 20000 && !invulnerable) {
+            this.world?.remEntity(this)
+        }
+    }
+
     fun renderInHud(matrix:Matrix4dStack) {
-        val x = Client.window.midX.toDouble()
-        val y = Client.window.midY.toDouble() + offset
+        val x = Client.window.midX
+        val y = Client.window.midY + offset
         Client.render.drawRectAlphaWithoutEnding(matrix, x, y, x + renderWidth, y + renderHeight, ldu, 0.9f)
         for ((i, v) in nameLines.withIndex()) {
             Client.font.drawWithoutEnding(matrix,
@@ -116,4 +122,4 @@ open class Portal(final override val texDataId:string, val worldId:string, val n
 
 }
 
-class EmptyPortal:Portal("sand_1", "", "EMPTY (BUG IF SEEN :(( )")
+class EmptyPortal:Portal("empty", "", "EMPTY ( BUG IF SEEN :(( )")

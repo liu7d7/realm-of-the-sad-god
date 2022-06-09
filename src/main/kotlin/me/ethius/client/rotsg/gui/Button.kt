@@ -20,7 +20,7 @@ class Button(
 ) {
 
     private var text = { "" }
-    private var left = { _:Button -> }
+    var left = { _:Button -> }
     private var right = { _:Button -> }
     private var textAction = { _:string, _:Button -> }
     private var keyAction = { _:KeyPressedEvent, _:Button -> }
