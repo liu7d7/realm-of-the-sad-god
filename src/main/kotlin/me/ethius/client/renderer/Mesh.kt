@@ -283,13 +283,11 @@ open class Mesh(drawMode:DrawMode, var shader:Shader?, vararg attributes:Attrib)
             triangles.shader = _shader
             if (triangles.building)
                 triangles.end()
-            bindTexture(main_tex.id, 0) {
-                triangles.shader?.set("u_Texture0", 0)
-            }
+            bindTexture(main_tex.id, 0)
+            triangles.shader?.set("u_Texture0", 0)
             if (Client.font.font != null) {
-                bindTexture(Client.font.font!!.texture.id, 1) {
-                    triangles.shader?.set("u_Texture1", 1)
-                }
+                bindTexture(Client.font.font!!.texture.id, 1)
+                triangles.shader?.set("u_Texture1", 1)
                 Client.font.end()
             }
             triangles.render()

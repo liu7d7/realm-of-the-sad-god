@@ -2,7 +2,10 @@ package me.ethius.client.renderer
 
 import me.ethius.client.Client
 import me.ethius.client.ext.writeRowMajor
-import me.ethius.shared.*
+import me.ethius.shared.double
+import me.ethius.shared.float
+import me.ethius.shared.int
+import me.ethius.shared.string
 import org.joml.Matrix4d
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL30.*
@@ -106,10 +109,9 @@ fun textureParam(target:int, name:int, param:int) {
     glTexParameteri(target, name, param)
 }
 
-inline fun bindTexture(texId:int, layer:int = 0, after:() -> void = { }) {
+fun bindTexture(texId:int, layer:int = 0) {
     glActiveTexture(GL_TEXTURE0 + layer)
     glBindTexture(GL_TEXTURE_2D, texId)
-    after()
 }
 
 /* State */

@@ -280,6 +280,7 @@ open class TexData(
         val mtns_1 = RandomTexData(TexData(192, 283, 8, 8), TexData(202, 283, 8, 8))
         val water_2 = FlowingTexData(TexData(378, 258, 16, 16), 8.0, 8.0)
         val water_3 = FlowingTexData(TexData(378, 240, 16, 16), 8.0, 8.0)
+        val water_4 = FlowingTexData(TexData(396, 258, 16, 16), 8.0, 8.0)
         val empty = TexData(0f, 0f, 0f, 0f)
         val magma_1 = TexData(192, 223, 8, 8)
         val shadow_stone_1 = TexData(202, 243, 8, 8)

@@ -22,32 +22,23 @@ object WorldTracker {
     }
 
     fun set(className:string, world:ServerWorld):string {
-        val str:string
-        worlds["${className}_${nextInt(className)}".also { str = it }] = world
+        val str = "${className}_${nextInt(className)}"
+        worlds[str] = world
         world.worldId = str
         return str
     }
 
     fun newWorld(world:() -> ServerWorld):string {
-        val str:string
         val world = world()
-        set(world.name, world).also { str = it }
-        return str
+        return set(world.name, world)
     }
 
     fun add(world:ServerWorld):string {
         return set(world.name, world)
     }
 
-    fun newWorld_PWS(world:() -> ServerWorld):Pair<ServerWorld, string> {
-        val str:string
-        val wrld = world()
-        set(wrld.name, wrld).also { str = it }
-        return Pair(wrld, str)
-    }
-
     private fun nextInt(className:string):int {
-        ints.computeIfAbsent(className) { 0 }
+        ints.putIfAbsent(className, 0)
         check(ints[className] != null) { "computeIfAbsent somehow failed." }
         return ints[className]!!.also { ints[className] = it + 1 }
     }

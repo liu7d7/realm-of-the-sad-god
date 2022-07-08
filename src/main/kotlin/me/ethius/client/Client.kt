@@ -233,6 +233,7 @@ object Client {
 
     private fun shutdown() {
         if (isShutdown) return
+        Log.info + "Shutting down!" + Log.endl
         network.shutdown()
         ticker.shutdown()
         discordRpc.shutdown()
@@ -278,8 +279,7 @@ object Client {
             val px = player.lerpedX
             val py = player.lerpedY
             lookAt = Matrix4d().identity()
-            lookAt.set(Matrix4d().translate((-(px - window.midX)).also { cameraX = it },
-                                            (-(py - player.offsetY)).also { cameraY = it }, 0.0))
+            lookAt.set(Matrix4d().translate((-(px - window.midX)).also { cameraX = it }, (-(py - player.offsetY)).also { cameraY = it }, 0.0))
             lookAt.translate(px, py, 0.0)
             lookAt.multiply(POSITIVE_X.getDegreesQuaternion(camAngleX))
             lookAt.multiply(POSITIVE_Z.getDegreesQuaternion(player.lerpedR))

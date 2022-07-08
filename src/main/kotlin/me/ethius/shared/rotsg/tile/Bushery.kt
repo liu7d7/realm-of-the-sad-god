@@ -151,7 +151,7 @@ open class Bushery(
         val shadow_bush_1 = Bushery(TexData.shadow_bush_1.id, 1.0, .925, 1.1, BoundingBoxType.centered)
         val shadow_bush_2 = Bushery(TexData.shadow_bush_2.id, 1.0, .925, 1.1, BoundingBoxType.centered)
 
-        val pink_tree_hanging = Bushery(TexData.pink_tree_hanging.id, 1.0, .925, 1.1, BoundingBoxType.centered)
+        val pink_tree_hanging = Bushery(TexData.pink_tree_hanging.id, 1.0, .925, 1.1, BoundingBoxType.none)
         val pink_tree_standing_1 = Bushery(TexData.pink_tree_standing_1.id, 1.0, .925, 1.1, BoundingBoxType.centered)
         val pink_tree_standing_2 = Bushery(TexData.pink_tree_standing_2.id, 1.0, .925, 1.1, BoundingBoxType.centered)
 

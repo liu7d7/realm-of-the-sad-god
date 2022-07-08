@@ -53,8 +53,8 @@ class InGameMenuScreen:Screen() {
         renderLayer = ScreenRenderLayer.after
         buttons.add(Button.make {
             // Resume button
-            centerX = Client.window.midX.toDouble()
-            centerY = Client.window.midY.toDouble() - 75
+            centerX = Client.window.midX
+            centerY = Client.window.midY - 75
 
             width = 200.0
             height = 50.0
@@ -64,8 +64,8 @@ class InGameMenuScreen:Screen() {
         })
         buttons.add(Button.make {
             // Options button
-            centerX = Client.window.midX.toDouble()
-            centerY = Client.window.midY.toDouble() - 25
+            centerX = Client.window.midX
+            centerY = Client.window.midY - 25
 
             width = 200.0
             height = 50.0
@@ -75,8 +75,8 @@ class InGameMenuScreen:Screen() {
         })
         buttons.add(Button.make {
             // Main menu button
-            centerX = Client.window.midX.toDouble()
-            centerY = Client.window.midY.toDouble() + 25
+            centerX = Client.window.midX
+            centerY = Client.window.midY + 25
 
             width = 200.0
             height = 50.0
@@ -89,8 +89,8 @@ class InGameMenuScreen:Screen() {
         })
         buttons.add(Button.make {
             // Quit button
-            centerX = Client.window.midX.toDouble()
-            centerY = Client.window.midY.toDouble() + 75
+            centerX = Client.window.midX
+            centerY = Client.window.midY + 75
 
             width = 200.0
             height = 50.0

@@ -4,6 +4,7 @@ import me.ethius.client.Client
 import me.ethius.client.rotsg.screen.worldbuilder.WorldBuilderScreen
 import me.ethius.shared.ivec2
 import me.ethius.shared.rotsg.world.biome.BiomeFeature
+import me.ethius.shared.rotsg.world.biome.feature_data_dir
 import me.ethius.shared.string
 
 class LoadBiomeFeatureCommand:Command(arrayOf("lbf", "loadbiomefeature"), "Loads a biome feature", "<name (str)>") {
@@ -17,10 +18,14 @@ class LoadBiomeFeatureCommand:Command(arrayOf("lbf", "loadbiomefeature"), "Loads
             return
         }
         val name = args[0]
-        val biomeFeature = BiomeFeature.values.find { it.id == name }
+        var biomeFeature = BiomeFeature.values.find { it.id == name }
         if (biomeFeature == null) {
-            sendMessage("No biome feature with the name $name exists!")
-            return
+            if (Client.javaClass.getResource("$feature_data_dir/$name.dat") == null) {
+                Client.inGameHud.chatHud.addChat("No biome feature with the name '$name' exists!")
+                return
+            } else {
+                biomeFeature = BiomeFeature.Data { BiomeFeature(it, name) }
+            }
         }
         (Client.screen as WorldBuilderScreen).loadFeature(biomeFeature(ivec2(4, 4)))
     }

@@ -9,15 +9,12 @@ import me.ethius.client.rotsg.entity.ClientPlayer
 import me.ethius.client.rotsg.gui.Button
 import me.ethius.client.rotsg.screen.worldbuilder.WorldBuilderScreen
 import me.ethius.client.rotsg.world.ClientWorld
-import me.ethius.shared.Log
-import me.ethius.shared.bool
+import me.ethius.shared.*
 import me.ethius.shared.events.def.MouseClickedEvent
 import me.ethius.shared.ext.POSITIVE_Z
-import me.ethius.shared.measuringTimeMS
 import me.ethius.shared.network.Packet
 import me.ethius.shared.rotsg.data.Formatting
 import me.ethius.shared.rotsg.entity.player.PlayerProfile
-import me.ethius.shared.sin
 import org.apache.commons.io.IOUtils
 import org.joml.Matrix4dStack
 import org.lwjgl.glfw.GLFW.glfwSwapInterval
@@ -55,7 +52,7 @@ class MainMenuScreen:Screen() {
         it.setOnLeft { }
         Client.ticker.submitTask(Client) {
             try {
-                Client.network.connect("rotsg.ethius.us", if (Client.runArgs.testing) 9928 else 9927)
+                Client.network.connect(if (Client.runArgs.testing) getLocalIp() else "rotsg.ethius.us", if (Client.runArgs.testing) 9928 else 9927)
                 if (this::playerProfile.isInitialized) {
                     ClientPlayer.load(playerProfile)
                 } else {

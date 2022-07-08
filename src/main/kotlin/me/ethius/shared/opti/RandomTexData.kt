@@ -10,7 +10,7 @@ class RandomTexData(private vararg val datas:TexData):TexData(0f, 0f, 0f, 0f) {
     override val height = datas.first().height
 
     override fun texData(seed:int, wind:float):TexData {
-        return datas[(frand(seed) * (datas.size - 1)).toInt().coerceIn(datas.indices)]
+        return datas[(frand(seed) * (datas.size - 1)).toInt().coerceAtLeast(0).coerceAtMost(datas.size - 1)]
     }
 
     override fun getAvgColor() {

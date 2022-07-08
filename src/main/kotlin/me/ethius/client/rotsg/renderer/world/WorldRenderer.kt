@@ -43,37 +43,26 @@ class WorldRenderer:Tickable(true) {
             if (tilesInView.isEmpty()) {
                 updateTerrain(true)
             }
-            Client.renderTaskTracker.layer(RenderLayer.tile)
-            Client.renderTaskTracker.track {
-                try {
-                    for (it in tilesInView) {
+            try {
+                for (it in tilesInView) {
+                    Client.renderTaskTracker.onLayer(RenderLayer.tile) {
                         it.renderMesh(matrix)
                         it.renderBlend(matrix)
                     }
-                } catch (_:Exception) {
-                    Log.warn + "Failed to render some tiles" + Log.endl
-                }
-            }
-            Client.renderTaskTracker.layer(RenderLayer.world_feature)
-            for (it in tilesInView) {
-                if (it.env != null) {
-                    if (it.env!!.texDataId == "empty") {
-                        continue
-                    }
                     it.renderOverlays(matrix)
                 }
+            } catch (_:Exception) {
+                Log.warn + "Failed to render some tiles" + Log.endl
             }
-            Client.renderTaskTracker.track {
-                for (it in entitiesInView) {
-                    if (!it.shouldRender || !this.shouldRenderEntity(it)) {
-                        continue
-                    }
+            Client.renderTaskTracker.layer(RenderLayer.world_feature)
+            for (it in entitiesInView) {
+                if (!it.shouldRender || !this.shouldRenderEntity(it)) {
+                    continue
+                }
+                Client.renderTaskTracker.onLayer(RenderLayer.world_feature) {
                     EntityRendererDispatcher.render(matrix, it)
                 }
-            }
-            Client.renderTaskTracker.layer(RenderLayer.world_feature_text)
-            Client.renderTaskTracker.track {
-                for (it in entitiesInView) {
+                Client.renderTaskTracker.onLayer(RenderLayer.world_feature_text) {
                     EntityRenderer.renderNotifications(matrix, it)
                 }
             }

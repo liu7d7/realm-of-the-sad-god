@@ -87,6 +87,7 @@ class WorldBuilderDropDownMenu(
                     WorldBuilderScreen.Mode.draw -> {
                         endDraw()
                     }
+                    else -> { }
                 }
                 this.worldBuilder.tileDDM = null
             }

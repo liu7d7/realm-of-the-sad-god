@@ -12,8 +12,13 @@ import org.apache.commons.lang3.RandomUtils
 import org.lwjgl.glfw.GLFW.glfwGetTime
 import org.lwjgl.system.MemoryUtil
 import java.io.*
+import java.net.DatagramSocket
+import java.net.InetAddress
+import java.net.InetSocketAddress
+import java.net.Socket
 import java.nio.ByteBuffer
 import java.nio.channels.Channels
+import java.util.*
 import kotlin.math.*
 
 const val PI = Math.PI
@@ -66,7 +71,12 @@ fun Double.toDegrees():double {
 }
 
 fun updateTime() {
-    time = (glfwGetTime() * 1000.0).toFloat()
+    ifclient {
+        time = (glfwGetTime() * 1000.0).toFloat()
+    }
+    ifserver {
+        time = (System.currentTimeMillis() - start).toFloat()
+    }
 }
 
 fun measuringTimeMS():float {
@@ -92,7 +102,6 @@ fun wrapDegrees(degrees:double):double {
     }
     return f
 }
-
 
 fun wrapDegrees(degrees:float):float {
     var f = degrees % 360.0f
@@ -159,6 +168,49 @@ inline fun after(ms:long, crossinline action:() -> void) {
         Thread.sleep(ms)
         action()
     }.start()
+}
+
+enum class OS {
+    windows, mac, linux, other
+}
+
+private lateinit var _os: OS
+
+fun getOS(): OS {
+    if (!::_os.isInitialized) {
+        val os = System.getProperty("os.name", "generic").lowercase(Locale.ENGLISH)
+        if (os.indexOf("mac") >= 0 || os.indexOf("darwin") >= 0) {
+            _os = OS.mac
+        } else if (os.indexOf("win") >= 0) {
+            _os = OS.windows
+        } else if (os.indexOf("nux") >= 0) {
+            _os = OS.linux
+        } else {
+            _os = OS.other
+        }
+    }
+    return _os
+}
+
+private lateinit var _ip: string
+
+fun getLocalIp(): string {
+    if (!::_ip.isInitialized) {
+        when (getOS()) {
+            OS.windows -> {
+                DatagramSocket().use { socket ->
+                    socket.connect(InetAddress.getByName("8.8.8.8"), 10002)
+                    _ip = socket.localAddress.hostAddress
+                }
+            }
+            else -> {
+                val socket = Socket()
+                socket.connect(InetSocketAddress("google.com", 80))
+                _ip = socket.localAddress.toString()
+            }
+        }
+    }
+    return _ip
 }
 
 fun withAlpha(color:long, alpha:float):long {

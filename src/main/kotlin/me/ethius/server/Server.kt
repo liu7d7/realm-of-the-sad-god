@@ -22,7 +22,9 @@ object Server {
     lateinit var network:SNetworkHandler
 
     fun main(args:RunArgs) {
+
         Side.currentSide = Side.server
+        Log.info + "Starting server with " + args + Log.endl
         System.setProperty("joml.format", "false")
         Log.info + "JOML format set to false" + Log.endl
 
@@ -43,8 +45,9 @@ object Server {
         this.network = SNetworkHandler()
         Log.info + "Initialized NetworkHandler" + Log.endl
 
-        this.network.start(args.addr, if (args.testing) 9928 else 9927)
+        this.network.start(if (args.testing) getLocalIp() else args.addr, if (args.testing) 9928 else 9927)
 
+        val start = System.currentTimeMillis();
         timeGetter = { (System.currentTimeMillis() - start).toFloat() }
 
         Realm.worldId = WorldTracker.newWorld { Realm() }
@@ -55,7 +58,7 @@ object Server {
         shutdown()
     }
 
-    class RunArgs(val addr:string, val testing:bool)
+    data class RunArgs(val addr:string, val testing:bool)
 
     private fun shutdown() {
         this.network.shutdown()

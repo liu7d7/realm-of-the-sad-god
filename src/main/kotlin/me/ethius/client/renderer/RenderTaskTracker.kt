@@ -1,21 +1,21 @@
 package me.ethius.client.renderer
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import me.ethius.client.Client
 import me.ethius.client.iden_m4d
 import me.ethius.shared.bool
-import me.ethius.shared.rotsg.entity.AEntity
 import org.joml.Matrix4d
 import java.util.*
 
 class RenderTaskTracker {
 
     var layer = RenderLayer.tile
-    private val map = EnumMap<RenderLayer, ArrayList<() -> Any>>(RenderLayer::class.java).also {
+    private val map = EnumMap<RenderLayer, ObjectArrayList<() -> Any>>(RenderLayer::class.java).also {
         for (i in RenderLayer.values()) {
             if (i == RenderLayer.ignored) {
                 continue
             }
-            it[i] = ArrayList()
+            it[i] = ObjectArrayList()
         }
     }
     val threeD = ScreenFramebuffer(true)
@@ -25,8 +25,6 @@ class RenderTaskTracker {
     var lookAt:Matrix4d = iden_m4d
 
     var hasWorld3d:bool = false
-
-    var currentRenderEntity = null as AEntity?
 
     fun layer(layer:RenderLayer) {
         this.layer = layer
@@ -52,7 +50,7 @@ class RenderTaskTracker {
         }
         if (Client.worldInit) {
             for (i in RenderLayer.notIgnoredWorld) {
-                if (map[i]!!.isEmpty()) {
+                if (map[i]!!.isEmpty) {
                     continue
                 }
                 layer(i)
@@ -76,7 +74,7 @@ class RenderTaskTracker {
         }
         lookAt = iden_m4d
         for (i in RenderLayer.notIgnoredHud) {
-            if (map[i]!!.isEmpty()) {
+            if (map[i]!!.isEmpty) {
                 continue
             }
             layer(i)
