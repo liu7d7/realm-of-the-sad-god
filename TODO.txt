@@ -1,3 +1,0 @@
-[x] Add New TexData to TexHolder
-[ ] Make new weapons
-[ ] Add light armor

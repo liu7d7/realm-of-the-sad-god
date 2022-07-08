@@ -33,7 +33,7 @@ class CNetworkHandler:Tickable(true, 1) {
         if (connected) {
             shutdown()
         }
-        Client.inGameHud.chatHud.addChat("Connected to $addr:$port")
+        Client.inGameHud.chatHud.addChat("Connecting to $addr:$port")
         this.connected = true
         this.addr = addr
         this.port = port
